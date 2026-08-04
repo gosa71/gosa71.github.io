@@ -1,21 +1,24 @@
-{
-  "type": "pages",
-  "headline": "Фильмы Zona",
-  "extension": {
-    "request": {
-      "url": "https://api.codetabs.com/v1/proxy/?quest=https://api.zonafilm.ru/api/movies?page=1",
-      "ready": {
-        "data": "@model.data"
-      }
-    }
-  },
-  "data": [
-    {
-      "type": "default",
-      "id": "{slug}",
-      "label": "{title} ({year})",
-      "image": "{cover_url}",
-      "action": "content:https://gosa71.github.io/index.html?kp_id={kp_id}"
-    }
-  ]
-}
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const tmdbId = urlParams.get('tmdb_id');
+        const frame = document.getElementById('video-frame');
+        
+        if (tmdbId) {
+            // 1. Спрашиваем у TMDB IMDB ID для этого фильма
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=ТВОЙ_КЛЮЧ`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.imdb_id) {
+                        // 2. Вставляем IMDB ID в плеер zenithjs.ws
+                        frame.src = `https://api.zenithjs.ws/embed/imdb/${data.imdb_id}`;
+                    } else {
+                        document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">IMDB ID не найден</h1>';
+                    }
+                })
+                .catch(err => {
+                    document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Ошибка загрузки</h1>';
+                });
+        } else {
+            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Ошибка: ID фильма не передан</h1>';
+        }
+    </script>
