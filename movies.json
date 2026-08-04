@@ -1,22 +1,21 @@
 {
-  "type": "list",
+  "type": "pages",
   "headline": "Фильмы Zona",
-  "template": {
-    "type": "default",
-    "layout": "0,0,3,4"
+  "extension": {
+    "request": {
+      "url": "https://api.zonafilm.ru/api/movies?page=1",
+      "ready": {
+        "data": "@model.data"
+      }
+    }
   },
-  "items": [
+  "data": [
     {
-      "title": "Тестовый фильм 1",
-      "titleFooter": "2024"
-    },
-    {
-      "title": "Тестовый фильм 2",
-      "titleFooter": "2023"
-    },
-    {
-      "title": "Тестовый фильм 3",
-      "titleFooter": "2022"
+      "type": "default",
+      "id": "{slug}",
+      "label": "{title} ({year})",
+      "image": "{cover_url}",
+      "action": "content:https://gosa71.github.io/index.html?kp_id={kp_id}"
     }
   ]
 }
