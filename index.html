@@ -72,7 +72,7 @@
         if (tmdbId) {
             // 1. Спрашиваем у TMDB IMDB ID для этого фильма
             // ВНИМАНИЕ: Замени СЮДА_ВСТАВЬ_СВОЙ_КЛЮЧ на твой API ключ от TMDB!
-            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NWY2NDVjZmVmYTM4ZjkxZGU2MjY5NDYzMzY0OTliMCIsIm5iZiI6MTc4MzAwNzIyNC42MjgsInN1YiI6IjZhNDY4N2Y4MTBjN2Y2OTgwZmZiM2FjZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oIR2gmojx7VeRNvFlVXCIDKb52ohwPffvf1kMX-5sIs`)
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=65f645cfefa38f91de626946336499b0`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.imdb_id) {
