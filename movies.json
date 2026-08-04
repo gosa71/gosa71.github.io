@@ -3,7 +3,7 @@
   "headline": "Популярные фильмы",
   "extension": {
     "request": {
-      "url": "https://api.themoviedb.org/3/movie/popular?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NWY2NDVjZmVmYTM4ZjkxZGU2MjY5NDYzMzY0OTliMCIsIm5iZiI6MTc4MzAwNzIyNC42MjgsInN1YiI6IjZhNDY4N2Y4MTBjN2Y2OTgwZmZiM2FjZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oIR2gmojx7VeRNvFlVXCIDKb52ohwPffvf1kMX-5sIs&language=ru",
+      "url": "https://api.themoviedb.org/3/movie/popular?api_key=65f645cfefa38f91de626946336499b0&language=ru",
       "ready": {
         "data": "@model.results"
       }
