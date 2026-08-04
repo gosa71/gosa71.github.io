@@ -15,7 +15,7 @@
       "id": "{slug}",
       "label": "{title} ({year})",
       "image": "{cover_url}",
-      "action": "content:https://gosa71.github.io/index22.html?kp_id={kp_id}"
+      "action": "content:https://gosa71.github.io/index.html?kp_id={kp_id}"
     }
   ]
 }
