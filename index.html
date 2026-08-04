@@ -13,7 +13,6 @@
             background-color: #000;
             overflow: hidden;
         }
-        /* Сам плеер на весь экран */
         #video-frame {
             position: absolute;
             top: 0;
@@ -22,25 +21,6 @@
             height: 100%;
             border: 0;
         }
-        /* Рекламный блок внизу */
-        #casino-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 80px; /* Высота рекламы */
-            z-index: 9999; /* Поверх видео */
-            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none; /* Чтобы клики проходили сквозь рекламу к плееру */
-        }
-        #casino-ad img {
-            max-height: 100%;
-            max-width: 100%;
-        }
-        /* Текст ошибки */
         #error-msg {
             color: white;
             font-family: sans-serif;
@@ -49,45 +29,115 @@
             font-size: 24px;
         }
     </style>
+    <!-- Библиотека MSX для связи HTML-страницы с плеером -->
+    <script type="text/javascript" src="https://msx.benzac.de/js/tvx-plugin.min.js"></script>
 </head>
 <body>
 
-    <!-- 1. Iframe с плеером -->
     <iframe id="video-frame" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
-
-    <!-- 2. Твой рекламный баннер казино -->
-    <div id="casino-ad">
-        <!-- Вставь сюда ссылку на картинку или GIF казино -->
-        <a href="https://твое-казино.com" target="_blank">
-            <img src="https://via.placeholder.com/468x60/000000/FF0000?text=CASINO+AD" alt="Casino">
-        </a>
-    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const tmdbId = urlParams.get('tmdb_id');
         const frame = document.getElementById('video-frame');
         const body = document.body;
+        const API_KEY = '65f645cfefa38f91de626946336499b0';
 
-        if (tmdbId) {
-            // 1. Спрашиваем у TMDB IMDB ID для этого фильма
-            // ВНИМАНИЕ: Замени СЮДА_ВСТАВЬ_СВОЙ_КЛЮЧ на твой API ключ от TMDB!
-            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=65f645cfefa38f91de626946336499b0`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.imdb_id) {
-                        // 2. Вставляем IMDB ID в плеер zenithjs.ws
-                        frame.src = `https://api.zenithjs.ws/embed/imdb/${data.imdb_id}`;
-                    } else {
-                        body.innerHTML = '<h1 id="error-msg">IMDB ID не найден для этого фильма</h1>';
-                    }
-                })
-                .catch(err => {
-                    body.innerHTML = '<h1 id="error-msg">Ошибка загрузки данных</h1>';
-                });
-        } else {
-            body.innerHTML = '<h1 id="error-msg">Ошибка: ID фильма не передан</h1>';
+        // Фиктивная длительность/позиция — реальный embed-плеер
+        // не сообщает нам данные о ходе воспроизведения,
+        // поэтому просто "тикаем" секундами, пока страница открыта.
+        let fakeDuration = 7200; // 2 часа "по умолчанию"
+        let fakePosition = 0;
+        let isPlaying = false;
+        let tickTimer = null;
+
+        function startTicking() {
+            stopTicking();
+            tickTimer = setInterval(() => {
+                if (isPlaying && fakePosition < fakeDuration) {
+                    fakePosition += 1;
+                }
+            }, 1000);
         }
+
+        function stopTicking() {
+            if (tickTimer) {
+                clearInterval(tickTimer);
+                tickTimer = null;
+            }
+        }
+
+        function showError(message) {
+            body.innerHTML = '<h1 id="error-msg">' + message + '</h1>';
+        }
+
+        function loadPlayer(imdbId) {
+            frame.src = `https://api.zenithjs.ws/embed/imdb/${imdbId}`;
+        }
+
+        // --- Реализация интерфейса видео-плагина MSX ---
+        function MSXPlayerHandler() {
+            this.init = function () {
+                if (!tmdbId) {
+                    showError('Ошибка: ID фильма не передан');
+                    return;
+                }
+                fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=${API_KEY}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.imdb_id) {
+                            loadPlayer(data.imdb_id);
+                        } else {
+                            showError('IMDB ID не найден для этого фильма');
+                        }
+                    })
+                    .catch(() => {
+                        showError('Ошибка загрузки данных TMDB');
+                    });
+            };
+
+            this.ready = function () {
+                // Сообщаем MSX, что воспроизведение "началось"
+                isPlaying = true;
+                startTicking();
+                TVXVideoPlugin.startPlayback();
+            };
+
+            this.play = function () {
+                isPlaying = true;
+            };
+
+            this.pause = function () {
+                isPlaying = false;
+            };
+
+            this.stop = function () {
+                isPlaying = false;
+                stopTicking();
+            };
+
+            this.getDuration = function () {
+                return fakeDuration;
+            };
+
+            this.getPosition = function () {
+                return fakePosition;
+            };
+
+            this.setPosition = function (position) {
+                fakePosition = position;
+            };
+
+            this.setVolume = function () {
+                // Громкостью управляет сам embed-плеер внутри iframe,
+                // напрямую до него достучаться нельзя (кросс-домен).
+            };
+        }
+
+        TVXPluginTools.onReady(function () {
+            TVXVideoPlugin.setupHandler(new MSXPlayerHandler());
+            TVXVideoPlugin.init();
+        });
     </script>
 
 </body>
