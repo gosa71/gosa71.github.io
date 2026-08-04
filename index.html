@@ -30,21 +30,29 @@
             width: 100%;
             height: 80px; /* Высота рекламы */
             z-index: 9999; /* Поверх видео */
-            background: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none; /* Чтобы клики проходили сквозь рекламу к плееру, если нужно */
+            pointer-events: none; /* Чтобы клики проходили сквозь рекламу к плееру */
         }
         #casino-ad img {
             max-height: 100%;
             max-width: 100%;
         }
+        /* Текст ошибки */
+        #error-msg {
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 40vh;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. Iframe с плеером zenithjs.ws -->
+    <!-- 1. Iframe с плеером -->
     <iframe id="video-frame" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
 
     <!-- 2. Твой рекламный баннер казино -->
@@ -56,14 +64,29 @@
     </div>
 
     <script>
-        // Скрипт достает kp_id из адресной строки (?kp_id=5494049) и вставляет в iframe
         const urlParams = new URLSearchParams(window.location.search);
-        const kpId = urlParams.get('kp_id');
-        
-        if (kpId) {
-            document.getElementById('video-frame').src = `https://api.zenithjs.ws/embed/kp/${kpId}`;
+        const tmdbId = urlParams.get('tmdb_id');
+        const frame = document.getElementById('video-frame');
+        const body = document.body;
+
+        if (tmdbId) {
+            // 1. Спрашиваем у TMDB IMDB ID для этого фильма
+            // ВНИМАНИЕ: Замени СЮДА_ВСТАВЬ_СВОЙ_КЛЮЧ на твой API ключ от TMDB!
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NWY2NDVjZmVmYTM4ZjkxZGU2MjY5NDYzMzY0OTliMCIsIm5iZiI6MTc4MzAwNzIyNC42MjgsInN1YiI6IjZhNDY4N2Y4MTBjN2Y2OTgwZmZiM2FjZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oIR2gmojx7VeRNvFlVXCIDKb52ohwPffvf1kMX-5sIs`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.imdb_id) {
+                        // 2. Вставляем IMDB ID в плеер zenithjs.ws
+                        frame.src = `https://api.zenithjs.ws/embed/imdb/${data.imdb_id}`;
+                    } else {
+                        body.innerHTML = '<h1 id="error-msg">IMDB ID не найден для этого фильма</h1>';
+                    }
+                })
+                .catch(err => {
+                    body.innerHTML = '<h1 id="error-msg">Ошибка загрузки данных</h1>';
+                });
         } else {
-            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Ошибка: ID фильма не передан</h1>';
+            body.innerHTML = '<h1 id="error-msg">Ошибка: ID фильма не передан</h1>';
         }
     </script>
 
