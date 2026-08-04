@@ -1,5 +1,4 @@
 {
-  "name": "Фильмы Zona",
-  "version": "1.0.0",
-  "parameter": "content:https://jolly-tree-501a.ssr5577.workers.dev"
+  "parameter": "Zona Clone",
+  "content": "https://jolly-tree-501a.ssr5577.workers.dev"
 }
