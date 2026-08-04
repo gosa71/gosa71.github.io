@@ -3,7 +3,7 @@
   "headline": "Фильмы Zona",
   "extension": {
     "request": {
-      "url": "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.zonafilm.ru%2Fapi%2Fmovies%3Fpage%3D1",
+      "url": "https://api.codetabs.com/v1/proxy/?quest=https://api.zonafilm.ru/api/movies?page=1",
       "ready": {
         "data": "@model.data"
       }
