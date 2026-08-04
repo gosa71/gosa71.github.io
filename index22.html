@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Zona Player</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+        }
+        /* Сам плеер на весь экран */
+        #video-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* Рекламный блок внизу */
+        #casino-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px; /* Высота рекламы */
+            z-index: 9999; /* Поверх видео */
+            background: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Чтобы клики проходили сквозь рекламу к плееру, если нужно */
+        }
+        #casino-ad img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Iframe с плеером zenithjs.ws -->
+    <iframe id="video-frame" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+
+    <!-- 2. Твой рекламный баннер казино -->
+    <div id="casino-ad">
+        <!-- Вставь сюда ссылку на картинку или GIF казино -->
+        <a href="https://твое-казино.com" target="_blank">
+            <img src="https://via.placeholder.com/468x60/000000/FF0000?text=CASINO+AD" alt="Casino">
+        </a>
+    </div>
+
+    <script>
+        // Скрипт достает kp_id из адресной строки (?kp_id=5494049) и вставляет в iframe
+        const urlParams = new URLSearchParams(window.location.search);
+        const kpId = urlParams.get('kp_id');
+        
+        if (kpId) {
+            document.getElementById('video-frame').src = `https://api.zenithjs.ws/embed/kp/${kpId}`;
+        } else {
+            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Ошибка: ID фильма не передан</h1>';
+        }
+    </script>
+
+</body>
+</html>
