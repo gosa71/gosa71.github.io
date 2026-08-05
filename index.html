@@ -1,24 +1,19 @@
 <html lang="ru"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Смотреть фильмы и сериалы онлайн по ID КиноПоиск — KinoDivBox</title>
-
-<meta name="description" content="KinoDivBox — смотри фильмы и сериалы онлайн по ID КиноПоиска. Все популярные плееры в одном месте: быстро, удобно и бесплатно.">
-
-<meta name="keywords" content="смотреть фильмы онлайн, кино по id, kinopoisk id, KinoDivBox, сериалы онлайн, смотреть кино бесплатно">
-
-<link rel="icon" href="/css_js/favicon.svg" type="image/x-icon">
-<link rel="canonical" href="http://ssr5577gm6.temp.swtest.ru/">
-
-<meta property="og:title" content="KinoDivBox — фильмы и сериалы по ID КиноПоиск">
-<meta property="og:description" content="Введите ID фильма или сериала с КиноПоиска и смотрите онлайн на KinoDivBox.">
-<meta property="og:type" content="website">
-<meta name="author" content="KinoDivBox">
-<meta name="robots" content="index, follow">
-<meta property="og:url" content="/">
-<meta name="twitter:image" content="/319529_O.png">
-<meta property="og:image" content="/319529_O.png">
+  <title>Смотреть фильмы и сериалы онлайн по ID КиноПоиск — KinoDivBox</title>
+  <meta name="description" content="KinoDivBox — смотри фильмы и сериалы онлайн по ID КиноПоиска. Все популярные плееры в одном месте: быстро, удобно и бесплатно.">
+  <meta name="keywords" content="смотреть фильмы онлайн, кино по id, kinopoisk id, KinoDivBox, сериалы онлайн, смотреть кино бесплатно">
+  <link rel="icon" href="/css_js/favicon.svg" type="image/x-icon">
+  <link rel="canonical" href="http://ssr5577gm6.temp.swtest.ru/">
+  <meta property="og:title" content="KinoDivBox — фильмы и сериалы по ID КиноПоиск">
+  <meta property="og:description" content="Введите ID фильма или сериала с КиноПоиска и смотрите онлайн на KinoDivBox.">
+  <meta property="og:type" content="website">
+  <meta name="author" content="KinoDivBox">
+  <meta name="robots" content="index, follow">
+  <meta property="og:url" content="/">
+  <meta name="twitter:image" content="/319529_O.png">
+  <meta property="og:image" content="/319529_O.png">
 
   <style>
     body {
@@ -106,14 +101,12 @@
       transform: translateY(-2px);
     }
 
-    /* Контейнер плеера с переключателем */
     #playerArea {
       max-width: 900px;
       margin: 0 auto 20px;
       position: relative;
     }
 
-    /* Переключатель — кнопки-кругляшки справа сверху */
     #playerSwitcher {
       position: absolute;
       top: 12px;
@@ -196,7 +189,6 @@
       iframe {
         height: 40vh;
       }
-      /* На мобильных переключатели снизу, горизонтально */
       #playerSwitcher {
         position: static;
         justify-content: center;
@@ -210,48 +202,20 @@
       }
     }
 
-    /* Стили для рекламного баннера */
-    .ad-banner {
-      background: linear-gradient(45deg, #ff3d00, #ff6f3a);
-      color: #fff;
-      padding: 16px;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: bold;
-      margin: 20px auto;
-      max-width: 700px;
-      box-shadow: 0 4px 12px rgba(255, 61, 0, 0.4);
-      animation: fadeIn 0.8s ease-in-out;
-      transition: opacity 0.5s ease;
-    }
-
-    .ad-banner.hidden {
-      opacity: 0;
-      pointer-events: none;
-      height: 0;
-      overflow: hidden;
-      padding: 0;
-      margin: 0 auto;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    /* Убрали .ad-banner, так как он не используется */
 
     .seo-text {
-  max-width: 900px;
-  margin: 40px auto;
-  color: #ccc;
-  font-size: 15px;
-  line-height: 1.6;
-}
-.seo-text h1 {
-  font-size: 22px;
-  color: #fff;
-  margin-bottom: 15px;
-}
+      max-width: 900px;
+      margin: 40px auto;
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .seo-text h1 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
     .title-results {
       max-width: 500px;
       margin: 0 auto 16px;
@@ -288,7 +252,7 @@
   </style>
 
 </head>
-<body class="">
+<body>
   
 <p class="logo" title="Перейти на главную страницу">
   🎬 <a href="/" style="color:inherit; text-decoration:none;">KinoLyaL</a>
@@ -299,11 +263,10 @@
   <button onclick="searchPlayer()" aria-label="Поиск">Поиск</button>
   <button onclick="copyShareLink()" aria-label="Поделиться ссылкой">Поделиться</button>
 </div>
-<div id="titleResults" class="title-results" hidden=""></div>
+<div id="titleResults" class="title-results" hidden></div>
 
-<!-- Контейнер плеера + переключатель -->
 <div id="playerArea">
-  <div id="playerSwitcher" aria-label="Выбор плеера" role="tablist" hidden=""></div>
+  <div id="playerSwitcher" aria-label="Выбор плеера" role="tablist" hidden></div>
   <div class="player" id="playerContainer" aria-live="polite" aria-atomic="true"></div>
 </div>
 
@@ -314,8 +277,6 @@ const players = {
   Kodik: id => `https://kodikplayer.com/find-player?kinopoiskID=${id}`,
 };
 
-  // Тестовый ключ kinopoisk.dev — статика на GitHub Pages не может прятать
-  // серверные секреты, ключ неизбежно виден в исходнике (как и токены плееров выше).
   const KINOPOISK_API_KEY = '8DCHKJN-GY2MFX0-G8DA27G-EK51D6J';
 
   function extractID(input) {
@@ -337,7 +298,6 @@ const players = {
       return;
     }
 
-    // Не число и не ссылка на kinopoisk.ru/film|series/<id> — считаем названием
     await searchByTitle(raw);
   }
 
@@ -502,27 +462,41 @@ const players = {
     if (e.ctrlKey && e.keyCode =='U'.charCodeAt(0)) return false;
     if (e.ctrlKey && e.shiftKey && e.keyCode =='C'.charCodeAt(0)) return false;
   };
+
+  // Простой фильтр для удаления элементов с подозрительными классами/ID (не влияет на iframe)
+  function removeAdElements() {
+    const selectors = [
+      '.ad', '.ads', '.ad-banner', '.banner',
+      '[id*="ad"]', '[class*="ad"]',
+      '[id*="banner"]', '[class*="banner"]'
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach(el => {
+      // Не трогаем элементы внутри плееров и переключателей
+      if (!el.closest('#playerContainer') && !el.closest('#playerSwitcher')) {
+        el.style.display = 'none';
+      }
+    });
+  }
+  window.addEventListener('load', removeAdElements);
+  setTimeout(removeAdElements, 2000);
 </script>
 
-<!-- Кнопки перехода на сайты -->
 <div style="text-align: center; margin-top: 30px;">
   <button onclick="window.open('https://www.kinopoisk.ru/lists/categories/movies/', '_blank')" aria-label="КиноПоиск Список ID" class="action-button">
     КиноПоиск Список ID
-  </button>&nbsp;</div>
+  </button>&nbsp;
+</div>
 
-<!-- Иконка "?" -->
-<div id="help-icon" title="Как пользоваться сайтом" style="       position: fixed;       bottom: 20px;       right: 20px;       width: 48px;       height: 48px;       background-color: #007bff;       color: white;       font-weight: bold;       font-size: 28px;       line-height: 48px;       text-align: center;       border-radius: 50%;       cursor: pointer;       box-shadow: 0 2px 8px rgba(0,0,0,0.3);       user-select: none;       z-index: 10000;       ">
+<div id="help-icon" title="Как пользоваться сайтом" style="position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; background-color: #007bff; color: white; font-weight: bold; font-size: 28px; line-height: 48px; text-align: center; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); user-select: none; z-index: 10000;">
   ?
 </div>
 
-<!-- Всплывающее окно с инструкцией -->
-<div id="help-popup" style="       display: none;       position: fixed;       bottom: 80px;       right: 20px;       width: 320px;       max-height: 400px;       overflow-y: auto;       background: var(--bg-color, #f9f9f9);       color: var(--text-color, #222);       box-shadow: 0 4px 16px rgba(0,0,0,0.3);       border-radius: 12px;       padding: 1rem 1.2rem;       font-family: sans-serif;       font-size: 0.9rem;       line-height: 1.4;       z-index: 10000;       ">
+<div id="help-popup" style="display: none; position: fixed; bottom: 80px; right: 20px; width: 320px; max-height: 400px; overflow-y: auto; background: var(--bg-color, #f9f9f9); color: var(--text-color, #222); box-shadow: 0 4px 16px rgba(0,0,0,0.3); border-radius: 12px; padding: 1rem 1.2rem; font-family: sans-serif; font-size: 0.9rem; line-height: 1.4; z-index: 10000;">
   <h3 style="margin-top: 0; font-size: 1.2rem; text-align:center;">📘 Как пользоваться сайтом</h3>
 
   <p><strong>🔎 Найдите ID КиноПоиска:</strong><br>
   Перейдите на <a href="https://www.kinopoisk.ru" target="_blank" rel="noopener" style="color:#007bff;">КиноПоиск</a>, выберите фильм или сериал, и скопируйте цифры из ссылки:<br>
-
-</p><p>📌 Пример: Если вы открыли страницу фильма:</p>
+  </p><p>📌 Пример: Если вы открыли страницу фильма:</p>
   <code>https://www.kinopoisk.ru/film/<mark>535341</mark>/</code> → ID = <strong>535341</strong><p></p>
   
 <p>🎬 Пример с сериалом:</p>
@@ -535,24 +509,20 @@ const players = {
     <li>Выберите плеер для просмотра</li>
   </ol>
   
-    <p><strong>💡 Советы:</strong><br>
-— Если плеер не загружается?
-</p><p>1. Убедитесь, что ваш браузер обновлён до последней версии.<br>
-2. Попробуйте выбрать другой плеер<br>
-(кнопки: 1 / 2 / 3 / 4 / 5).<br>
-3. Если проблема не решается, воспользуйтесь VPN — возможно, ваш провайдер блокирует доступ.<br>
-4.&nbsp;Рекомендуем для ПК:<br>
-Установите расширения для браузера, повышающие безопасность, конфиденциальность и удобство.<br>
-Смотрите раздел «<a href="/install_helper">InstallHelper</a>».</p>
+  <p><strong>💡 Советы:</strong><br>
+  — Если плеер не загружается?<br>
+  1. Убедитесь, что ваш браузер обновлён до последней версии.<br>
+  2. Попробуйте выбрать другой плеер (кнопки: 1 / 2 / 3).<br>
+  3. Если проблема не решается, воспользуйтесь VPN — возможно, ваш провайдер блокирует доступ.<br>
+  4. Рекомендуем для ПК: установите расширения для браузера, повышающие безопасность, конфиденциальность и удобство. Смотрите раздел «<a href="/install_helper">InstallHelper</a>».<br>
+  <strong>🛡️ Реклама в плеерах?</strong> Реклама может показываться внутри плееров. Установите <a href="https://ublockorigin.com/" target="_blank" rel="noopener">uBlock Origin</a> или другой блокировщик – это решит проблему.</p>
 
   <p><strong>❓ Часто задаваемые вопросы:</strong><br>
-  — 🟢 Можно вставить ссылку целиком?
-Да, можно — сайт сам автоматически извлечёт ID из ссылки.<br>
-  — 🟠 А если вставлю не тот ID?
-Вы увидите пустой плеер или ошибку. Просто вставьте правильный ID ещё раз.</p>
+  — 🟢 Можно вставить ссылку целиком? Да, можно — сайт сам автоматически извлечёт ID из ссылки.<br>
+  — 🟠 А если вставлю не тот ID? Вы увидите пустой плеер или ошибку. Просто вставьте правильный ID ещё раз.</p>
 
   <p style="text-align:center; margin-top:1rem;">
-    <button id="help-close" style="      background:#007bff; color:#fff; border:none; border-radius:6px; padding: 6px 12px; cursor:pointer;      font-size: 0.9rem;    ">Закрыть</button>
+    <button id="help-close" style="background:#007bff; color:#fff; border:none; border-radius:6px; padding: 6px 12px; cursor:pointer; font-size: 0.9rem;">Закрыть</button>
   </p>
 </div>
 
@@ -569,7 +539,6 @@ const players = {
     helpPopup.style.display ='none';
   });
 
-  // Закрывать по клику вне окна
   document.addEventListener('click', (e) => {
     if (!helpPopup.contains(e.target) && !helpIcon.contains(e.target)) {
       helpPopup.style.display ='none';
@@ -578,13 +547,10 @@ const players = {
 </script>
 
 <style>
-  /* Поддержка тёмной темы */
   body.dark #help-popup {
     --bg-color: #222;
     --text-color: #eee;
   }
-
-  /* Подсветка ID в коде */
   #help-popup mark {
     background-color: #fffb91;
     color: #444;
@@ -592,7 +558,6 @@ const players = {
     border-radius: 3px;
     font-weight: 600;
   }
-
   #help-popup a {
     text-decoration: none;
   }
@@ -600,6 +565,5 @@ const players = {
     text-decoration: underline;
   }
 </style>
-
 
 </body></html>
