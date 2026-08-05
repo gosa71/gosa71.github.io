@@ -1,0 +1,11 @@
+{
+  "name": "KinoLyaL",
+  "version": "1.0.0",
+  "parameter": "menu:https://gosa71.github.io/msx/menu.json",
+  "welcome": "none",
+  "launcher": {
+    "icon": "play-circle-outline",
+    "image": "https://gosa71.github.io/319529_O.png",
+    "color": "msx-black"
+  }
+}
