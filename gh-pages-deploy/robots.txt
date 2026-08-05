@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /ID
+Disallow: /ID.html
+Disallow: /iframe
+Disallow: /iframe.html
+
+Sitemap: http://ssr5577gm6.temp.swtest.ru/sitemap.xml
+
