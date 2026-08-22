@@ -3,790 +3,552 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Смотреть фильмы и сериалы онлайн по ID КиноПоиск — KinoLyaL</title>
-  <meta name="description" content="KinoLyaL — смотри фильмы и сериалы онлайн по ID КиноПоиска. Все популярные плееры в одном месте: быстро, удобно и бесплатно.">
-  <meta name="keywords" content="смотреть фильмы онлайн, кино по id, kinopoisk id, KinoDivBox, сериалы онлайн, смотреть кино бесплатно">
+  <title>KinoLyaL — Онлайн кинотеатр</title>
+  <meta name="description" content="KinoLyaL — смотри фильмы и сериалы онлайн по ID КиноПоиска. Быстро, удобно и бесплатно.">
   <link rel="icon" href="/css_js/favicon.svg" type="image/x-icon">
-  <link rel="canonical" href="http://ssr5577gm6.temp.swtest.ru/">
-  <meta property="og:title" content="KinoLyaL — фильмы и сериалы по ID КиноПоиск">
-  <meta property="og:description" content="Введите ID фильма или сериала с КиноПоиска и смотрите онлайн на KinoLyaL.">
-  <meta property="og:type" content="website">
-  <meta name="author" content="KinoLyaL">
-  <meta name="robots" content="index, follow">
-  <meta property="og:url" content="/">
-  <meta name="twitter:image" content="/319529_O.png">
-  <meta property="og:image" content="/319529_O.png">
+  
+  <!-- Подключаем красивый шрифт Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #0a0a0f;
-      --bg-card: rgba(22, 22, 30, 0.75);
-      --bg-input: rgba(255, 255, 255, 0.06);
-      --accent: #ff4d2e;
-      --accent-hover: #ff6b4a;
-      --accent-glow: rgba(255, 77, 46, 0.35);
-      --text: #f0f0f5;
-      --text-muted: #9a9aab;
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      --primary: #e50914; /* Красный Netflix-style */
+      --primary-hover: #b20710;
+      --bg-dark: #141414;
+      --bg-card: rgba(30, 30, 30, 0.7);
+      --text-main: #ffffff;
+      --text-sec: #b3b3b3;
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --radius: 12px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      /* Красивый фоновый градиент с изображением (опционально можно поставить картинку) */
+      background-image: radial-gradient(circle at 50% 0%, #2a2a2a 0%, #141414 70%);
+      color: var(--text-main);
       min-height: 100vh;
-      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
-    /* Фоновые эффекты */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 77, 46, 0.15), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(80, 60, 180, 0.12), transparent),
-        radial-gradient(ellipse 50% 30% at 10% 80%, rgba(255, 100, 50, 0.08), transparent);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
-
-    /* Логотип */
-    .logo {
+    /* --- Логотип --- */
+    header {
+      padding: 20px;
       text-align: center;
-      margin-bottom: 36px;
-      user-select: none;
     }
-
-    .logo a {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
+    
+    .logo {
       font-weight: 800;
-      font-size: 2.4rem;
-      letter-spacing: -0.03em;
-      transition: var(--transition);
+      font-size: 2.5rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
     }
+    .logo a { text-decoration: none; color: inherit; }
+    .logo:hover { transform: scale(1.05); }
 
-    .logo a:hover {
-      color: var(--accent);
-      transform: scale(1.03);
-    }
-
-    .logo-icon {
-      font-size: 2.6rem;
-      filter: drop-shadow(0 0 12px var(--accent-glow));
-    }
-
-    /* Поиск */
-    .search-box {
-      display: flex;
-      gap: 12px;
-      max-width: 640px;
-      margin: 0 auto 24px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .search-input-wrap {
-      flex: 1;
-      min-width: 260px;
-      position: relative;
-    }
-
-    input#query {
+    /* --- Контейнер --- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
       width: 100%;
-      padding: 16px 20px;
+      box-sizing: border-box;
+    }
+
+    /* --- Поиск --- */
+    .search-wrapper {
+      position: relative;
+      max-width: 700px;
+      margin: 20px auto 40px;
+      display: flex;
+      gap: 10px;
+      background: rgba(255,255,255,0.05);
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: border-color 0.3s;
+    }
+    .search-wrapper:focus-within {
+      border-color: var(--primary);
+    }
+
+    input {
+      flex-grow: 1;
+      background: transparent;
+      border: none;
+      color: white;
       font-size: 16px;
-      font-family: inherit;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
+      padding: 12px 20px;
       outline: none;
-      transition: var(--transition);
-      backdrop-filter: blur(12px);
+      font-family: 'Inter', sans-serif;
     }
-
-    input#query::placeholder {
-      color: var(--text-muted);
-    }
-
-    input#query:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-      background: rgba(255, 255, 255, 0.09);
-    }
+    input::placeholder { color: #666; }
 
     .btn {
-      padding: 16px 24px;
-      font-size: 15px;
-      font-weight: 600;
-      font-family: inherit;
+      background: var(--primary);
+      color: white;
       border: none;
-      border-radius: var(--radius);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 600;
       cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      transition: all 0.2s ease;
+      font-size: 15px;
       white-space: nowrap;
     }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ff2a00);
-      color: #fff;
-      box-shadow: 0 4px 20px var(--accent-glow);
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
     }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent-hover), #ff4d2e);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px var(--accent-glow);
-    }
-
     .btn-secondary {
-      background: var(--bg-input);
-      color: var(--text);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.1);
     }
-
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
     }
 
-    /* Результаты поиска по названию */
+    /* --- Результаты поиска (список) --- */
     .title-results {
-      max-width: 640px;
-      margin: 0 auto 28px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      max-width: 700px;
+      margin: -20px auto 30px;
+      background: #1f1f1f;
       border-radius: var(--radius);
       overflow: hidden;
-      max-height: 360px;
-      overflow-y: auto;
-      backdrop-filter: blur(20px);
       box-shadow: var(--shadow);
-      animation: fadeIn 0.3s ease;
+      z-index: 100;
+      position: relative;
+      border: 1px solid var(--glass-border);
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .title-results-status {
-      padding: 18px 20px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
     .title-result-item {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 15px;
       padding: 12px 16px;
       cursor: pointer;
-      transition: var(--transition);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.2s;
     }
-
-    .title-result-item:last-child {
-      border-bottom: none;
-    }
-
-    .title-result-item:hover {
-      background: rgba(255, 77, 46, 0.12);
-    }
-
+    .title-result-item:last-child { border-bottom: none; }
+    .title-result-item:hover { background: rgba(255,255,255,0.08); }
     .title-result-item img {
-      width: 44px;
-      height: 62px;
-      object-fit: cover;
-      border-radius: 6px;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      width: 40px; height: 60px; object-fit: cover; border-radius: 4px;
     }
+    .title-results-status { padding: 15px; color: var(--text-sec); text-align: center; }
 
-    .title-result-item span {
-      font-weight: 500;
-      font-size: 15px;
-    }
-
-    /* Плеер */
+    /* --- Плеер --- */
     #playerArea {
       position: relative;
-      margin-top: 8px;
+      margin-bottom: 40px;
     }
 
+    /* Переключатель плееров */
     #playerSwitcher {
       display: flex;
-      gap: 8px;
       justify-content: center;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 15px;
       flex-wrap: wrap;
     }
-
     #playerSwitcher button {
-      min-width: 42px;
-      height: 42px;
-      padding: 0 14px;
-      border-radius: 50px;
-      border: 1px solid var(--border);
-      background: var(--bg-input);
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 14px;
-      font-family: inherit;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid transparent;
+      color: #ccc;
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: var(--transition);
-      backdrop-filter: blur(8px);
+      font-size: 14px;
+      transition: all 0.2s;
     }
-
-    #playerSwitcher button:hover {
-      color: var(--text);
-      border-color: rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
+    #playerSwitcher button:hover { background: rgba(255,255,255,0.2); color: white; }
     #playerSwitcher button.active {
-      background: linear-gradient(135deg, var(--accent), #ff2a00);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 16px var(--accent-glow);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
     }
 
     .player-block {
       display: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: #000;
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(20px);
-      animation: fadeIn 0.35s ease;
+      position: relative;
+      animation: fadeIn 0.5s ease;
     }
-
-    .player-block.active {
-      display: block;
-    }
-
-    .player-block h2 {
-      text-align: center;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 14px 16px;
-      color: var(--text-muted);
-      letter-spacing: 0.02em;
-      border-bottom: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.2);
+    .player-block.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     iframe {
       width: 100%;
-      height: 62vh;
-      min-height: 360px;
+      aspect-ratio: 16 / 9; /* Сохраняет пропорции */
       border: none;
       display: block;
-      background: #000;
     }
 
-    /* Нижняя кнопка */
-    .bottom-actions {
+    /* --- Доп. кнопки --- */
+    .extra-actions {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 20px;
     }
-
-    .bottom-actions .btn {
-      margin: 0 6px;
+    .action-button {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-sec);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
-
-    /* Help icon */
-    #help-icon {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, var(--accent), #ff2a00);
+    .action-button:hover {
+      border-color: white;
       color: white;
-      font-weight: 700;
+    }
+
+    /* --- Помощь (кнопка ?) --- */
+    #help-icon {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 50px; height: 50px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
       font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 50px;
+      text-align: center;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 6px 24px var(--accent-glow);
-      z-index: 10000;
-      transition: var(--transition);
-      user-select: none;
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5);
+      z-index: 1000;
+      transition: transform 0.3s;
     }
+    #help-icon:hover { transform: rotate(90deg); }
 
-    #help-icon:hover {
-      transform: scale(1.1) rotate(8deg);
-      box-shadow: 0 8px 32px var(--accent-glow);
-    }
-
-    /* Help popup */
     #help-popup {
       display: none;
-      position: fixed;
-      bottom: 90px;
-      right: 24px;
+      position: fixed; bottom: 90px; right: 30px;
       width: 340px;
-      max-height: 70vh;
-      overflow-y: auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 24px;
+      background: #1f1f1f;
+      color: #eee;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      border-radius: 16px;
+      padding: 20px;
+      z-index: 1000;
       font-size: 14px;
-      line-height: 1.6;
-      z-index: 10000;
-      backdrop-filter: blur(24px);
-      animation: fadeIn 0.25s ease;
+      line-height: 1.5;
     }
-
-    #help-popup h3 {
-      margin: 0 0 16px;
-      font-size: 1.15rem;
-      text-align: center;
-      color: var(--text);
+    #help-popup h3 { margin-top: 0; color: var(--primary); }
+    #help-popup code { 
+      background: #333; padding: 2px 6px; border-radius: 4px; color: #ffeb3b; font-family: monospace; 
     }
-
-    #help-popup p {
-      margin-bottom: 12px;
-      color: var(--text-muted);
-    }
-
-    #help-popup strong {
-      color: var(--text);
-    }
-
-    #help-popup a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    #help-popup a:hover {
-      text-decoration: underline;
-    }
-
-    #help-popup code {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 13px;
-    }
-
-    #help-popup mark {
-      background: rgba(255, 77, 46, 0.25);
-      color: #ffb3a0;
-      padding: 0 4px;
-      border-radius: 3px;
-    }
-
-    #help-popup ol {
-      padding-left: 20px;
-      margin-bottom: 12px;
-      color: var(--text-muted);
-    }
-
     #help-close {
-      display: block;
-      width: 100%;
-      margin-top: 16px;
-      padding: 10px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: var(--transition);
+      background: #333; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-top: 10px; width: 100%;
     }
+    #help-close:hover { background: #444; }
 
-    #help-close:hover {
-      background: var(--accent-hover);
-    }
-
-    /* Адаптив */
+    /* --- Адаптив --- */
     @media (max-width: 600px) {
-      .logo a {
-        font-size: 1.9rem;
-      }
-
-      .logo-icon {
-        font-size: 2.1rem;
-      }
-
-      .container {
-        padding: 24px 16px 80px;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-
-      .search-input-wrap {
-        min-width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      iframe {
-        height: 42vh;
-        min-height: 240px;
-      }
-
-      #help-popup {
-        width: calc(100vw - 32px);
-        right: 16px;
-        bottom: 86px;
-      }
-
-      #playerSwitcher button {
-        min-width: 38px;
-        height: 38px;
-        font-size: 13px;
-      }
-    }
-
-    /* Скроллбар */
-    .title-results::-webkit-scrollbar,
-    #help-popup::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .title-results::-webkit-scrollbar-track,
-    #help-popup::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .title-results::-webkit-scrollbar-thumb,
-    #help-popup::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
+      .logo { font-size: 2rem; }
+      .search-wrapper { flex-direction: column; border-radius: 20px; padding: 15px; }
+      .btn { width: 100%; }
+      #help-popup { right: 10px; left: 10px; width: auto; bottom: 90px; }
+      #help-icon { bottom: 20px; right: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <a href="/" title="Перейти на главную">
-        <span class="logo-icon">🎬</span>
-        <span>KinoLyaL</span>
-      </a>
-    </div>
 
-    <div class="search-box">
-      <div class="search-input-wrap">
-        <input id="query" type="text" placeholder="ID, ссылка или название фильма..." 
-               onkeydown="if(event.key==='Enter') searchPlayer()" 
-               aria-label="Поиск по ID, ссылке или названию">
-      </div>
-      <button class="btn btn-primary" onclick="searchPlayer()" aria-label="Поиск">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        Поиск
-      </button>
-      <button class="btn btn-secondary" onclick="copyShareLink()" aria-label="Поделиться ссылкой">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Поделиться
-      </button>
-    </div>
+<header>
+  <div class="logo">
+    🎬 <a href="/">KinoLyaL</a>
+  </div>
+</header>
 
-    <div id="titleResults" class="title-results" hidden></div>
-
-    <div id="playerArea">
-      <div id="playerSwitcher" aria-label="Выбор плеера" role="tablist" hidden></div>
-      <div class="player" id="playerContainer" aria-live="polite" aria-atomic="true"></div>
-    </div>
-
-    <div class="bottom-actions">
-      <button class="btn btn-secondary" onclick="window.open('https://www.kinopoisk.ru/lists/categories/movies/', '_blank')" aria-label="КиноПоиск Список ID">
-        КиноПоиск — списки
-      </button>
-    </div>
+<div class="container">
+  <!-- Поиск -->
+  <div class="search-wrapper">
+    <input id="query" type="text" placeholder="ID фильма, ссылка Kinopoisk или название..." onkeydown="if(event.key==='Enter') searchPlayer()" aria-label="Поиск">
+    <button onclick="searchPlayer()" class="btn">Найти</button>
+    <button onclick="copyShareLink()" class="btn btn-secondary" title="Скопировать ссылку">🔗</button>
   </div>
 
-  <!-- Help -->
-  <div id="help-icon" title="Как пользоваться сайтом">?</div>
-  <div id="help-popup">
-    <h3>📘 Как пользоваться</h3>
-    <p><strong>🔎 Найдите ID КиноПоиска:</strong><br>
-    Перейдите на <a href="https://www.kinopoisk.ru" target="_blank" rel="noopener">КиноПоиск</a>, выберите фильм или сериал и скопируйте цифры из ссылки.</p>
-    <p>📌 Пример фильма:<br>
-    <code>https://www.kinopoisk.ru/film/<mark>535341</mark>/</code> → ID = <strong>535341</strong></p>
-    <p>🎬 Пример сериала:<br>
-    <code>https://www.kinopoisk.ru/series/<mark>1234567</mark>/</code> → ID = <strong>1234567</strong></p>
-    <p><strong>Как смотреть:</strong></p>
-    <ol>
-      <li>Вставьте ID, ссылку или название</li>
-      <li>Нажмите «Поиск»</li>
-      <li>Выберите плеер</li>
-    </ol>
-    <p><strong>💡 Советы:</strong><br>
-    — Если плеер не загружается — попробуйте другой или включите VPN.<br>
-    — Реклама в плеерах? Установите <a href="https://ublockorigin.com/" target="_blank" rel="noopener">uBlock Origin</a>.</p>
-    <p><strong>❓ FAQ:</strong><br>
-    — Можно вставить ссылку целиком? Да — сайт сам извлечёт ID.<br>
-    — Неправильный ID? Просто введите верный.</p>
-    <button id="help-close">Закрыть</button>
+  <!-- Результаты поиска -->
+  <div id="titleResults" class="title-results" hidden></div>
+
+  <!-- Зона плеера -->
+  <div id="playerArea">
+    <div id="playerSwitcher" aria-label="Выбор плеера" role="tablist" hidden></div>
+    <div class="player" id="playerContainer" aria-live="polite"></div>
   </div>
 
-  <script>
-    const players = {
-      Collaps: id => `https://api.zenithjs.ws/embed/kp/${id}`,
-      Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`,
-    };
+  <!-- Кнопка списка ID -->
+  <div class="extra-actions">
+    <a href="https://www.kinopoisk.ru/lists/categories/movies/" target="_blank" class="action-button">
+      📂 Каталог КиноПоиска
+    </a>
+  </div>
+</div>
 
-    const KINOPOISK_API_KEY = '8DCHKJN-GY2MFX0-G8DA27G-EK51D6J';
+<!-- Иконка помощи -->
+<div id="help-icon">?</div>
 
-    function extractID(input) {
-      const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
-      return match ? match[1] : input;
-    }
+<!-- Окно помощи -->
+<div id="help-popup">
+  <h3>📘 Инструкция</h3>
+  <p><strong>Как найти фильм:</strong></p>
+  <ol style="padding-left: 20px; margin: 5px 0;">
+    <li>Зайдите на <a href="https://www.kinopoisk.ru" target="_blank" style="color:#ff3d00">Kinopoisk.ru</a>.</li>
+    <li>Откройте страницу фильма.</li>
+    <li>Скопируйте цифры из адресной строки.<br>
+    <small>Пример: kinopoisk.ru/film/<code>535341</code>/</small></li>
+    <li>Вставьте ID или ссылку в поиск выше.</li>
+  </ol>
+  <p style="margin-top:10px; color:#aaa; font-size:12px;">
+    💡 Если плеер не работает, попробуйте другой (кнопки 1, 2...) или отключите блокировщик рекламы.
+  </p>
+  <button id="help-close">Закрыть</button>
+</div>
 
-    async function searchPlayer() {
-      const raw = document.getElementById("query").value.trim();
-      if (!raw) return;
-      const titleResults = document.getElementById("titleResults");
-      titleResults.hidden = true;
-      titleResults.innerHTML = '';
-      const asId = extractID(raw);
-      if (/^\d+$/.test(asId)) {
-        await loadPlayers(asId);
-        return;
-      }
-      await searchByTitle(raw);
-    }
+<script>
+// === КОНФИГУРАЦИЯ ПЛЕЕРОВ ===
+const players = {
+  Collaps: id => `https://api.zenithjs.ws/embed/kp/${id}`,
+  Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`,
+  // Можно добавить другие плееры здесь
+};
 
-    async function searchByTitle(title) {
-      const box = document.getElementById("titleResults");
-      box.hidden = false;
-      box.innerHTML = '';
-      const status = document.createElement("p");
-      status.className = "title-results-status";
-      status.textContent = `Ищу «${title}»…`;
-      box.appendChild(status);
-      let data;
-      try {
-        const res = await fetch(
-          `https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10&query=${encodeURIComponent(title)}`,
-          { headers: { 'X-API-KEY': KINOPOISK_API_KEY, 'Accept': 'application/json' } }
-        );
-        data = await res.json();
-        if (!res.ok) throw new Error(data.message || "Ошибка поиска");
-      } catch (e) {
-        box.innerHTML = '';
-        const err = document.createElement("p");
-        err.className = "title-results-status";
-        err.textContent = "Не удалось выполнить поиск по названию. Попробуйте ID или ссылку.";
-        box.appendChild(err);
-        return;
-      }
-      const docs = data.docs || [];
-      const results = docs
-        .filter(d => d.id)
-        .map(d => ({
-          id: d.id,
-          name: d.name || d.alternativeName || "Без названия",
-          year: d.year || null,
-          poster: (d.poster && (d.poster.previewUrl || d.poster.url)) || null,
-        }));
-      box.innerHTML = '';
-      if (results.length === 0) {
-        const empty = document.createElement("p");
-        empty.className = "title-results-status";
-        empty.textContent = "Ничего не найдено.";
-        box.appendChild(empty);
-        return;
-      }
-      if (results.length === 1) {
-        box.hidden = true;
-        document.getElementById("query").value = results[0].id;
-        await loadPlayers(results[0].id);
-        return;
-      }
-      results.forEach(r => {
-        const item = document.createElement("div");
-        item.className = "title-result-item";
-        if (r.poster) {
-          const img = document.createElement("img");
-          img.src = r.poster;
-          img.alt = "";
-          img.loading = "lazy";
-          item.appendChild(img);
-        }
-        const span = document.createElement("span");
-        span.textContent = r.name + (r.year ? ` (${r.year})` : "");
-        item.appendChild(span);
-        item.onclick = async () => {
-          box.hidden = true;
-          document.getElementById("query").value = r.id;
-          await loadPlayers(r.id);
-        };
-        box.appendChild(item);
-      });
-    }
+const KINOPOISK_API_KEY = '8DCHKJN-GY2MFX0-G8DA27G-EK51D6J';
 
-    async function loadPlayers(query) {
-      const container = document.getElementById("playerContainer");
-      const switcher = document.getElementById("playerSwitcher");
-      container.innerHTML = '';
-      switcher.innerHTML = '';
-      switcher.hidden = true;
-      let index = 0;
-      for (const [name, getSrc] of Object.entries(players)) {
-        let iframeSrc = typeof getSrc === 'function' ? await getSrc(query) : null;
-        if (!iframeSrc) continue;
-        const block = document.createElement("div");
-        block.className = "player-block";
-        if (index === 0) block.classList.add("active");
-        const title = document.createElement("h2");
-        title.textContent = name;
-        block.appendChild(title);
-        const iframe = document.createElement("iframe");
-        iframe.src = iframeSrc;
-        iframe.allowFullscreen = true;
-        iframe.loading = "lazy";
-        iframe.title = `Плеер ${name} для КиноПоиск ID ${query}`;
-        block.appendChild(iframe);
-        container.appendChild(block);
-        const btn = document.createElement("button");
-        btn.textContent = name;
-        btn.title = name;
-        if (index === 0) btn.classList.add("active");
-        btn.onclick = () => {
-          [...switcher.children].forEach(b => b.classList.remove("active"));
-          [...container.children].forEach(p => p.classList.remove("active"));
-          btn.classList.add("active");
-          block.classList.add("active");
-        };
-        switcher.appendChild(btn);
-        index++;
-      }
-      if (index > 1) switcher.hidden = false;
-      history.replaceState(null, '', `?id=${query}`);
-    }
+// === ЛОГИКА ===
 
-    function copyShareLink() {
-      let query = document.getElementById("query").value.trim();
-      query = extractID(query);
-      if (!/^\d+$/.test(query)) {
-        alert("Введите корректный ID или ссылку перед копированием");
-        return;
-      }
-      const url = `${window.location.origin}${window.location.pathname}?id=${query}`;
-      navigator.clipboard.writeText(url)
-        .then(() => alert("Ссылка скопирована!"))
-        .catch(() => alert("Ошибка при копировании ссылки."));
-    }
+function extractID(input) {
+  const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
+  return match ? match[1] : input;
+}
 
-    function loadFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get("id");
-      if (id && /^\d+$/.test(id)) {
-        document.getElementById("query").value = id;
-        searchPlayer();
-      }
-    }
+async function searchPlayer() {
+  const raw = document.getElementById("query").value.trim();
+  if (!raw) return;
+  
+  const titleResults = document.getElementById("titleResults");
+  titleResults.hidden = true;
+  titleResults.innerHTML = '';
+  
+  const asId = extractID(raw);
+  
+  // Если это просто число (ID), грузим плееры сразу
+  if (/^\d+$/.test(asId)) {
+    await loadPlayers(asId);
+    return;
+  }
+  
+  // Иначе ищем по названию через API
+  await searchByTitle(raw);
+}
 
-    window.onload = loadFromURL;
+async function searchByTitle(title) {
+  const box = document.getElementById("titleResults");
+  box.hidden = false;
+  box.innerHTML = '<p class="title-results-status">Ищу «' + title + '»...</p>';
+  
+  let data;
+  try {
+    const res = await fetch(
+      `https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=5&query=${encodeURIComponent(title)}`,
+      { headers: { 'X-API-KEY': KINOPOISK_API_KEY, 'Accept': 'application/json' } }
+    );
+    data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Ошибка поиска");
+  } catch (e) {
+    box.innerHTML = '<p class="title-results-status">Ошибка API. Проверьте консоль или попробуйте ID.</p>';
+    return;
+  }
 
-    // Help popup
-    const helpIcon = document.getElementById('help-icon');
-    const helpPopup = document.getElementById('help-popup');
-    const helpClose = document.getElementById('help-close');
-    helpIcon.addEventListener('click', () => {
-      helpPopup.style.display = helpPopup.style.display === 'block' ? 'none' : 'block';
-    });
-    helpClose.addEventListener('click', () => {
-      helpPopup.style.display = 'none';
-    });
-    document.addEventListener('click', (e) => {
-      if (!helpPopup.contains(e.target) && !helpIcon.contains(e.target)) {
-        helpPopup.style.display = 'none';
-      }
-    });
+  const docs = data.docs || [];
+  const results = docs.filter(d => d.id).map(d => ({
+    id: d.id,
+    name: d.name || d.alternativeName || "Без названия",
+    year: d.year || "",
+    poster: (d.poster && (d.poster.previewUrl || d.poster.url)) || null,
+  }));
 
-    // Защита от копирования / devtools (как было)
-    document.oncontextmenu = function() { return false; };
-    document.onkeydown = function(e) {
-      if (e.keyCode == 123) return false;
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-      if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-    };
-  </script>
+  box.innerHTML = '';
+  
+  if (results.length === 0) {
+    box.innerHTML = '<p class="title-results-status">Ничего не найдено 😔</p>';
+    return;
+  }
 
-  <!-- Фильтр рекламы на странице -->
-  <script>
-  (function() {
-    const adSelectors = [
-      '.ad', '.ads', '.advert', '.advertisement', '.banner', '.banner-ad',
-      '.promo', '.sponsored', '.ad-container', '.ad-wrapper', '.ad-banner',
-      '.advertise', '.ad-block', '.ad-slot', '.ad-box', '.ad-area',
-      '.google-ads', '.yandex-ads',
-      '[id*="ad"]', '[class*="ad"]',
-      '[id*="banner"]', '[class*="banner"]',
-      '[id*="promo"]', '[class*="promo"]',
-      '[id*="sponsor"]', '[class*="sponsor"]'
-    ];
-    function hideAds() {
-      const elements = document.querySelectorAll(adSelectors.join(','));
-      for (const el of elements) {
-        if (!el.closest('#playerContainer') && !el.closest('#playerSwitcher')) {
-          if (el.tagName !== 'IFRAME') {
-            el.style.display = 'none';
-            el.style.visibility = 'hidden';
-            el.style.pointerEvents = 'none';
-          }
-        }
-      }
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', hideAds);
+  // Если найден ровно один результат - сразу открываем
+  if (results.length === 1) {
+    box.hidden = true;
+    document.getElementById("query").value = results[0].id;
+    await loadPlayers(results[0].id);
+    return;
+  }
+
+  // Выводим список
+  results.forEach(r => {
+    const item = document.createElement("div");
+    item.className = "title-result-item";
+    
+    let imgHtml = '';
+    if (r.poster) {
+      imgHtml = `<img src="${r.poster}" alt="" loading="lazy">`;
     } else {
-      hideAds();
+      imgHtml = `<div style="width:40px;height:60px;background:#333;border-radius:4px;"></div>`;
     }
-    const observer = new MutationObserver(() => hideAds());
-    observer.observe(document.body, { childList: true, subtree: true });
-  })();
-  </script>
+
+    item.innerHTML = `
+      ${imgHtml}
+      <div>
+        <div style="font-weight:600; color:white;">${r.name}</div>
+        <div style="font-size:12px; color:#888;">${r.year ? r.year + ' г.' : ''}</div>
+      </div>
+    `;
+    
+    item.onclick = async () => {
+      box.hidden = true;
+      document.getElementById("query").value = r.id;
+      await loadPlayers(r.id);
+    };
+    box.appendChild(item);
+  });
+}
+
+async function loadPlayers(query) {
+  const container = document.getElementById("playerContainer");
+  const switcher = document.getElementById("playerSwitcher");
+  
+  container.innerHTML = '';
+  switcher.innerHTML = '';
+  switcher.hidden = true;
+  
+  let index = 0;
+  for (const [name, getSrc] of Object.entries(players)) {
+    let iframeSrc = typeof getSrc === 'function' ? await getSrc(query) : null;
+    if (!iframeSrc) continue;
+
+    const block = document.createElement("div");
+    block.className = "player-block";
+    if (index === 0) block.classList.add("active");
+
+    const iframe = document.createElement("iframe");
+    iframe.src = iframeSrc;
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+    iframe.title = `Плеер ${name}`;
+    
+    block.appendChild(iframe);
+    container.appendChild(block);
+
+    // Кнопка переключения
+    const btn = document.createElement("button");
+    btn.textContent = name; // Показываем имя плеера, а не просто цифру
+    btn.title = `Переключить на ${name}`;
+    if (index === 0) btn.classList.add("active");
+    
+    btn.onclick = () => {
+      [...switcher.children].forEach(b => b.classList.remove("active"));
+      [...container.children].forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      block.classList.add("active");
+    };
+    
+    switcher.appendChild(btn);
+    index++;
+  }
+
+  if (index > 1) switcher.hidden = false;
+  
+  // Обновляем URL без перезагрузки
+  const currentUrl = new URL(window.location);
+  currentUrl.searchParams.set('id', query);
+  window.history.pushState({}, '', currentUrl);
+}
+
+function copyShareLink() {
+  let query = document.getElementById("query").value.trim();
+  query = extractID(query);
+  if (!/^\d+$/.test(query)) {
+    alert("Сначала найдите фильм (введите ID или название)!");
+    return;
+  }
+  const url = `${window.location.origin}${window.location.pathname}?id=${query}`;
+  navigator.clipboard.writeText(url)
+    .then(() => alert("Ссылка скопирована в буфер обмена!"))
+    .catch(() => prompt("Скопируйте ссылку вручную:", url));
+}
+
+function loadFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (id && /^\d+$/.test(id)) {
+    document.getElementById("query").value = id;
+    searchPlayer();
+  }
+}
+
+window.onload = loadFromURL;
+
+// Защита от копирования (как в оригинале)
+document.oncontextmenu = function() { return false; };
+document.onkeydown = function(e) {
+  if (e.keyCode == 123) return false; // F12
+  if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) return false;
+  if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+};
+
+// Логика попапа помощи
+const helpIcon = document.getElementById('help-icon');
+const helpPopup = document.getElementById('help-popup');
+const helpClose = document.getElementById('help-close');
+
+helpIcon.addEventListener('click', () => {
+  helpPopup.style.display = helpPopup.style.display === 'block' ? 'none' : 'block';
+});
+helpClose.addEventListener('click', () => {
+  helpPopup.style.display = 'none';
+});
+document.addEventListener('click', (e) => {
+  if (!helpPopup.contains(e.target) && !helpIcon.contains(e.target)) {
+    helpPopup.style.display = 'none';
+  }
+});
+
+// Простой фильтр рекламы (только внешние элементы)
+(function() {
+  const adSelectors = ['.ad', '.ads', '.banner', '.popup-ad']; // Пример
+  function hideAds() {
+    document.querySelectorAll(adSelectors.join(',')).forEach(el => {
+      if(!el.closest('#playerContainer')) el.style.display = 'none';
+    });
+  }
+  setTimeout(hideAds, 1000);
+})();
+</script>
+
 </body>
 </html>
