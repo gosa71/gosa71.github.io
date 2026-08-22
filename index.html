@@ -4,38 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KinoLyaL — смотреть фильмы и сериалы онлайн по ID КиноПоиск</title>
-    <meta name="description" content="KinoLyaL — смотри фильмы и сериалы онлайн по ID КиноПоиска. Все популярные плееры в одном месте." />
-    <meta name="keywords" content="смотреть фильмы онлайн, кино по id, kinopoisk id, сериалы онлайн" />
-    <link rel="icon" href="/css_js/favicon.svg" type="image/x-icon" />
-    <link rel="canonical" href="http://ssr5577gm6.temp.swtest.ru/" />
-    <meta property="og:title" content="KinoLyaL — фильмы и сериалы по ID КиноПоиск" />
-    <meta property="og:description" content="Введите ID фильма или сериала с КиноПоиска и смотрите онлайн." />
-    <meta property="og:type" content="website" />
-    <meta name="robots" content="index, follow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-
     <style>
-        /* ===== RESET & BASE ===== */
-        *,
-        *::before,
-        *::after {
+        /* ===== стили (оставляем те же, что и раньше) ===== */
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
         :root {
             --primary: #f97316;
             --primary-dark: #ea580c;
             --primary-light: #fb923c;
             --primary-glow: rgba(249, 115, 22, 0.35);
             --secondary: #8b5cf6;
-            --secondary-glow: rgba(139, 92, 246, 0.25);
             --accent: #06b6d4;
             --bg-start: #0b0b1a;
-            --bg-end: #14142e;
             --bg-card: rgba(255, 255, 255, 0.04);
             --bg-card-hover: rgba(255, 255, 255, 0.08);
             --border-subtle: rgba(255, 255, 255, 0.06);
@@ -49,43 +35,20 @@
             --shadow-glow: 0 0 40px rgba(249, 115, 22, 0.08);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-start);
             color: var(--text-primary);
             min-height: 100vh;
             padding: 20px 20px 40px;
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.10) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+            background-image: radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.10) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%);
             background-attachment: fixed;
             line-height: 1.6;
         }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-light);
-        }
-
-        /* ===== ANIMATED BG ORBS ===== */
         .bg-orb {
             position: fixed;
             border-radius: 50%;
@@ -114,17 +77,6 @@
             animation-duration: 30s;
             animation-delay: -5s;
         }
-        .bg-orb--3 {
-            width: 300px;
-            height: 300px;
-            top: 40%;
-            left: 60%;
-            background: var(--accent);
-            opacity: 0.06;
-            animation-duration: 35s;
-            animation-delay: -10s;
-        }
-
         @keyframes orbFloat {
             0% {
                 transform: translate(0, 0) scale(1);
@@ -139,16 +91,12 @@
                 transform: translate(20px, -20px) scale(1.05);
             }
         }
-
-        /* ===== CONTAINER ===== */
         .app {
             position: relative;
             z-index: 1;
             max-width: 960px;
             margin: 0 auto;
         }
-
-        /* ===== LOGO ===== */
         .logo {
             text-align: center;
             margin-bottom: 32px;
@@ -164,7 +112,6 @@
             font-weight: 900;
             letter-spacing: -0.03em;
             transition: var(--transition);
-            position: relative;
         }
         .logo a:hover {
             color: var(--primary);
@@ -172,7 +119,6 @@
         }
         .logo-icon {
             font-size: 2.4rem;
-            line-height: 1;
             filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.2));
             transition: var(--transition);
         }
@@ -185,7 +131,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: none;
         }
         .logo-sub {
             display: block;
@@ -197,8 +142,6 @@
             -webkit-text-fill-color: var(--text-secondary);
             background: none;
         }
-
-        /* ===== SEARCH ===== */
         .search-section {
             margin-bottom: 28px;
         }
@@ -209,7 +152,6 @@
             justify-content: center;
             background: var(--bg-card);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius);
             padding: 8px;
@@ -220,7 +162,6 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 4px var(--primary-glow), 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-
         .search-input-wrap {
             flex: 1;
             min-width: 200px;
@@ -238,14 +179,12 @@
             font-size: 1.2rem;
             opacity: 0.5;
             margin-right: 10px;
-            flex-shrink: 0;
             transition: var(--transition);
         }
         .search-input-wrap:focus-within .icon {
             opacity: 0.9;
             color: var(--primary);
         }
-
         .search-input-wrap input {
             width: 100%;
             padding: 14px 0;
@@ -262,13 +201,11 @@
             font-weight: 400;
             font-style: italic;
         }
-
         .search-actions {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -293,10 +230,6 @@
             color: var(--text-primary);
             transform: translateY(-1px);
         }
-        .btn:active {
-            transform: scale(0.97);
-        }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #fff;
@@ -308,18 +241,6 @@
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: #fff;
         }
-
-        .btn-outline {
-            background: transparent;
-            border-color: rgba(255, 255, 255, 0.10);
-            color: var(--text-secondary);
-        }
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--text-primary);
-            background: rgba(249, 115, 22, 0.08);
-        }
-
         .btn-share {
             background: rgba(139, 92, 246, 0.12);
             color: var(--text-secondary);
@@ -329,14 +250,11 @@
             color: #c4b5fd;
             border-color: var(--secondary);
         }
-
-        /* ===== TITLE RESULTS ===== */
         .title-results {
             max-width: 600px;
             margin: 16px auto 0;
             background: var(--bg-card);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius);
             overflow: hidden;
@@ -348,14 +266,12 @@
         .title-results.visible {
             display: block;
         }
-
         .title-results-status {
             padding: 16px 20px;
             color: var(--text-secondary);
             font-size: 0.95rem;
             text-align: center;
         }
-
         .title-result-item {
             display: flex;
             align-items: center;
@@ -393,14 +309,9 @@
             font-size: 0.8rem;
             color: var(--text-muted);
         }
-
-        /* ===== PLAYER AREA ===== */
         #playerArea {
             margin-top: 28px;
-            position: relative;
         }
-
-        /* ===== PLAYER SWITCHER ===== */
         #playerSwitcher {
             display: none;
             gap: 8px;
@@ -411,7 +322,6 @@
         #playerSwitcher.visible {
             display: flex;
         }
-
         #playerSwitcher .sw-btn {
             padding: 10px 20px;
             border: none;
@@ -425,7 +335,6 @@
             color: var(--text-secondary);
             border: 1px solid transparent;
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -455,24 +364,19 @@
         #playerSwitcher .sw-btn.active .num {
             background: rgba(255, 255, 255, 0.20);
         }
-
-        /* ===== PLAYER BLOCKS ===== */
         .player-block {
             display: none;
             background: var(--bg-card);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-lg), var(--shadow-glow);
-            transition: var(--transition);
             animation: fadeSlideUp 0.45s ease;
         }
         .player-block.active {
             display: block;
         }
-
         @keyframes fadeSlideUp {
             0% {
                 opacity: 0;
@@ -483,7 +387,6 @@
                 transform: translateY(0);
             }
         }
-
         .player-block .header {
             display: flex;
             align-items: center;
@@ -496,7 +399,6 @@
             font-size: 1rem;
             font-weight: 700;
             color: var(--text-secondary);
-            letter-spacing: 0.3px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -508,7 +410,6 @@
             color: #fff;
             padding: 2px 10px;
             border-radius: 50px;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
         .player-block .header .status {
@@ -537,7 +438,6 @@
                 transform: scale(0.85);
             }
         }
-
         .player-block iframe {
             width: 100%;
             height: 60vh;
@@ -546,8 +446,6 @@
             display: block;
             background: #0a0a14;
         }
-
-        /* ===== HELP ===== */
         .help-fab {
             position: fixed;
             bottom: 24px;
@@ -567,17 +465,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: inherit;
-            line-height: 1;
         }
         .help-fab:hover {
             transform: scale(1.08) rotate(-4deg);
             box-shadow: 0 8px 40px rgba(139, 92, 246, 0.50);
         }
-        .help-fab:active {
-            transform: scale(0.94);
-        }
-
         .help-popup {
             display: none;
             position: fixed;
@@ -589,7 +481,6 @@
             overflow-y: auto;
             background: rgba(18, 18, 40, 0.92);
             backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius);
             padding: 24px 28px;
@@ -603,7 +494,6 @@
         .help-popup.visible {
             display: block;
         }
-
         .help-popup h3 {
             font-size: 1.15rem;
             font-weight: 700;
@@ -621,12 +511,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .help-popup p {
-            margin-bottom: 10px;
-        }
-        .help-popup strong {
-            color: var(--text-primary);
-        }
         .help-popup code {
             display: inline-block;
             background: rgba(255, 255, 255, 0.06);
@@ -635,7 +519,6 @@
             font-family: 'Inter', monospace;
             font-size: 0.85rem;
             color: var(--text-primary);
-            word-break: break-all;
         }
         .help-popup mark {
             background: rgba(249, 115, 22, 0.20);
@@ -647,18 +530,13 @@
         .help-popup a {
             color: var(--primary-light);
             text-decoration: none;
-            transition: var(--transition);
         }
         .help-popup a:hover {
-            color: var(--primary);
             text-decoration: underline;
         }
         .help-popup ol {
             padding-left: 20px;
             margin: 8px 0 12px;
-        }
-        .help-popup ol li {
-            margin-bottom: 4px;
         }
         .help-popup .close-btn {
             display: block;
@@ -679,33 +557,14 @@
             box-shadow: 0 4px 20px rgba(249, 115, 22, 0.30);
             transform: translateY(-1px);
         }
-
-        /* ===== FOOTER LINKS ===== */
-        .footer-actions {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-subtle);
-        }
-        .footer-actions .btn {
-            font-size: 0.85rem;
-        }
-
-        /* ===== RESPONSIVE ===== */
+        /* Удалили блок footer-actions, поэтому стили для него не нужны */
         @media (max-width: 700px) {
-            body {
-                padding: 16px 12px 32px;
-            }
             .logo a {
                 font-size: 2rem;
             }
-            .logo-icon {
-                font-size: 1.8rem;
-            }
             .search-box {
-                padding: 6px;
-                gap: 8px;
                 flex-direction: column;
+                padding: 6px;
             }
             .search-input-wrap {
                 padding: 0 12px;
@@ -713,9 +572,6 @@
             .search-input-wrap input {
                 padding: 12px 0;
                 font-size: 0.95rem;
-            }
-            .search-actions {
-                justify-content: stretch;
             }
             .search-actions .btn {
                 flex: 1;
@@ -726,18 +582,6 @@
             .player-block iframe {
                 height: 40vh;
                 min-height: 240px;
-            }
-            .player-block .header {
-                flex-direction: column;
-                gap: 6px;
-                padding: 12px 16px;
-            }
-            .player-block .header h2 {
-                font-size: 0.9rem;
-            }
-            #playerSwitcher .sw-btn {
-                padding: 8px 14px;
-                font-size: 0.75rem;
             }
             .help-popup {
                 bottom: 76px;
@@ -754,61 +598,15 @@
                 bottom: 16px;
                 right: 16px;
             }
-            .title-results {
-                max-height: 260px;
-            }
-            .title-result-item {
-                padding: 8px 12px;
-            }
-            .title-result-item img {
-                width: 34px;
-                height: 48px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .logo a {
-                font-size: 1.6rem;
-            }
-            .logo-icon {
-                font-size: 1.4rem;
-            }
-            .search-input-wrap input {
-                font-size: 0.85rem;
-                padding: 10px 0;
-            }
-            .btn {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-        }
-
-        /* ===== UTILITY ===== */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
         }
     </style>
 </head>
 <body>
-
-    <!-- ===== BACKGROUND ORBS ===== -->
     <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb--3" aria-hidden="true"></div>
-
-    <!-- ===== APP ===== -->
     <div class="app" role="main">
-
-        <!-- LOGO -->
         <div class="logo">
-            <a href="/" title="Перейти на главную">
+            <a href="/">
                 <span class="logo-icon">🎬</span>
                 <span>
                     <span class="logo-text">KinoLyaL</span>
@@ -816,83 +614,26 @@
                 </span>
             </a>
         </div>
-
-        <!-- SEARCH -->
-        <section class="search-section" aria-label="Поиск фильма">
+        <section class="search-section">
             <div class="search-box">
                 <div class="search-input-wrap">
                     <span class="icon" aria-hidden="true">🔍</span>
-                    <input
-                    id="query"
-                    type="text"
-                    placeholder="Введите ID, ссылку или название фильма"
-                    aria-label="Поиск по ID, ссылке или названию"
-                    autocomplete="off"
-                    />
+                    <input id="query" type="text" placeholder="Введите ID, ссылку или название фильма" autocomplete="off" />
                 </div>
                 <div class="search-actions">
-                    <button class="btn btn-primary" onclick="searchPlayer()" aria-label="Поиск">
-                        <span aria-hidden="true">▶</span> Найти
-                    </button>
-                    <button class="btn btn-share" onclick="copyShareLink()" aria-label="Поделиться ссылкой">
-                        <span aria-hidden="true">🔗</span> Поделиться
-                    </button>
+                    <button class="btn btn-primary" onclick="searchPlayer()">▶ Найти</button>
+                    <button class="btn btn-share" onclick="copyShareLink()">🔗 Поделиться</button>
                 </div>
             </div>
             <div id="titleResults" class="title-results" role="listbox"></div>
         </section>
-
-        <!-- PLAYER -->
-        <section id="playerArea" aria-label="Видеоплеер">
-            <div id="playerSwitcher" role="tablist" aria-label="Выбор плеера"></div>
-            <div id="playerContainer" aria-live="polite" aria-atomic="true"></div>
+        <section id="playerArea">
+            <div id="playerSwitcher" role="tablist"></div>
+            <div id="playerContainer"></div>
         </section>
+        <!-- Кнопка "КиноПоиск Список ID" УДАЛЕНА -->
+    
 
-        <!-- FOOTER -->
-        <div class="footer-actions">
-            <button class="btn btn-outline" onclick="window.open('https://www.kinopoisk.ru/lists/categories/movies/', '_blank')" aria-label="КиноПоиск Список ID">
-                📋 КиноПоиск Список ID
-            </button>
-        </div>
-
-    </div>
-
-    <!-- ===== HELP FAB ===== -->
-    <button class="help-fab" id="helpIcon" aria-label="Помощь" title="Как пользоваться сайтом">
-        ?
-    </button>
-
-    <!-- ===== HELP POPUP ===== -->
-    <div class="help-popup" id="helpPopup" role="dialog" aria-label="Помощь">
-        <h3>📘 <span>Как пользоваться</span></h3>
-
-        <p><strong>🔎 Найдите ID на КиноПоиске:</strong><br />
-            Перейдите на <a href="https://www.kinopoisk.ru" target="_blank" rel="noopener">КиноПоиск</a>, выберите фильм или сериал, скопируйте цифры из ссылки:</p>
-
-        <p>📌 Пример фильма:<br />
-            <code>https://www.kinopoisk.ru/film/<mark>535341</mark>/</code> → ID = <strong>535341</strong></p>
-
-        <p>🎬 Пример сериала:<br />
-            <code>https://www.kinopoisk.ru/series/<mark>1234567</mark>/</code> → ID = <strong>1234567</strong></p>
-
-        <p><strong>🎬 Как смотреть:</strong></p>
-        <ol>
-            <li>Вставьте ID в строку поиска</li>
-            <li>Нажмите «Найти»</li>
-            <li>Выберите плеер (кнопки 1, 2, …)</li>
-        </ol>
-
-        <p><strong>💡 Советы:</strong><br />
-            — Если плеер не грузится, попробуйте другой или обновите страницу.<br />
-            — Реклама внутри плееров — установите <a href="https://ublockorigin.com/" target="_blank" rel="noopener">uBlock Origin</a>.<br />
-            — Можно вставить полную ссылку — ID извлечётся автоматически.</p>
-
-        <button class="close-btn" id="helpClose">Закрыть</button>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- ===== JAVASCRIPT ===== -->
-    <!-- ============================================================ -->
     <script>
         // ===== PLAYERS =====
         const players = {
@@ -900,64 +641,49 @@
             Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`,
         };
 
-        const KINOPOISK_API_KEY = '8DCHKJN-GY2MFX0-G8DA27G-EK51D6J';
+        // ===== ВАШ WORKER (укажите реальный URL) =====
+        const WORKER_URL = 'https://foxs-rss-proxy.ssr5577.workers.dev/'; // ← замените!
 
         // ===== HELP =====
         (function initHelp() {
             const icon = document.getElementById('helpIcon');
             const popup = document.getElementById('helpPopup');
             const close = document.getElementById('helpClose');
-
-            function toggle() {
-                popup.classList.toggle('visible');
-            }
-
+            function toggle() { popup.classList.toggle('visible'); }
             icon.addEventListener('click', toggle);
             close.addEventListener('click', toggle);
-
             document.addEventListener('click', (e) => {
-                if (!popup.contains(e.target) && !icon.contains(e.target)) {
-                    popup.classList.remove('visible');
-                }
+                if (!popup.contains(e.target) && !icon.contains(e.target)) popup.classList.remove('visible');
             });
-
-            // Close on Escape
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && popup.classList.contains('visible')) {
-                    popup.classList.remove('visible');
-                }
+                if (e.key === 'Escape' && popup.classList.contains('visible')) popup.classList.remove('visible');
             });
         })();
 
-        // ===== UTILITY =====
         function extractID(input) {
             const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
             return match ? match[1] : input;
         }
 
-        // ===== SEARCH =====
         async function searchPlayer() {
             const raw = document.getElementById('query').value.trim();
             if (!raw) return;
-
-            const resultsBox = document.getElementById('titleResults');
-            resultsBox.classList.remove('visible');
-            resultsBox.innerHTML = '';
-
+            const box = document.getElementById('titleResults');
+            box.classList.remove('visible');
+            box.innerHTML = '';
             const asId = extractID(raw);
             if (/^\d+$/.test(asId)) {
                 await loadPlayers(asId);
                 return;
             }
-
             await searchByTitle(raw);
         }
 
+        // ===== ПОИСК ПО НАЗВАНИЮ (через Worker) =====
         async function searchByTitle(title) {
             const box = document.getElementById('titleResults');
             box.classList.add('visible');
             box.innerHTML = '';
-
             const status = document.createElement('p');
             status.className = 'title-results-status';
             status.textContent = `🔎 Ищем «${title}»…`;
@@ -965,38 +691,23 @@
 
             let data;
             try {
-                const res = await fetch(
-                    `https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10&query=${encodeURIComponent(title)}`, {
-                        headers: {
-                            'X-API-KEY': KINOPOISK_API_KEY,
-                            'Accept': 'application/json'
-                        }
-                    }
-                );
-                data = await res.json();
-                if (!res.ok) throw new Error(data.message || 'Ошибка поиска');
-            } catch (_) {
+                const url = `${WORKER_URL}/search?search=${encodeURIComponent(title)}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const json = await res.json();
+                if (json.error) throw new Error(json.error);
+                data = json.results || [];
+            } catch (e) {
                 box.innerHTML = '';
                 const err = document.createElement('p');
                 err.className = 'title-results-status';
-                err.textContent = '❌ Не удалось выполнить поиск. Попробуйте ID или ссылку.';
+                err.textContent = `❌ Ошибка: ${e.message}. Попробуйте ввести ID вручную.`;
                 box.appendChild(err);
                 return;
             }
 
-            const docs = data.docs || [];
-            const results = docs
-                .filter(d => d.id)
-                .map(d => ({
-                    id: d.id,
-                    name: d.name || d.alternativeName || 'Без названия',
-                    year: d.year || null,
-                    poster: (d.poster && (d.poster.previewUrl || d.poster.url)) || null,
-                }));
-
-            box.innerHTML = '';
-
-            if (results.length === 0) {
+            if (data.length === 0) {
+                box.innerHTML = '';
                 const empty = document.createElement('p');
                 empty.className = 'title-results-status';
                 empty.textContent = '😕 Ничего не найдено. Попробуйте другой запрос.';
@@ -1004,18 +715,17 @@
                 return;
             }
 
-            if (results.length === 1) {
+            box.innerHTML = '';
+            if (data.length === 1) {
                 box.classList.remove('visible');
-                document.getElementById('query').value = results[0].id;
-                await loadPlayers(results[0].id);
+                document.getElementById('query').value = data[0].id;
+                await loadPlayers(data[0].id);
                 return;
             }
 
-            results.forEach(r => {
+            data.forEach(r => {
                 const item = document.createElement('div');
                 item.className = 'title-result-item';
-                item.setAttribute('role', 'option');
-
                 if (r.poster) {
                     const img = document.createElement('img');
                     img.src = r.poster;
@@ -1023,7 +733,6 @@
                     img.loading = 'lazy';
                     item.appendChild(img);
                 }
-
                 const info = document.createElement('div');
                 info.className = 'info';
                 const nameSpan = document.createElement('span');
@@ -1037,13 +746,11 @@
                     info.appendChild(yearSpan);
                 }
                 item.appendChild(info);
-
                 item.addEventListener('click', async () => {
                     box.classList.remove('visible');
                     document.getElementById('query').value = r.id;
                     await loadPlayers(r.id);
                 });
-
                 box.appendChild(item);
             });
         }
@@ -1052,94 +759,55 @@
         async function loadPlayers(query) {
             const container = document.getElementById('playerContainer');
             const switcher = document.getElementById('playerSwitcher');
-
             container.innerHTML = '';
             switcher.innerHTML = '';
             switcher.classList.remove('visible');
-
             let index = 0;
-            const entries = Object.entries(players);
-
-            for (const [name, getSrc] of entries) {
+            for (const [name, getSrc] of Object.entries(players)) {
                 let iframeSrc;
-                try {
-                    iframeSrc = await getSrc(query);
-                } catch (_) {
-                    continue;
-                }
+                try { iframeSrc = await getSrc(query); } catch { continue; }
                 if (!iframeSrc) continue;
-
                 const block = document.createElement('div');
                 block.className = 'player-block';
                 if (index === 0) block.classList.add('active');
-
-                // Header
                 const header = document.createElement('div');
                 header.className = 'header';
-
                 const h2 = document.createElement('h2');
                 h2.innerHTML = `${name} <span class="badge">плеер</span>`;
                 header.appendChild(h2);
-
                 const status = document.createElement('div');
                 status.className = 'status';
                 status.innerHTML = `<span class="dot"></span> готов`;
                 header.appendChild(status);
-
                 block.appendChild(header);
-
-                // Iframe
                 const iframe = document.createElement('iframe');
                 iframe.src = iframeSrc;
                 iframe.allowFullscreen = true;
                 iframe.loading = 'lazy';
                 iframe.title = `Плеер ${name} для ID ${query}`;
                 block.appendChild(iframe);
-
                 container.appendChild(block);
-
-                // Switcher button
                 const btn = document.createElement('button');
                 btn.className = 'sw-btn';
                 if (index === 0) btn.classList.add('active');
-                btn.setAttribute('role', 'tab');
-                btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
                 btn.innerHTML = `<span class="num">${index + 1}</span> ${name}`;
                 btn.title = name;
-
                 btn.addEventListener('click', () => {
-                    const allBtns = switcher.querySelectorAll('.sw-btn');
-                    const allBlocks = container.querySelectorAll('.player-block');
-
-                    allBtns.forEach(b => {
-                        b.classList.remove('active');
-                        b.setAttribute('aria-selected', 'false');
-                    });
-                    allBlocks.forEach(p => p.classList.remove('active'));
-
+                    document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.player-block').forEach(p => p.classList.remove('active'));
                     btn.classList.add('active');
-                    btn.setAttribute('aria-selected', 'true');
                     block.classList.add('active');
                 });
-
                 switcher.appendChild(btn);
                 index++;
             }
-
             if (index > 1) switcher.classList.add('visible');
-
-            // Update URL
             if (query && /^\d+$/.test(query)) {
-                try {
-                    history.replaceState(null, '', `?id=${query}`);
-                } catch (_) { /* ignore */ }
+                try { history.replaceState(null, '', `?id=${query}`); } catch (_) {}
             }
-
-            // Scroll to player
             document.getElementById('playerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // ===== SHARE =====
         function copyShareLink() {
             let query = document.getElementById('query').value.trim();
             query = extractID(query);
@@ -1153,26 +821,18 @@
                 .catch(() => alert('❌ Ошибка при копировании ссылки.'));
         }
 
-        // ===== LOAD FROM URL =====
         function loadFromURL() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             if (id && /^\d+$/.test(id)) {
                 document.getElementById('query').value = id;
-                // Small delay to let DOM settle
                 setTimeout(searchPlayer, 120);
             }
         }
-
-        // ===== ENTER KEY =====
         document.getElementById('query').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') searchPlayer();
         });
-
-        // ===== INIT =====
         document.addEventListener('DOMContentLoaded', loadFromURL);
-
-        // ===== ANTI-DEVTOOLS (light) =====
         document.oncontextmenu = function() { return false; };
         document.addEventListener('keydown', function(e) {
             if (e.keyCode === 123) return false;
@@ -1180,6 +840,5 @@
             if (e.ctrlKey && e.keyCode === 85) return false;
         });
     </script>
-
 </body>
 </html>
