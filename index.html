@@ -648,6 +648,7 @@
             const icon = document.getElementById('helpIcon');
             const popup = document.getElementById('helpPopup');
             const close = document.getElementById('helpClose');
+            if (!icon || !popup || !close) return; // элементов помощи нет в разметке — выходим, не ломая остальной скрипт
             function toggle() { popup.classList.toggle('visible'); }
             icon.addEventListener('click', toggle);
             close.addEventListener('click', toggle);
