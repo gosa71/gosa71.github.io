@@ -2,17 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KinoLyaL — смотреть фильмы и сериалы онлайн по ID КиноПоиск</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>KinoLyaL — смотреть фильмы и сериалы онлайн</title>
+    
+    <!-- ОПТИМИЗАЦИЯ 3: Preconnect к доменам плееров и воркеру -->
+    <link rel="preconnect" href="https://api.zenithjs.ws" crossorigin>
+    <link rel="preconnect" href="https://harald-as.newplayjj.com" crossorigin>
+    <link rel="preconnect" href="https://foxs-rss-proxy.ssr5577.workers.dev" crossorigin>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --primary: #f97316;
             --primary-dark: #ea580c;
@@ -34,9 +36,7 @@
             --shadow-glow: 0 0 40px rgba(249, 115, 22, 0.08);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-start);
@@ -48,604 +48,129 @@
             background-attachment: fixed;
             line-height: 1.6;
         }
-        .bg-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
-            animation: orbFloat 20s ease-in-out infinite alternate;
-        }
-        .bg-orb--1 {
-            width: 500px;
-            height: 500px;
-            top: -200px;
-            right: -100px;
-            background: var(--secondary);
-            opacity: 0.12;
-            animation-duration: 25s;
-        }
-        .bg-orb--2 {
-            width: 400px;
-            height: 400px;
-            bottom: -150px;
-            left: -100px;
-            background: var(--primary);
-            opacity: 0.10;
-            animation-duration: 30s;
-            animation-delay: -5s;
-        }
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(40px, -60px) scale(1.1); }
-            66% { transform: translate(-30px, 40px) scale(0.9); }
-            100% { transform: translate(20px, -20px) scale(1.05); }
-        }
-        .app {
-            position: relative;
-            z-index: 1;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-        /* ===== НОВОЕ: верхняя панель (язык + донат) ===== */
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-        .lang-switcher {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 50px;
-            padding: 8px 16px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .lang-switcher:hover { border-color: var(--secondary); }
-        .lang-switcher select {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.88rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .lang-switcher select option { background: #14142b; color: var(--text-primary); }
-        .donate-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            font-family: inherit;
-            border-radius: 50px;
-            text-decoration: none;
-            background: linear-gradient(135deg, #b45309, #f59e0b);
-            color: #fff;
-            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-        .donate-btn:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
-            color: #fff;
-        }
-        /* ===== НОВОЕ: прячем служебные элементы Google Translate ===== */
-        body { top: 0 !important; }
-        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
-        .goog-text-highlight { background: none !important; box-shadow: none !important; }
-        #google_translate_element { display: none !important; }
-        /* ===== НОВОЕ: список в FAQ ===== */
-        .help-popup ul { padding-left: 20px; margin: 8px 0 12px; }
-        .logo {
-            text-align: center;
-            margin-bottom: 32px;
-            user-select: none;
-        }
-        .logo a {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 2.6rem;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            transition: var(--transition);
-        }
-        .logo a:hover {
-            color: var(--primary);
-            transform: scale(1.02);
-        }
-        .logo-icon {
-            font-size: 2.4rem;
-            filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.2));
-            transition: var(--transition);
-        }
-        .logo a:hover .logo-icon {
-            filter: drop-shadow(0 0 30px rgba(249, 115, 22, 0.4));
-            transform: rotate(-6deg) scale(1.05);
-        }
-        .logo-text {
-            background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #facc15 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .logo-sub {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-secondary);
-            letter-spacing: 0.3px;
-            margin-top: 2px;
-            -webkit-text-fill-color: var(--text-secondary);
-            background: none;
-        }
-        .search-section { margin-bottom: 28px; }
-        .search-box {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            padding: 8px;
-            box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.25);
-            transition: var(--transition);
-        }
-        .search-box:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-glow), 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        .search-input-wrap {
-            flex: 1;
-            min-width: 200px;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: var(--radius-sm);
-            padding: 0 16px;
-            transition: var(--transition);
-        }
+        .bg-orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.3; animation: orbFloat 20s ease-in-out infinite alternate; }
+        .bg-orb--1 { width: 500px; height: 500px; top: -200px; right: -100px; background: var(--secondary); opacity: 0.12; animation-duration: 25s; }
+        .bg-orb--2 { width: 400px; height: 400px; bottom: -150px; left: -100px; background: var(--primary); opacity: 0.10; animation-duration: 30s; animation-delay: -5s; }
+        @keyframes orbFloat { 0% { transform: translate(0, 0) scale(1); } 33% { transform: translate(40px, -60px) scale(1.1); } 66% { transform: translate(-30px, 40px) scale(0.9); } 100% { transform: translate(20px, -20px) scale(1.05); } }
+        
+        .app { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+        
+        /* Logo */
+        .logo { text-align: center; margin-bottom: 32px; user-select: none; }
+        .logo a { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-size: 2.6rem; font-weight: 900; letter-spacing: -0.03em; transition: var(--transition); }
+        .logo a:hover { color: var(--primary); transform: scale(1.02); }
+        .logo-icon { font-size: 2.4rem; filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.2)); transition: var(--transition); }
+        .logo a:hover .logo-icon { filter: drop-shadow(0 0 30px rgba(249, 115, 22, 0.4)); transform: rotate(-6deg) scale(1.05); }
+        .logo-text { background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #facc15 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo-sub { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-secondary); letter-spacing: 0.3px; margin-top: 2px; -webkit-text-fill-color: var(--text-secondary); background: none; }
+
+        /* Search */
+        .search-section { margin-bottom: 28px; position: relative; }
+        .search-box { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 8px; box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.25); transition: var(--transition); }
+        .search-box:focus-within { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow), 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .search-input-wrap { flex: 1; min-width: 200px; display: flex; align-items: center; background: rgba(255, 255, 255, 0.04); border-radius: var(--radius-sm); padding: 0 16px; transition: var(--transition); position: relative; }
         .search-input-wrap:focus-within { background: rgba(255, 255, 255, 0.07); }
-        .search-input-wrap .icon {
-            font-size: 1.2rem;
-            opacity: 0.5;
-            margin-right: 10px;
-            transition: var(--transition);
-        }
+        .search-input-wrap .icon { font-size: 1.2rem; opacity: 0.5; margin-right: 10px; transition: var(--transition); }
         .search-input-wrap:focus-within .icon { opacity: 0.9; color: var(--primary); }
-        .search-input-wrap input {
-            width: 100%;
-            padding: 14px 0;
-            font-size: 1rem;
-            font-weight: 500;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text-primary);
-            font-family: inherit;
-        }
-        .search-input-wrap input::placeholder {
-            color: var(--text-muted);
-            font-weight: 400;
-            font-style: italic;
-        }
-        .search-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: inherit;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            user-select: none;
-            white-space: nowrap;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-secondary);
-            border: 1px solid transparent;
-        }
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.10);
-            color: var(--text-primary);
-            transform: translateY(-1px);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(249, 115, 22, 0.30);
-        }
-        .btn-primary:hover {
-            box-shadow: 0 6px 28px rgba(249, 115, 22, 0.45);
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-        }
-        .btn-share {
-            background: rgba(139, 92, 246, 0.12);
-            color: var(--text-secondary);
-        }
-        .btn-share:hover {
-            background: rgba(139, 92, 246, 0.20);
-            color: #c4b5fd;
-            border-color: var(--secondary);
-        }
-        .title-results {
-            max-width: 600px;
-            margin: 16px auto 0;
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            overflow: hidden;
-            max-height: 340px;
-            overflow-y: auto;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-            display: none;
-        }
+        .search-input-wrap input { width: 100%; padding: 14px 0; font-size: 1rem; font-weight: 500; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: inherit; }
+        .search-input-wrap input::placeholder { color: var(--text-muted); font-weight: 400; font-style: italic; }
+        
+        .input-spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; display: none; margin-left: 10px; }
+        .input-spinner.visible { display: block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .search-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; font-size: 0.95rem; font-weight: 600; font-family: inherit; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); user-select: none; white-space: nowrap; background: rgba(255, 255, 255, 0.06); color: var(--text-secondary); border: 1px solid transparent; }
+        .btn:hover { background: rgba(255, 255, 255, 0.10); color: var(--text-primary); transform: translateY(-1px); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 4px 16px rgba(249, 115, 22, 0.30); }
+        .btn-primary:hover { box-shadow: 0 6px 28px rgba(249, 115, 22, 0.45); transform: translateY(-2px); background: linear-gradient(135deg, var(--primary-light), var(--primary)); color: #fff; }
+        .btn-share { background: rgba(139, 92, 246, 0.12); color: var(--text-secondary); }
+        .btn-share:hover { background: rgba(139, 92, 246, 0.20); color: #c4b5fd; border-color: var(--secondary); }
+
+        /* Results Dropdown */
+        .title-results { max-width: 600px; margin: 8px auto 0; background: rgba(18, 18, 40, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; max-height: 340px; overflow-y: auto; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); display: none; position: absolute; left: 50%; transform: translateX(-50%); width: 90%; z-index: 100; }
         .title-results.visible { display: block; }
-        .title-results-status {
-            padding: 16px 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            text-align: center;
-        }
-        .title-result-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            border-bottom: 1px solid var(--border-subtle);
-        }
+        .title-results-status { padding: 16px 20px; color: var(--text-secondary); font-size: 0.95rem; text-align: center; }
+        .title-result-item { display: flex; align-items: center; gap: 14px; padding: 10px 16px; cursor: pointer; transition: var(--transition); border-bottom: 1px solid var(--border-subtle); outline: none; }
         .title-result-item:last-child { border-bottom: none; }
-        .title-result-item:hover {
-            background: var(--bg-card-hover);
-            padding-left: 20px;
-        }
-        .title-result-item img {
-            width: 44px;
-            height: 62px;
-            object-fit: cover;
-            border-radius: var(--radius-xs);
-            flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.04);
-        }
-        .title-result-item .info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        .title-result-item .name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .title-result-item .year {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .title-result-item:hover, .title-result-item.focused { background: var(--bg-card-hover); padding-left: 20px; }
+        .title-result-item.focused { box-shadow: inset 3px 0 0 var(--primary); }
+        .title-result-item img { width: 44px; height: 62px; object-fit: cover; border-radius: var(--radius-xs); flex-shrink: 0; background: rgba(255, 255, 255, 0.04); }
+        .title-result-item .info { display: flex; flex-direction: column; gap: 2px; }
+        .title-result-item .name { font-weight: 600; color: var(--text-primary); }
+        .title-result-item .year { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Player Area */
         #playerArea { margin-top: 28px; }
-        #playerSwitcher {
-            display: none;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+        #playerSwitcher { display: none; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         #playerSwitcher.visible { display: flex; }
-        #playerSwitcher .sw-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-            border: 1px solid transparent;
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        #playerSwitcher .sw-btn:hover {
-            background: rgba(255, 255, 255, 0.09);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-        #playerSwitcher .sw-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
-            border-color: var(--primary);
-        }
-        #playerSwitcher .sw-btn .num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
+        #playerSwitcher .sw-btn { padding: 10px 20px; border: none; border-radius: 50px; font-size: 0.85rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); background: rgba(255, 255, 255, 0.05); color: var(--text-secondary); border: 1px solid transparent; backdrop-filter: blur(4px); display: flex; align-items: center; gap: 8px; }
+        #playerSwitcher .sw-btn:hover { background: rgba(255, 255, 255, 0.09); color: var(--text-primary); transform: translateY(-2px); }
+        #playerSwitcher .sw-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35); border-color: var(--primary); }
+        #playerSwitcher .sw-btn .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255, 255, 255, 0.06); font-size: 0.75rem; font-weight: 700; }
         #playerSwitcher .sw-btn.active .num { background: rgba(255, 255, 255, 0.20); }
-        .player-block {
-            display: none;
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-            animation: fadeSlideUp 0.45s ease;
-        }
+
+        .player-block { display: none; background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-glow); animation: fadeSlideUp 0.45s ease; position: relative; }
         .player-block.active { display: block; }
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(18px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .player-block .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            background: rgba(0, 0, 0, 0.25);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .player-block .header h2 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .player-block .header h2 .badge {
-            font-size: 0.65rem;
-            font-weight: 600;
-            background: var(--primary);
-            color: #fff;
-            padding: 2px 10px;
-            border-radius: 50px;
-            text-transform: uppercase;
-        }
-        .player-block .header .status {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .player-block .header .status .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-            display: inline-block;
-            animation: pulseDot 2s ease-in-out infinite;
-        }
-        @keyframes pulseDot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.85); }
-        }
-        .player-block iframe {
-            width: 100%;
-            height: 60vh;
-            min-height: 340px;
-            border: none;
-            display: block;
-            background: #0a0a14;
-        }
-        .help-fab {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), #6d28d9);
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 24px rgba(139, 92, 246, 0.35);
-            transition: var(--transition);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .help-fab:hover {
-            transform: scale(1.08) rotate(-4deg);
-            box-shadow: 0 8px 40px rgba(139, 92, 246, 0.50);
-        }
-        .help-popup {
-            display: none;
-            position: fixed;
-            bottom: 88px;
-            right: 24px;
-            width: 380px;
-            max-width: calc(100vw - 48px);
-            max-height: 70vh;
-            overflow-y: auto;
-            background: rgba(18, 18, 40, 0.92);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            padding: 24px 28px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-            z-index: 10000;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            animation: fadeSlideUp 0.3s ease;
-        }
+        @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        .player-block .header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: rgba(0, 0, 0, 0.25); border-bottom: 1px solid var(--border-subtle); }
+        .player-block .header h2 { font-size: 1rem; font-weight: 700; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+        .player-block .header h2 .badge { font-size: 0.65rem; font-weight: 600; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 50px; text-transform: uppercase; }
+        .player-block .header .status { font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .player-block .header .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; animation: pulseDot 2s ease-in-out infinite; }
+        @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+
+        /* Iframe & Skeleton */
+        .iframe-wrapper { position: relative; width: 100%; height: 60vh; min-height: 340px; background: #0a0a14; overflow: hidden; }
+        .iframe-skeleton { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; color: var(--text-muted); font-size: 0.9rem; z-index: 1; background: #0a0a14; transition: opacity 0.3s ease; }
+        .iframe-skeleton.hidden { opacity: 0; pointer-events: none; }
+        .iframe-skeleton .loader { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.05); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        .player-block iframe { width: 100%; height: 100%; border: none; display: block; position: absolute; inset: 0; z-index: 2; }
+
+        /* Help FAB & Popup */
+        .help-fab { position: fixed; bottom: 24px; right: 24px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), #6d28d9); color: #fff; font-size: 1.5rem; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 4px 24px rgba(139, 92, 246, 0.35); transition: var(--transition); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .help-fab:hover { transform: scale(1.08) rotate(-4deg); box-shadow: 0 8px 40px rgba(139, 92, 246, 0.50); }
+        .help-popup { display: none; position: fixed; bottom: 88px; right: 24px; width: 380px; max-width: calc(100vw - 48px); max-height: 70vh; overflow-y: auto; background: rgba(18, 18, 40, 0.92); backdrop-filter: blur(24px); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 24px 28px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6); z-index: 10000; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; animation: fadeSlideUp 0.3s ease; }
         .help-popup.visible { display: block; }
-        .help-popup h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .help-popup h3 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .help-popup code {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 0 8px;
-            border-radius: var(--radius-xs);
-            font-family: 'Inter', monospace;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-        }
-        .help-popup mark {
-            background: rgba(249, 115, 22, 0.20);
-            color: var(--primary-light);
-            padding: 0 4px;
-            border-radius: 3px;
-            font-weight: 600;
-        }
-        .help-popup a {
-            color: var(--primary-light);
-            text-decoration: none;
-        }
+        .help-popup h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .help-popup h3 span { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .help-popup code { display: inline-block; background: rgba(255, 255, 255, 0.06); padding: 0 8px; border-radius: var(--radius-xs); font-family: 'Inter', monospace; font-size: 0.85rem; color: var(--text-primary); }
+        .help-popup mark { background: rgba(249, 115, 22, 0.20); color: var(--primary-light); padding: 0 4px; border-radius: 3px; font-weight: 600; }
+        .help-popup a { color: var(--primary-light); text-decoration: none; }
         .help-popup a:hover { text-decoration: underline; }
-        .help-popup ol {
-            padding-left: 20px;
-            margin: 8px 0 12px;
-        }
-        .help-popup .close-btn {
-            display: block;
-            width: 100%;
-            margin-top: 16px;
-            padding: 10px;
-            border: none;
-            border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-        .help-popup .close-btn:hover {
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.30);
-            transform: translateY(-1px);
-        }
+        .help-popup ol { padding-left: 20px; margin: 8px 0 12px; }
+        .help-popup .close-btn { display: block; width: 100%; margin-top: 16px; padding: 10px; border: none; border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition); font-family: inherit; }
+        .help-popup .close-btn:hover { box-shadow: 0 4px 20px rgba(249, 115, 22, 0.30); transform: translateY(-1px); }
+
+        /* History Suggestions */
+        .history-suggestions { position: absolute; top: 100%; left: 0; right: 0; background: rgba(18, 18, 40, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-top: 4px; display: none; z-index: 90; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        .history-suggestions.visible { display: block; }
+        .history-item { padding: 10px 16px; cursor: pointer; transition: var(--transition); font-size: 0.9rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+        .history-item:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+        .history-item .hist-icon { opacity: 0.5; font-size: 0.8rem; }
+
         @media (max-width: 700px) {
             .logo a { font-size: 2rem; }
-            .top-bar { justify-content: center; }
-            .donate-btn { padding: 9px 16px; font-size: 0.85rem; }
-            .search-box {
-                flex-direction: column;
-                padding: 6px;
-            }
+            .search-box { flex-direction: column; padding: 6px; }
             .search-input-wrap { padding: 0 12px; }
-            .search-input-wrap input {
-                padding: 12px 0;
-                font-size: 0.95rem;
-            }
-            .search-actions .btn {
-                flex: 1;
-                justify-content: center;
-                padding: 10px 16px;
-                font-size: 0.85rem;
-            }
-            .player-block iframe {
-                height: 40vh;
-                min-height: 240px;
-            }
-            .help-popup {
-                bottom: 76px;
-                right: 12px;
-                left: 12px;
-                width: auto;
-                padding: 20px;
-                font-size: 0.85rem;
-            }
-            .help-fab {
-                width: 44px;
-                height: 44px;
-                font-size: 1.2rem;
-                bottom: 16px;
-                right: 16px;
-            }
+            .search-input-wrap input { padding: 12px 0; font-size: 0.95rem; }
+            .search-actions .btn { flex: 1; justify-content: center; padding: 10px 16px; font-size: 0.85rem; }
+            .iframe-wrapper { height: 40vh; min-height: 240px; }
+            .help-popup { bottom: 76px; right: 12px; left: 12px; width: auto; padding: 20px; font-size: 0.85rem; }
+            .help-fab { width: 44px; height: 44px; font-size: 1.2rem; bottom: 16px; right: 16px; }
+            .title-results { width: 95%; }
         }
     </style>
 </head>
 <body>
+
     <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
-    <div class="app" role="main">
-        <!-- ===== НОВОЕ: панель языка + донат ===== -->
-        <div class="top-bar">
-            <label class="lang-switcher notranslate">
-                <span aria-hidden="true">🌐</span>
-                <select id="langSelect" aria-label="Язык / Language">
-                    <option value="ru">Русский</option>
-                    <option value="en">English</option>
-                    <option value="uk">Українська</option>
-                    <option value="kk">Қазақша</option>
-                    <option value="be">Беларуская</option>
-                    <option value="de">Deutsch</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                    <option value="it">Italiano</option>
-                    <option value="pl">Polski</option>
-                    <option value="tr">Türkçe</option>
-                    <option value="ar">العربية</option>
-                    <option value="zh-CN">中文</option>
-                </select>
-            </label>
-            <!-- 🔗 ЗАМЕНИ ССЫЛКУ на свою страницу доната -->
-            <a class="donate-btn notranslate" href="https://ko-fi.com/ВАШ_НИК" target="_blank" rel="noopener">
-                ☕ Купить автору кофе
-            </a>
-        </div>
 
+    <div class="app" role="main">
         <div class="logo">
-            <a href="/" class="notranslate">
+            <a href="/">
                 <span class="logo-icon">🎬</span>
                 <span>
                     <span class="logo-text">KinoLyaL</span>
@@ -653,76 +178,433 @@
                 </span>
             </a>
         </div>
+
         <section class="search-section">
             <div class="search-box">
                 <div class="search-input-wrap">
                     <span class="icon" aria-hidden="true">🔍</span>
-                    <input id="query" type="text" placeholder="Введите ID, ссылку или название фильма" autocomplete="off" />
+                    <input
+                        id="query"
+                        type="text"
+                        placeholder="Введите ID, ссылку или название фильма"
+                        autocomplete="off"
+                        aria-autocomplete="list"
+                        aria-controls="titleResults historySuggestions"
+                        autofocus
+                    />
+                    <div class="input-spinner" id="searchSpinner" aria-hidden="true"></div>
+                    <div id="historySuggestions" class="history-suggestions" role="listbox" aria-label="История поиска"></div>
                 </div>
+
                 <div class="search-actions">
                     <button class="btn btn-primary" onclick="searchPlayer()">▶ Найти</button>
                     <button class="btn btn-share" onclick="copyShareLink()">🔗 Поделиться</button>
                 </div>
             </div>
-            <div id="titleResults" class="title-results" role="listbox"></div>
+
+            <div id="a11yStatus" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
+            <div id="titleResults" class="title-results" role="listbox" aria-label="Результаты поиска"></div>
         </section>
+
         <section id="playerArea">
             <div id="playerSwitcher" role="tablist"></div>
             <div id="playerContainer"></div>
         </section>
     </div>
+
     <button class="help-fab" id="helpIcon" aria-label="Помощь">?</button>
-    <div class="help-popup" id="helpPopup" role="dialog">
-        <h3>📘 <span>Как пользоваться</span></h3>
+
+    <div class="help-popup" id="helpPopup" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <h3 id="helpTitle">📘 <span>Как пользоваться</span></h3>
         <p><strong>🔎 Найдите ID на КиноПоиске:</strong><br />
-            Перейдите на <a href="https://www.kinopoisk.ru" target="_blank">КиноПоиск</a>, скопируйте цифры из ссылки:</p>
+            Перейдите на <a href="https://www.kinopoisk.ru" target="_blank" rel="noopener">КиноПоиск</a>, скопируйте цифры из ссылки:</p>
         <p><code>https://www.kinopoisk.ru/film/<mark>535341</mark>/</code> → ID = <strong>535341</strong></p>
         <p><strong>🎬 Как смотреть:</strong></p>
         <ol>
-            <li>Вставьте ID в строку поиска</li>
-            <li>Нажмите «Найти»</li>
+            <li>Вставьте ID или название в строку поиска</li>
+            <li>Нажмите «Найти» или Enter</li>
             <li>Выберите плеер (кнопки 1, 2, …)</li>
         </ol>
-        <!-- ===== НОВОЕ: FAQ про рекламу ===== -->
-        <p><strong>🛡️ Как смотреть без рекламы?</strong><br />
-            Установите в браузер бесплатное расширение-блокировщик рекламы:</p>
-        <ul>
-            <li><a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh" target="_blank" rel="noopener">uBlock Origin Lite</a> — для Chrome / Edge / Opera</li>
-            <li><a href="https://addons.mozilla.org/firefox/addon/ublock-origin/" target="_blank" rel="noopener">uBlock Origin</a> — для Firefox</li>
-            <li><a href="https://getadblock.com/" target="_blank" rel="noopener">AdBlock</a> — для любого браузера</li>
-        </ul>
-        <p>После установки перезагрузите страницу — реклама и всплывающие окна в плеерах исчезнут, а видео будет грузиться быстрее. Это бесплатно и безопасно.</p>
         <p><strong>💡 Советы:</strong><br />
-            — Если плеер не грузится, попробуйте другой или обновите страницу.<br />
+            — Если плеер не грузится, попробуйте другой.<br />
             — Можно вставить полную ссылку — ID извлечётся автоматически.</p>
         <button class="close-btn" id="helpClose">Закрыть</button>
     </div>
 
-    <!-- ===== НОВОЕ: Google Translate (скрытый виджет) ===== -->
-    <div id="google_translate_element"></div>
     <script>
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ru',
-                includedLanguages: 'en,uk,kk,be,de,es,fr,it,pl,tr,ar,zh-CN',
-                autoDisplay: false,
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <script>
-        // ===== PLAYERS =====
-        const players = {
-            Collaps: id => `https://api.zenithjs.ws/embed/kp/${id}`,
-            Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`,
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const CONFIG = {
+            workerUrl: 'https://foxs-rss-proxy.ssr5577.workers.dev',
+            storageKeys: {
+                lastPlayer: 'kinolyal_last_player',
+                searchHistory: 'kinolyal_search_history'
+            },
+            maxHistoryItems: 10,
+            players: {
+                Collaps: id => `https://api.zenithjs.ws/embed/kp/${id}`,
+                Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`
+            }
         };
 
-        // ===== ВАШ WORKER (укажите реальный URL) =====
-        const WORKER_URL = 'https://foxs-rss-proxy.ssr5577.workers.dev/'; // ← замените!
+        let currentFocusIndex = -1;
 
-        // ===== HELP =====
+        // ============================================================
+        // UTILS
+        // ============================================================
+        function extractID(input) {
+            const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
+            return match ? match[1] : input.trim();
+        }
+
+        function isValidID(id) { return /^\d{1,10}$/.test(id); }
+
+        function announceToScreenReader(message) {
+            const el = document.getElementById('a11yStatus');
+            el.textContent = '';
+            setTimeout(() => { el.textContent = message; }, 100);
+        }
+
+        function addToHistory(query) {
+            if (!query || query.length < 2) return;
+            try {
+                let history = JSON.parse(localStorage.getItem(CONFIG.storageKeys.searchHistory) || '[]');
+                history = history.filter(h => h !== query);
+                history.unshift(query);
+                if (history.length > CONFIG.maxHistoryItems) history = history.slice(0, CONFIG.maxHistoryItems);
+                localStorage.setItem(CONFIG.storageKeys.searchHistory, JSON.stringify(history));
+            } catch(e) {}
+        }
+
+        function getHistory() {
+            try { return JSON.parse(localStorage.getItem(CONFIG.storageKeys.searchHistory) || '[]'); } 
+            catch(e) { return []; }
+        }
+
+        function saveLastPlayer(name) {
+            try { localStorage.setItem(CONFIG.storageKeys.lastPlayer, name); } catch(e) {}
+        }
+
+        function getLastPlayer() {
+            try { return localStorage.getItem(CONFIG.storageKeys.lastPlayer); } catch(e) { return null; }
+        }
+
+        // ============================================================
+        // SEARCH HISTORY UI
+        // ============================================================
+        const historyBox = document.getElementById('historySuggestions');
+        const queryInput = document.getElementById('query');
+
+        function showHistory() {
+            const history = getHistory();
+            if (history.length === 0 || queryInput.value.trim().length > 0) {
+                historyBox.classList.remove('visible');
+                return;
+            }
+            historyBox.innerHTML = '';
+            history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.setAttribute('role', 'option');
+                div.innerHTML = `<span class="hist-icon">🕐</span> ${item}`;
+                div.addEventListener('click', () => {
+                    queryInput.value = item;
+                    historyBox.classList.remove('visible');
+                    searchPlayer();
+                });
+                historyBox.appendChild(div);
+            });
+            historyBox.classList.add('visible');
+        }
+
+        queryInput.addEventListener('focus', showHistory);
+        queryInput.addEventListener('input', () => {
+            if (queryInput.value.trim().length === 0) showHistory();
+            else historyBox.classList.remove('visible');
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-input-wrap')) historyBox.classList.remove('visible');
+        });
+
+        // ============================================================
+        // KEYBOARD NAVIGATION
+        // ============================================================
+        queryInput.addEventListener('keydown', (e) => {
+            const resultsBox = document.getElementById('titleResults');
+            const items = resultsBox.querySelectorAll('.title-result-item');
+            
+            if (!resultsBox.classList.contains('visible') || items.length === 0) {
+                if (e.key === 'Enter') searchPlayer();
+                return;
+            }
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                currentFocusIndex = Math.min(currentFocusIndex + 1, items.length - 1);
+                updateFocus(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                currentFocusIndex = Math.max(currentFocusIndex - 1, 0);
+                updateFocus(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentFocusIndex >= 0 && items[currentFocusIndex]) items[currentFocusIndex].click();
+                else searchPlayer();
+            } else if (e.key === 'Escape') {
+                resultsBox.classList.remove('visible');
+                currentFocusIndex = -1;
+            }
+        });
+
+        function updateFocus(items) {
+            items.forEach((item, i) => {
+                item.classList.toggle('focused', i === currentFocusIndex);
+                if (i === currentFocusIndex) item.scrollIntoView({ block: 'nearest' });
+            });
+        }
+
+        // ============================================================
+        // MAIN SEARCH
+        // ============================================================
+        async function searchPlayer() {
+            const raw = queryInput.value.trim();
+            if (!raw) return;
+
+            const spinner = document.getElementById('searchSpinner');
+            const box = document.getElementById('titleResults');
+            
+            box.classList.remove('visible');
+            historyBox.classList.remove('visible');
+            box.innerHTML = '';
+            currentFocusIndex = -1;
+            spinner.classList.add('visible');
+
+            addToHistory(raw);
+            const asId = extractID(raw);
+
+            if (isValidID(asId)) {
+                loadPlayers(asId); // Убрали await, функция синхронная в начале
+                spinner.classList.remove('visible');
+                return;
+            }
+
+            await searchByTitle(raw);
+            spinner.classList.remove('visible');
+        }
+
+        // ============================================================
+        // SEARCH BY TITLE WITH CACHE
+        // ============================================================
+        async function searchByTitle(title) {
+            const box = document.getElementById('titleResults');
+            box.classList.add('visible');
+            
+            const cacheKey = `search_${title.toLowerCase()}`;
+            const cached = sessionStorage.getItem(cacheKey);
+            
+            if (cached) {
+                try {
+                    renderResults(JSON.parse(cached), title);
+                    return;
+                } catch(e) {}
+            }
+
+            box.innerHTML = '<p class="title-results-status">🔎 Ищем…</p>';
+
+            try {
+                const url = `${CONFIG.workerUrl}/search?search=${encodeURIComponent(title)}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const json = await res.json();
+                if (json.error) throw new Error(json.error);
+                const data = json.results || [];
+                
+                sessionStorage.setItem(cacheKey, JSON.stringify(data));
+                renderResults(data, title);
+            } catch (e) {
+                box.innerHTML = `<p class="title-results-status">❌ Ошибка: ${e.message}. Попробуйте ввести ID вручную.</p>`;
+            }
+        }
+
+        function renderResults(data, title) {
+            const box = document.getElementById('titleResults');
+            box.innerHTML = '';
+
+            if (data.length === 0) {
+                box.innerHTML = '<p class="title-results-status">😕 Ничего не найдено.</p>';
+                return;
+            }
+
+            if (data.length === 1) {
+                box.classList.remove('visible');
+                queryInput.value = data[0].id;
+                loadPlayers(data[0].id);
+                return;
+            }
+
+            data.forEach((r) => {
+                const item = document.createElement('div');
+                item.className = 'title-result-item';
+                item.setAttribute('role', 'option');
+                item.tabIndex = -1;
+
+                if (r.poster) {
+                    const img = document.createElement('img');
+                    img.src = r.poster;
+                    img.alt = '';
+                    img.loading = 'lazy';
+                    item.appendChild(img);
+                }
+
+                const info = document.createElement('div');
+                info.className = 'info';
+                info.innerHTML = `<span class="name">${r.name}</span>${r.year ? `<span class="year">${r.year}</span>` : ''}`;
+                item.appendChild(info);
+
+                item.addEventListener('click', () => {
+                    box.classList.remove('visible');
+                    queryInput.value = r.id;
+                    loadPlayers(r.id);
+                });
+
+                box.appendChild(item);
+            });
+        }
+
+        // ============================================================
+        // LOAD PLAYERS (ОПТИМИЗИРОВАННАЯ ВЕРСИЯ)
+        // ============================================================
+        function loadPlayers(query) {
+            const container = document.getElementById('playerContainer');
+            const switcher = document.getElementById('playerSwitcher');
+
+            container.innerHTML = '';
+            switcher.innerHTML = '';
+            switcher.classList.remove('visible');
+
+            let index = 0;
+            const lastPlayer = getLastPlayer();
+            let activeIndex = 0;
+            const playerEntries = Object.entries(CONFIG.players);
+
+            if (lastPlayer) {
+                const savedIdx = playerEntries.findIndex(([name]) => name === lastPlayer);
+                if (savedIdx !== -1) activeIndex = savedIdx;
+            }
+
+            for (const [name, getSrc] of playerEntries) {
+                // ОПТИМИЗАЦИЯ 4: Убрали await, так как getSrc возвращает строку синхронно
+                const iframeSrc = getSrc(query); 
+                if (!iframeSrc) continue;
+
+                const isActive = index === activeIndex;
+
+                const block = document.createElement('div');
+                block.className = `player-block${isActive ? ' active' : ''}`;
+                
+                const header = document.createElement('div');
+                header.className = 'header';
+                header.innerHTML = `<h2>${name} <span class="badge">плеер</span></h2><div class="status"><span class="dot"></span> готов</div>`;
+                block.appendChild(header);
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'iframe-wrapper';
+                
+                const skeleton = document.createElement('div');
+                skeleton.className = 'iframe-skeleton';
+                skeleton.innerHTML = '<div class="loader"></div><span>Загрузка плеера...</span>';
+                
+                // ОПТИМИЗАЦИЯ 1 & 2: Lazy loading Iframes
+                // Создаем iframe только для активного плеера. Для остальных - заглушка.
+                if (isActive) {
+                    createIframe(wrapper, skeleton, iframeSrc, name, query);
+                } else {
+                    wrapper.dataset.src = iframeSrc; // Сохраняем URL в data-атрибут
+                    wrapper.dataset.name = name;
+                }
+
+                block.appendChild(wrapper);
+                container.appendChild(block);
+
+                // Switch Button
+                const btn = document.createElement('button');
+                btn.className = `sw-btn${isActive ? ' active' : ''}`;
+                btn.innerHTML = `<span class="num">${index + 1}</span> ${name}`;
+                btn.title = name;
+                
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.player-block').forEach(p => p.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    block.classList.add('active');
+                    saveLastPlayer(name);
+
+                    // ОПТИМИЗАЦИЯ 1: Загружаем iframe только в момент клика на вкладку
+                    const inactiveWrapper = block.querySelector('.iframe-wrapper');
+                    if (inactiveWrapper && inactiveWrapper.dataset.src && !inactiveWrapper.querySelector('iframe')) {
+                        const skel = inactiveWrapper.querySelector('.iframe-skeleton');
+                        if(skel) skel.classList.remove('hidden'); // Показываем лоадер снова
+                        createIframe(inactiveWrapper, skel, inactiveWrapper.dataset.src, inactiveWrapper.dataset.name, query);
+                    }
+                });
+
+                switcher.appendChild(btn);
+                index++;
+            }
+
+            if (index > 1) switcher.classList.add('visible');
+
+            if (query && isValidID(query)) {
+                try { history.replaceState(null, '', `?id=${query}`); } catch (_) {}
+            }
+
+            document.getElementById('playerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Вспомогательная функция для создания iframe с правильными атрибутами
+        function createIframe(wrapper, skeleton, src, name, query) {
+            const iframe = document.createElement('iframe');
+            iframe.src = src;
+            iframe.allowFullscreen = true;
+            iframe.title = `Плеер ${name} для ID ${query}`;
+            
+            // ОПТИМИЗАЦИЯ 2: Атрибуты для ускорения рендеринга
+            iframe.loading = 'lazy'; 
+            iframe.decoding = 'async';
+            iframe.referrerPolicy = 'no-referrer'; // Ускоряет ответ некоторых серверов
+            
+            iframe.onload = () => { if(skeleton) skeleton.classList.add('hidden'); };
+            iframe.onerror = () => { if(skeleton) skeleton.innerHTML = '<span>⚠️ Не удалось загрузить плеер</span>'; };
+
+            wrapper.appendChild(iframe);
+        }
+
+        // ============================================================
+        // SHARE LINK & INIT
+        // ============================================================
+        function copyShareLink() {
+            let query = extractID(queryInput.value);
+            if (!isValidID(query)) {
+                alert('Введите корректный ID или ссылку перед копированием');
+                return;
+            }
+            const url = `${window.location.origin}${window.location.pathname}?id=${query}`;
+            navigator.clipboard.writeText(url)
+                .then(() => alert('✅ Ссылка скопирована!'))
+                .catch(() => alert('❌ Ошибка при копировании ссылки.'));
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (id && isValidID(id)) {
+                queryInput.value = id;
+                setTimeout(searchPlayer, 120);
+            }
+        }
+
         (function initHelp() {
             const icon = document.getElementById('helpIcon');
             const popup = document.getElementById('helpPopup');
@@ -738,214 +620,7 @@
             });
         })();
 
-        // ===== НОВОЕ: ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА =====
-        (function initLangSwitcher() {
-            const select = document.getElementById('langSelect');
-            select.addEventListener('change', () => {
-                const target = select.value;
-                if (target === 'ru') {
-                    // сброс к оригиналу: чистим cookie перевода и перезагружаем
-                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
-                    location.reload();
-                    return;
-                }
-                // ждём загрузки скрытого комбобокса Google и дёргаем его
-                const apply = (attempts) => {
-                    const combo = document.querySelector('.goog-te-combo');
-                    if (combo) {
-                        combo.value = target;
-                        combo.dispatchEvent(new Event('change', { bubbles: true }));
-                    } else if (attempts > 0) {
-                        setTimeout(() => apply(attempts - 1), 300);
-                    }
-                };
-                apply(20);
-            });
-            // если язык уже выбран (после перезагрузки страницы) — синхронизируем
-            const m = document.cookie.match(/googtrans=\/[^/]*\/([a-zA-Z-]+)/);
-            if (m && select.querySelector(`option[value="${m[1]}"]`)) select.value = m[1];
-        })();
-
-        function extractID(input) {
-            const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
-            return match ? match[1] : input;
-        }
-
-        async function searchPlayer() {
-            const raw = document.getElementById('query').value.trim();
-            if (!raw) return;
-            const box = document.getElementById('titleResults');
-            box.classList.remove('visible');
-            box.innerHTML = '';
-            const asId = extractID(raw);
-            if (/^\d+$/.test(asId)) {
-                await loadPlayers(asId);
-                return;
-            }
-            await searchByTitle(raw);
-        }
-
-        // ===== ПОИСК ПО НАЗВАНИЮ (через Worker) =====
-        async function searchByTitle(title) {
-            const box = document.getElementById('titleResults');
-            box.classList.add('visible');
-            box.innerHTML = '';
-            const status = document.createElement('p');
-            status.className = 'title-results-status';
-            status.textContent = `🔎 Ищем «${title}»…`;
-            box.appendChild(status);
-
-            let data;
-            try {
-                const url = `${WORKER_URL}/search?search=${encodeURIComponent(title)}`;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const json = await res.json();
-                if (json.error) throw new Error(json.error);
-                data = json.results || [];
-            } catch (e) {
-                box.innerHTML = '';
-                const err = document.createElement('p');
-                err.className = 'title-results-status';
-                err.textContent = `❌ Ошибка: ${e.message}. Попробуйте ввести ID вручную.`;
-                box.appendChild(err);
-                return;
-            }
-
-            if (data.length === 0) {
-                box.innerHTML = '';
-                const empty = document.createElement('p');
-                empty.className = 'title-results-status';
-                empty.textContent = '😕 Ничего не найдено. Попробуйте другой запрос.';
-                box.appendChild(empty);
-                return;
-            }
-
-            box.innerHTML = '';
-            if (data.length === 1) {
-                box.classList.remove('visible');
-                document.getElementById('query').value = data[0].id;
-                await loadPlayers(data[0].id);
-                return;
-            }
-
-            data.forEach(r => {
-                const item = document.createElement('div');
-                item.className = 'title-result-item';
-                if (r.poster) {
-                    const img = document.createElement('img');
-                    img.src = r.poster;
-                    img.alt = '';
-                    img.loading = 'lazy';
-                    item.appendChild(img);
-                }
-                const info = document.createElement('div');
-                info.className = 'info';
-                const nameSpan = document.createElement('span');
-                nameSpan.className = 'name';
-                nameSpan.textContent = r.name;
-                info.appendChild(nameSpan);
-                if (r.year) {
-                    const yearSpan = document.createElement('span');
-                    yearSpan.className = 'year';
-                    yearSpan.textContent = r.year;
-                    info.appendChild(yearSpan);
-                }
-                item.appendChild(info);
-                item.addEventListener('click', async () => {
-                    box.classList.remove('visible');
-                    document.getElementById('query').value = r.id;
-                    await loadPlayers(r.id);
-                });
-                box.appendChild(item);
-            });
-        }
-
-        // ===== LOAD PLAYERS =====
-        async function loadPlayers(query) {
-            const container = document.getElementById('playerContainer');
-            const switcher = document.getElementById('playerSwitcher');
-            container.innerHTML = '';
-            switcher.innerHTML = '';
-            switcher.classList.remove('visible');
-            let index = 0;
-            for (const [name, getSrc] of Object.entries(players)) {
-                let iframeSrc;
-                try { iframeSrc = await getSrc(query); } catch { continue; }
-                if (!iframeSrc) continue;
-                const block = document.createElement('div');
-                block.className = 'player-block';
-                if (index === 0) block.classList.add('active');
-                const header = document.createElement('div');
-                header.className = 'header';
-                const h2 = document.createElement('h2');
-                h2.innerHTML = `${name} <span class="badge">плеер</span>`;
-                header.appendChild(h2);
-                const status = document.createElement('div');
-                status.className = 'status';
-                status.innerHTML = `<span class="dot"></span> готов`;
-                header.appendChild(status);
-                block.appendChild(header);
-                const iframe = document.createElement('iframe');
-                iframe.src = iframeSrc;
-                iframe.allowFullscreen = true;
-                iframe.loading = 'lazy';
-                iframe.title = `Плеер ${name} для ID ${query}`;
-                block.appendChild(iframe);
-                container.appendChild(block);
-                const btn = document.createElement('button');
-                btn.className = 'sw-btn';
-                if (index === 0) btn.classList.add('active');
-                btn.innerHTML = `<span class="num">${index + 1}</span> ${name}`;
-                btn.title = name;
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.player-block').forEach(p => p.classList.remove('active'));
-                    btn.classList.add('active');
-                    block.classList.add('active');
-                });
-                switcher.appendChild(btn);
-                index++;
-            }
-            if (index > 1) switcher.classList.add('visible');
-            if (query && /^\d+$/.test(query)) {
-                try { history.replaceState(null, '', `?id=${query}`); } catch (_) {}
-            }
-            document.getElementById('playerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function copyShareLink() {
-            let query = document.getElementById('query').value.trim();
-            query = extractID(query);
-            if (!/^\d+$/.test(query)) {
-                alert('Введите корректный ID или ссылку перед копированием');
-                return;
-            }
-            const url = `${window.location.origin}${window.location.pathname}?id=${query}`;
-            navigator.clipboard.writeText(url)
-                .then(() => alert('✅ Ссылка скопирована!'))
-                .catch(() => alert('❌ Ошибка при копировании ссылки.'));
-        }
-
-        function loadFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            if (id && /^\d+$/.test(id)) {
-                document.getElementById('query').value = id;
-                setTimeout(searchPlayer, 120);
-            }
-        }
-        document.getElementById('query').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') searchPlayer();
-        });
         document.addEventListener('DOMContentLoaded', loadFromURL);
-        document.oncontextmenu = function() { return false; };
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode === 123) return false;
-            if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(String.fromCharCode(e.keyCode))) return false;
-            if (e.ctrlKey && e.keyCode === 85) return false;
-        });
     </script>
 </body>
 </html>
