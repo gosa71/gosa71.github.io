@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== стили (оставляем те же, что и раньше) ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -78,18 +77,10 @@
             animation-delay: -5s;
         }
         @keyframes orbFloat {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(40px, -60px) scale(1.1);
-            }
-            66% {
-                transform: translate(-30px, 40px) scale(0.9);
-            }
-            100% {
-                transform: translate(20px, -20px) scale(1.05);
-            }
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -60px) scale(1.1); }
+            66% { transform: translate(-30px, 40px) scale(0.9); }
+            100% { transform: translate(20px, -20px) scale(1.05); }
         }
         .app {
             position: relative;
@@ -97,6 +88,67 @@
             max-width: 960px;
             margin: 0 auto;
         }
+        /* ===== НОВОЕ: верхняя панель (язык + донат) ===== */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50px;
+            padding: 8px 16px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .lang-switcher:hover { border-color: var(--secondary); }
+        .lang-switcher select {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .lang-switcher select option { background: #14142b; color: var(--text-primary); }
+        .donate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: 50px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .donate-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+            color: #fff;
+        }
+        /* ===== НОВОЕ: прячем служебные элементы Google Translate ===== */
+        body { top: 0 !important; }
+        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+        #google_translate_element { display: none !important; }
+        /* ===== НОВОЕ: список в FAQ ===== */
+        .help-popup ul { padding-left: 20px; margin: 8px 0 12px; }
         .logo {
             text-align: center;
             margin-bottom: 32px;
@@ -142,9 +194,7 @@
             -webkit-text-fill-color: var(--text-secondary);
             background: none;
         }
-        .search-section {
-            margin-bottom: 28px;
-        }
+        .search-section { margin-bottom: 28px; }
         .search-box {
             display: flex;
             gap: 12px;
@@ -172,19 +222,14 @@
             padding: 0 16px;
             transition: var(--transition);
         }
-        .search-input-wrap:focus-within {
-            background: rgba(255, 255, 255, 0.07);
-        }
+        .search-input-wrap:focus-within { background: rgba(255, 255, 255, 0.07); }
         .search-input-wrap .icon {
             font-size: 1.2rem;
             opacity: 0.5;
             margin-right: 10px;
             transition: var(--transition);
         }
-        .search-input-wrap:focus-within .icon {
-            opacity: 0.9;
-            color: var(--primary);
-        }
+        .search-input-wrap:focus-within .icon { opacity: 0.9; color: var(--primary); }
         .search-input-wrap input {
             width: 100%;
             padding: 14px 0;
@@ -263,9 +308,7 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
             display: none;
         }
-        .title-results.visible {
-            display: block;
-        }
+        .title-results.visible { display: block; }
         .title-results-status {
             padding: 16px 20px;
             color: var(--text-secondary);
@@ -281,9 +324,7 @@
             transition: var(--transition);
             border-bottom: 1px solid var(--border-subtle);
         }
-        .title-result-item:last-child {
-            border-bottom: none;
-        }
+        .title-result-item:last-child { border-bottom: none; }
         .title-result-item:hover {
             background: var(--bg-card-hover);
             padding-left: 20px;
@@ -309,9 +350,7 @@
             font-size: 0.8rem;
             color: var(--text-muted);
         }
-        #playerArea {
-            margin-top: 28px;
-        }
+        #playerArea { margin-top: 28px; }
         #playerSwitcher {
             display: none;
             gap: 8px;
@@ -319,9 +358,7 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        #playerSwitcher.visible {
-            display: flex;
-        }
+        #playerSwitcher.visible { display: flex; }
         #playerSwitcher .sw-btn {
             padding: 10px 20px;
             border: none;
@@ -361,9 +398,7 @@
             font-size: 0.75rem;
             font-weight: 700;
         }
-        #playerSwitcher .sw-btn.active .num {
-            background: rgba(255, 255, 255, 0.20);
-        }
+        #playerSwitcher .sw-btn.active .num { background: rgba(255, 255, 255, 0.20); }
         .player-block {
             display: none;
             background: var(--bg-card);
@@ -374,18 +409,10 @@
             box-shadow: var(--shadow-lg), var(--shadow-glow);
             animation: fadeSlideUp 0.45s ease;
         }
-        .player-block.active {
-            display: block;
-        }
+        .player-block.active { display: block; }
         @keyframes fadeSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .player-block .header {
             display: flex;
@@ -428,15 +455,8 @@
             animation: pulseDot 2s ease-in-out infinite;
         }
         @keyframes pulseDot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.85);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
         }
         .player-block iframe {
             width: 100%;
@@ -491,9 +511,7 @@
             line-height: 1.6;
             animation: fadeSlideUp 0.3s ease;
         }
-        .help-popup.visible {
-            display: block;
-        }
+        .help-popup.visible { display: block; }
         .help-popup h3 {
             font-size: 1.15rem;
             font-weight: 700;
@@ -531,9 +549,7 @@
             color: var(--primary-light);
             text-decoration: none;
         }
-        .help-popup a:hover {
-            text-decoration: underline;
-        }
+        .help-popup a:hover { text-decoration: underline; }
         .help-popup ol {
             padding-left: 20px;
             margin: 8px 0 12px;
@@ -557,18 +573,15 @@
             box-shadow: 0 4px 20px rgba(249, 115, 22, 0.30);
             transform: translateY(-1px);
         }
-        /* Удалили блок footer-actions, поэтому стили для него не нужны */
         @media (max-width: 700px) {
-            .logo a {
-                font-size: 2rem;
-            }
+            .logo a { font-size: 2rem; }
+            .top-bar { justify-content: center; }
+            .donate-btn { padding: 9px 16px; font-size: 0.85rem; }
             .search-box {
                 flex-direction: column;
                 padding: 6px;
             }
-            .search-input-wrap {
-                padding: 0 12px;
-            }
+            .search-input-wrap { padding: 0 12px; }
             .search-input-wrap input {
                 padding: 12px 0;
                 font-size: 0.95rem;
@@ -605,8 +618,34 @@
     <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
     <div class="app" role="main">
+        <!-- ===== НОВОЕ: панель языка + донат ===== -->
+        <div class="top-bar">
+            <label class="lang-switcher notranslate">
+                <span aria-hidden="true">🌐</span>
+                <select id="langSelect" aria-label="Язык / Language">
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                    <option value="uk">Українська</option>
+                    <option value="kk">Қазақша</option>
+                    <option value="be">Беларуская</option>
+                    <option value="de">Deutsch</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="it">Italiano</option>
+                    <option value="pl">Polski</option>
+                    <option value="tr">Türkçe</option>
+                    <option value="ar">العربية</option>
+                    <option value="zh-CN">中文</option>
+                </select>
+            </label>
+            <!-- 🔗 ЗАМЕНИ ССЫЛКУ на свою страницу доната -->
+            <a class="donate-btn notranslate" href="https://ko-fi.com/ВАШ_НИК" target="_blank" rel="noopener">
+                ☕ Купить автору кофе
+            </a>
+        </div>
+
         <div class="logo">
-            <a href="/">
+            <a href="/" class="notranslate">
                 <span class="logo-icon">🎬</span>
                 <span>
                     <span class="logo-text">KinoLyaL</span>
@@ -631,7 +670,6 @@
             <div id="playerSwitcher" role="tablist"></div>
             <div id="playerContainer"></div>
         </section>
-        <!-- Кнопка "КиноПоиск Список ID" УДАЛЕНА -->
     </div>
     <button class="help-fab" id="helpIcon" aria-label="Помощь">?</button>
     <div class="help-popup" id="helpPopup" role="dialog">
@@ -645,11 +683,34 @@
             <li>Нажмите «Найти»</li>
             <li>Выберите плеер (кнопки 1, 2, …)</li>
         </ol>
+        <!-- ===== НОВОЕ: FAQ про рекламу ===== -->
+        <p><strong>🛡️ Как смотреть без рекламы?</strong><br />
+            Установите в браузер бесплатное расширение-блокировщик рекламы:</p>
+        <ul>
+            <li><a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh" target="_blank" rel="noopener">uBlock Origin Lite</a> — для Chrome / Edge / Opera</li>
+            <li><a href="https://addons.mozilla.org/firefox/addon/ublock-origin/" target="_blank" rel="noopener">uBlock Origin</a> — для Firefox</li>
+            <li><a href="https://getadblock.com/" target="_blank" rel="noopener">AdBlock</a> — для любого браузера</li>
+        </ul>
+        <p>После установки перезагрузите страницу — реклама и всплывающие окна в плеерах исчезнут, а видео будет грузиться быстрее. Это бесплатно и безопасно.</p>
         <p><strong>💡 Советы:</strong><br />
             — Если плеер не грузится, попробуйте другой или обновите страницу.<br />
             — Можно вставить полную ссылку — ID извлечётся автоматически.</p>
         <button class="close-btn" id="helpClose">Закрыть</button>
     </div>
+
+    <!-- ===== НОВОЕ: Google Translate (скрытый виджет) ===== -->
+    <div id="google_translate_element"></div>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                includedLanguages: 'en,uk,kk,be,de,es,fr,it,pl,tr,ar,zh-CN',
+                autoDisplay: false,
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         // ===== PLAYERS =====
@@ -675,6 +736,35 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && popup.classList.contains('visible')) popup.classList.remove('visible');
             });
+        })();
+
+        // ===== НОВОЕ: ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА =====
+        (function initLangSwitcher() {
+            const select = document.getElementById('langSelect');
+            select.addEventListener('change', () => {
+                const target = select.value;
+                if (target === 'ru') {
+                    // сброс к оригиналу: чистим cookie перевода и перезагружаем
+                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
+                    location.reload();
+                    return;
+                }
+                // ждём загрузки скрытого комбобокса Google и дёргаем его
+                const apply = (attempts) => {
+                    const combo = document.querySelector('.goog-te-combo');
+                    if (combo) {
+                        combo.value = target;
+                        combo.dispatchEvent(new Event('change', { bubbles: true }));
+                    } else if (attempts > 0) {
+                        setTimeout(() => apply(attempts - 1), 300);
+                    }
+                };
+                apply(20);
+            });
+            // если язык уже выбран (после перезагрузки страницы) — синхронизируем
+            const m = document.cookie.match(/googtrans=\/[^/]*\/([a-zA-Z-]+)/);
+            if (m && select.querySelector(`option[value="${m[1]}"]`)) select.value = m[1];
         })();
 
         function extractID(input) {
