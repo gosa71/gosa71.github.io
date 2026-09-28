@@ -7,7 +7,7 @@
     
     <!-- ОПТИМИЗАЦИЯ 3: Preconnect к доменам плееров и воркеру -->
     <link rel="preconnect" href="https://api.zenithjs.ws" crossorigin>
-    <link rel="preconnect" href="https://harald-as.newplayjj.com" crossorigin>
+    <link rel="preconnect" href="https://api.alloha.tv" crossorigin>
     <link rel="preconnect" href="https://foxs-rss-proxy.ssr5577.workers.dev" crossorigin>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,7 +63,6 @@
         .logo a:hover .logo-icon { filter: drop-shadow(0 0 30px rgba(249, 115, 22, 0.4)); transform: rotate(-6deg) scale(1.05); }
         .logo-text { background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #facc15 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .logo-sub { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-secondary); letter-spacing: 0.3px; margin-top: 2px; -webkit-text-fill-color: var(--text-secondary); background: none; }
-
         /* Search */
         .search-section { margin-bottom: 28px; position: relative; }
         .search-box { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 8px; box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.25); transition: var(--transition); }
@@ -78,7 +77,6 @@
         .input-spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; display: none; margin-left: 10px; }
         .input-spinner.visible { display: block; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
         .search-actions { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; font-size: 0.95rem; font-weight: 600; font-family: inherit; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); user-select: none; white-space: nowrap; background: rgba(255, 255, 255, 0.06); color: var(--text-secondary); border: 1px solid transparent; }
         .btn:hover { background: rgba(255, 255, 255, 0.10); color: var(--text-primary); transform: translateY(-1px); }
@@ -86,7 +84,6 @@
         .btn-primary:hover { box-shadow: 0 6px 28px rgba(249, 115, 22, 0.45); transform: translateY(-2px); background: linear-gradient(135deg, var(--primary-light), var(--primary)); color: #fff; }
         .btn-share { background: rgba(139, 92, 246, 0.12); color: var(--text-secondary); }
         .btn-share:hover { background: rgba(139, 92, 246, 0.20); color: #c4b5fd; border-color: var(--secondary); }
-
         /* Results Dropdown */
         .title-results { max-width: 600px; margin: 8px auto 0; background: rgba(18, 18, 40, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; max-height: 340px; overflow-y: auto; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); display: none; position: absolute; left: 50%; transform: translateX(-50%); width: 90%; z-index: 100; }
         .title-results.visible { display: block; }
@@ -99,7 +96,6 @@
         .title-result-item .info { display: flex; flex-direction: column; gap: 2px; }
         .title-result-item .name { font-weight: 600; color: var(--text-primary); }
         .title-result-item .year { font-size: 0.8rem; color: var(--text-muted); }
-
         /* Player Area */
         #playerArea { margin-top: 28px; }
         #playerSwitcher { display: none; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
@@ -109,7 +105,6 @@
         #playerSwitcher .sw-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35); border-color: var(--primary); }
         #playerSwitcher .sw-btn .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255, 255, 255, 0.06); font-size: 0.75rem; font-weight: 700; }
         #playerSwitcher .sw-btn.active .num { background: rgba(255, 255, 255, 0.20); }
-
         .player-block { display: none; background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-glow); animation: fadeSlideUp 0.45s ease; position: relative; }
         .player-block.active { display: block; }
         @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -120,14 +115,12 @@
         .player-block .header .status { font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
         .player-block .header .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; animation: pulseDot 2s ease-in-out infinite; }
         @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-
         /* Iframe & Skeleton */
         .iframe-wrapper { position: relative; width: 100%; height: 60vh; min-height: 340px; background: #0a0a14; overflow: hidden; }
         .iframe-skeleton { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; color: var(--text-muted); font-size: 0.9rem; z-index: 1; background: #0a0a14; transition: opacity 0.3s ease; }
         .iframe-skeleton.hidden { opacity: 0; pointer-events: none; }
         .iframe-skeleton .loader { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.05); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         .player-block iframe { width: 100%; height: 100%; border: none; display: block; position: absolute; inset: 0; z-index: 2; }
-
         /* Help FAB & Popup */
         .help-fab { position: fixed; bottom: 24px; right: 24px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), #6d28d9); color: #fff; font-size: 1.5rem; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 4px 24px rgba(139, 92, 246, 0.35); transition: var(--transition); z-index: 9999; display: flex; align-items: center; justify-content: center; }
         .help-fab:hover { transform: scale(1.08) rotate(-4deg); box-shadow: 0 8px 40px rgba(139, 92, 246, 0.50); }
@@ -142,14 +135,12 @@
         .help-popup ol { padding-left: 20px; margin: 8px 0 12px; }
         .help-popup .close-btn { display: block; width: 100%; margin-top: 16px; padding: 10px; border: none; border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition); font-family: inherit; }
         .help-popup .close-btn:hover { box-shadow: 0 4px 20px rgba(249, 115, 22, 0.30); transform: translateY(-1px); }
-
         /* History Suggestions */
         .history-suggestions { position: absolute; top: 100%; left: 0; right: 0; background: rgba(18, 18, 40, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-top: 4px; display: none; z-index: 90; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
         .history-suggestions.visible { display: block; }
         .history-item { padding: 10px 16px; cursor: pointer; transition: var(--transition); font-size: 0.9rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
         .history-item:hover { background: var(--bg-card-hover); color: var(--text-primary); }
         .history-item .hist-icon { opacity: 0.5; font-size: 0.8rem; }
-
         @media (max-width: 700px) {
             .logo a { font-size: 2rem; }
             .search-box { flex-direction: column; padding: 6px; }
@@ -164,10 +155,8 @@
     </style>
 </head>
 <body>
-
     <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
-
     <div class="app" role="main">
         <div class="logo">
             <a href="/">
@@ -178,7 +167,6 @@
                 </span>
             </a>
         </div>
-
         <section class="search-section">
             <div class="search-box">
                 <div class="search-input-wrap">
@@ -195,25 +183,20 @@
                     <div class="input-spinner" id="searchSpinner" aria-hidden="true"></div>
                     <div id="historySuggestions" class="history-suggestions" role="listbox" aria-label="История поиска"></div>
                 </div>
-
                 <div class="search-actions">
                     <button class="btn btn-primary" onclick="searchPlayer()">▶ Найти</button>
                     <button class="btn btn-share" onclick="copyShareLink()">🔗 Поделиться</button>
                 </div>
             </div>
-
             <div id="a11yStatus" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
             <div id="titleResults" class="title-results" role="listbox" aria-label="Результаты поиска"></div>
         </section>
-
         <section id="playerArea">
             <div id="playerSwitcher" role="tablist"></div>
             <div id="playerContainer"></div>
         </section>
     </div>
-
     <button class="help-fab" id="helpIcon" aria-label="Помощь">?</button>
-
     <div class="help-popup" id="helpPopup" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
         <h3 id="helpTitle">📘 <span>Как пользоваться</span></h3>
         <p><strong>🔎 Найдите ID на КиноПоиске:</strong><br />
@@ -230,7 +213,6 @@
             — Можно вставить полную ссылку — ID извлечётся автоматически.</p>
         <button class="close-btn" id="helpClose">Закрыть</button>
     </div>
-
     <script>
         // ============================================================
         // CONFIGURATION
@@ -242,12 +224,12 @@
                 searchHistory: 'kinolyal_search_history'
             },
             maxHistoryItems: 10,
+            allohaToken: 'e7b61f129f4a392ac4bf6726a9dd6a',
             players: {
                 Collaps: id => `https://api.zenithjs.ws/embed/kp/${id}`,
-                Alloha: id => `https://harald-as.newplayjj.com/?kp=${id}&token=e7b61f129f4a392ac4bf6726a9dd6a`
+                Alloha: id => null // получаем через API
             }
         };
-
         let currentFocusIndex = -1;
 
         // ============================================================
@@ -257,15 +239,12 @@
             const match = input.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
             return match ? match[1] : input.trim();
         }
-
         function isValidID(id) { return /^\d{1,10}$/.test(id); }
-
         function announceToScreenReader(message) {
             const el = document.getElementById('a11yStatus');
             el.textContent = '';
             setTimeout(() => { el.textContent = message; }, 100);
         }
-
         function addToHistory(query) {
             if (!query || query.length < 2) return;
             try {
@@ -276,18 +255,35 @@
                 localStorage.setItem(CONFIG.storageKeys.searchHistory, JSON.stringify(history));
             } catch(e) {}
         }
-
         function getHistory() {
             try { return JSON.parse(localStorage.getItem(CONFIG.storageKeys.searchHistory) || '[]'); } 
             catch(e) { return []; }
         }
-
         function saveLastPlayer(name) {
             try { localStorage.setItem(CONFIG.storageKeys.lastPlayer, name); } catch(e) {}
         }
-
         function getLastPlayer() {
             try { return localStorage.getItem(CONFIG.storageKeys.lastPlayer); } catch(e) { return null; }
+        }
+
+        // ============================================================
+        // ALLOHA API
+        // ============================================================
+        async function getAllohaIframe(id) {
+            try {
+                const url = `https://api.alloha.tv/?token=${CONFIG.allohaToken}&kp=${id}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                if (data.status === 'success' && data.data?.iframe) {
+                    return data.data.iframe;
+                }
+                console.warn('Alloha API response:', data);
+                return null;
+            } catch (e) {
+                console.error('Alloha error:', e);
+                return null;
+            }
         }
 
         // ============================================================
@@ -295,7 +291,6 @@
         // ============================================================
         const historyBox = document.getElementById('historySuggestions');
         const queryInput = document.getElementById('query');
-
         function showHistory() {
             const history = getHistory();
             if (history.length === 0 || queryInput.value.trim().length > 0) {
@@ -317,7 +312,6 @@
             });
             historyBox.classList.add('visible');
         }
-
         queryInput.addEventListener('focus', showHistory);
         queryInput.addEventListener('input', () => {
             if (queryInput.value.trim().length === 0) showHistory();
@@ -338,7 +332,6 @@
                 if (e.key === 'Enter') searchPlayer();
                 return;
             }
-
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 currentFocusIndex = Math.min(currentFocusIndex + 1, items.length - 1);
@@ -356,7 +349,6 @@
                 currentFocusIndex = -1;
             }
         });
-
         function updateFocus(items) {
             items.forEach((item, i) => {
                 item.classList.toggle('focused', i === currentFocusIndex);
@@ -370,7 +362,6 @@
         async function searchPlayer() {
             const raw = queryInput.value.trim();
             if (!raw) return;
-
             const spinner = document.getElementById('searchSpinner');
             const box = document.getElementById('titleResults');
             
@@ -379,16 +370,13 @@
             box.innerHTML = '';
             currentFocusIndex = -1;
             spinner.classList.add('visible');
-
             addToHistory(raw);
             const asId = extractID(raw);
-
             if (isValidID(asId)) {
-                loadPlayers(asId); // Убрали await, функция синхронная в начале
+                await loadPlayers(asId);
                 spinner.classList.remove('visible');
                 return;
             }
-
             await searchByTitle(raw);
             spinner.classList.remove('visible');
         }
@@ -409,9 +397,7 @@
                     return;
                 } catch(e) {}
             }
-
             box.innerHTML = '<p class="title-results-status">🔎 Ищем…</p>';
-
             try {
                 const url = `${CONFIG.workerUrl}/search?search=${encodeURIComponent(title)}`;
                 const res = await fetch(url);
@@ -426,29 +412,24 @@
                 box.innerHTML = `<p class="title-results-status">❌ Ошибка: ${e.message}. Попробуйте ввести ID вручную.</p>`;
             }
         }
-
         function renderResults(data, title) {
             const box = document.getElementById('titleResults');
             box.innerHTML = '';
-
             if (data.length === 0) {
                 box.innerHTML = '<p class="title-results-status">😕 Ничего не найдено.</p>';
                 return;
             }
-
             if (data.length === 1) {
                 box.classList.remove('visible');
                 queryInput.value = data[0].id;
                 loadPlayers(data[0].id);
                 return;
             }
-
             data.forEach((r) => {
                 const item = document.createElement('div');
                 item.className = 'title-result-item';
                 item.setAttribute('role', 'option');
                 item.tabIndex = -1;
-
                 if (r.poster) {
                     const img = document.createElement('img');
                     img.src = r.poster;
@@ -456,50 +437,41 @@
                     img.loading = 'lazy';
                     item.appendChild(img);
                 }
-
                 const info = document.createElement('div');
                 info.className = 'info';
                 info.innerHTML = `<span class="name">${r.name}</span>${r.year ? `<span class="year">${r.year}</span>` : ''}`;
                 item.appendChild(info);
-
                 item.addEventListener('click', () => {
                     box.classList.remove('visible');
                     queryInput.value = r.id;
                     loadPlayers(r.id);
                 });
-
                 box.appendChild(item);
             });
         }
 
         // ============================================================
-        // LOAD PLAYERS (ОПТИМИЗИРОВАННАЯ ВЕРСИЯ)
+        // LOAD PLAYERS
         // ============================================================
-        function loadPlayers(query) {
+        async function loadPlayers(query) {
             const container = document.getElementById('playerContainer');
             const switcher = document.getElementById('playerSwitcher');
-
             container.innerHTML = '';
             switcher.innerHTML = '';
             switcher.classList.remove('visible');
-
+            
             let index = 0;
             const lastPlayer = getLastPlayer();
             let activeIndex = 0;
             const playerEntries = Object.entries(CONFIG.players);
-
+            
             if (lastPlayer) {
                 const savedIdx = playerEntries.findIndex(([name]) => name === lastPlayer);
                 if (savedIdx !== -1) activeIndex = savedIdx;
             }
 
             for (const [name, getSrc] of playerEntries) {
-                // ОПТИМИЗАЦИЯ 4: Убрали await, так как getSrc возвращает строку синхронно
-                const iframeSrc = getSrc(query); 
-                if (!iframeSrc) continue;
-
                 const isActive = index === activeIndex;
-
                 const block = document.createElement('div');
                 block.className = `player-block${isActive ? ' active' : ''}`;
                 
@@ -514,14 +486,15 @@
                 const skeleton = document.createElement('div');
                 skeleton.className = 'iframe-skeleton';
                 skeleton.innerHTML = '<div class="loader"></div><span>Загрузка плеера...</span>';
-                
-                // ОПТИМИЗАЦИЯ 1 & 2: Lazy loading Iframes
-                // Создаем iframe только для активного плеера. Для остальных - заглушка.
+                wrapper.appendChild(skeleton);
+
                 if (isActive) {
-                    createIframe(wrapper, skeleton, iframeSrc, name, query);
+                    // Загружаем сразу активный плеер
+                    loadPlayerIframe(wrapper, skeleton, name, query);
                 } else {
-                    wrapper.dataset.src = iframeSrc; // Сохраняем URL в data-атрибут
+                    // Для неактивных сохраняем данные
                     wrapper.dataset.name = name;
+                    wrapper.dataset.query = query;
                 }
 
                 block.appendChild(wrapper);
@@ -541,43 +514,65 @@
                     block.classList.add('active');
                     saveLastPlayer(name);
 
-                    // ОПТИМИЗАЦИЯ 1: Загружаем iframe только в момент клика на вкладку
                     const inactiveWrapper = block.querySelector('.iframe-wrapper');
-                    if (inactiveWrapper && inactiveWrapper.dataset.src && !inactiveWrapper.querySelector('iframe')) {
+                    if (inactiveWrapper && !inactiveWrapper.querySelector('iframe')) {
                         const skel = inactiveWrapper.querySelector('.iframe-skeleton');
-                        if(skel) skel.classList.remove('hidden'); // Показываем лоадер снова
-                        createIframe(inactiveWrapper, skel, inactiveWrapper.dataset.src, inactiveWrapper.dataset.name, query);
+                        if (skel) skel.classList.remove('hidden');
+                        loadPlayerIframe(inactiveWrapper, skel, name, query);
                     }
                 });
-
                 switcher.appendChild(btn);
                 index++;
             }
 
             if (index > 1) switcher.classList.add('visible');
-
             if (query && isValidID(query)) {
                 try { history.replaceState(null, '', `?id=${query}`); } catch (_) {}
             }
-
             document.getElementById('playerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Вспомогательная функция для создания iframe с правильными атрибутами
+        // Загрузка iframe (с поддержкой async для Alloha)
+        async function loadPlayerIframe(wrapper, skeleton, name, query) {
+            let src = null;
+
+            if (name === 'Alloha') {
+                src = await getAllohaIframe(query);
+            } else {
+                const getSrc = CONFIG.players[name];
+                if (typeof getSrc === 'function') {
+                    src = getSrc(query);
+                }
+            }
+
+            if (!src) {
+                if (skeleton) {
+                    skeleton.innerHTML = '<span>⚠️ Не удалось загрузить плеер</span>';
+                }
+                return;
+            }
+
+            createIframe(wrapper, skeleton, src, name, query);
+        }
+
         function createIframe(wrapper, skeleton, src, name, query) {
+            // Удаляем старый iframe если есть
+            const oldIframe = wrapper.querySelector('iframe');
+            if (oldIframe) oldIframe.remove();
+
             const iframe = document.createElement('iframe');
             iframe.src = src;
             iframe.allowFullscreen = true;
             iframe.title = `Плеер ${name} для ID ${query}`;
-            
-            // ОПТИМИЗАЦИЯ 2: Атрибуты для ускорения рендеринга
-            iframe.loading = 'lazy'; 
+            iframe.loading = 'lazy';
             iframe.decoding = 'async';
-            iframe.referrerPolicy = 'no-referrer'; // Ускоряет ответ некоторых серверов
+            iframe.referrerPolicy = 'no-referrer';
             
-            iframe.onload = () => { if(skeleton) skeleton.classList.add('hidden'); };
-            iframe.onerror = () => { if(skeleton) skeleton.innerHTML = '<span>⚠️ Не удалось загрузить плеер</span>'; };
-
+            iframe.onload = () => { if (skeleton) skeleton.classList.add('hidden'); };
+            iframe.onerror = () => { 
+                if (skeleton) skeleton.innerHTML = '<span>⚠️ Не удалось загрузить плеер</span>'; 
+            };
+            
             wrapper.appendChild(iframe);
         }
 
@@ -595,7 +590,6 @@
                 .then(() => alert('✅ Ссылка скопирована!'))
                 .catch(() => alert('❌ Ошибка при копировании ссылки.'));
         }
-
         function loadFromURL() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
@@ -604,7 +598,6 @@
                 setTimeout(searchPlayer, 120);
             }
         }
-
         (function initHelp() {
             const icon = document.getElementById('helpIcon');
             const popup = document.getElementById('helpPopup');
@@ -619,7 +612,6 @@
                 if (e.key === 'Escape' && popup.classList.contains('visible')) popup.classList.remove('visible');
             });
         })();
-
         document.addEventListener('DOMContentLoaded', loadFromURL);
     </script>
 </body>
