@@ -3,119 +3,121 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KinoLyaL — смотреть фильмы и сериалы</title>
-<link rel="preconnect" href="https://api.zenithjs.ws" crossorigin>
+<title>KinoLyaL — фильмы и сериалы</title>
 <link rel="preconnect" href="https://harald-as.newplayjj.com" crossorigin>
 <link rel="preconnect" href="https://foxs-rss-proxy.ssr5577.workers.dev" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--p:#f97316;--pd:#ea580c;--glow:rgba(249,115,22,.35);--bg:#0b0b1a;--card:rgba(255,255,255,.04);--hover:rgba(255,255,255,.08);--line:rgba(255,255,255,.06);--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--r:16px;--rs:10px}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;padding:20px 20px 40px;line-height:1.6;background-image:radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.10),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(249,115,22,.08),transparent 50%);background-attachment:fixed}
-.app{max-width:960px;margin:0 auto}
-.logo{text-align:center;margin-bottom:32px}
-.logo a{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--t1);font-size:2.6rem;font-weight:900;letter-spacing:-.03em}
-.logo-text{background:linear-gradient(135deg,#f97316,#fb923c 50%,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.logo-sub{display:block;font-size:.85rem;font-weight:400;color:var(--t2);-webkit-text-fill-color:var(--t2)}
-.search{position:relative;margin-bottom:28px}
-.box{display:flex;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:8px}
-.box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px var(--glow)}
-.in{flex:1;min-width:200px;display:flex;align-items:center;background:rgba(255,255,255,.04);border-radius:var(--rs);padding:0 16px;position:relative}
-.in input{width:100%;padding:14px 0 14px 10px;font:500 1rem Inter,sans-serif;background:transparent;border:0;outline:0;color:var(--t1)}
-.spin{width:20px;height:20px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite;display:none}
-.spin.on{display:block}@keyframes s{to{transform:rotate(360deg)}}
-.btn{padding:12px 24px;font:600 .95rem Inter,sans-serif;border:0;border-radius:var(--rs);cursor:pointer;background:rgba(255,255,255,.06);color:var(--t2)}
-.btn:hover{background:rgba(255,255,255,.1);color:var(--t1)}
-.btn-p{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff}
-.btn-p:hover{background:linear-gradient(135deg,#fb923c,var(--p));color:#fff}
-.drop{display:none;position:absolute;top:100%;left:0;right:0;margin-top:6px;background:rgba(18,18,40,.97);border:1px solid var(--line);border-radius:var(--rs);max-height:340px;overflow-y:auto;z-index:100}
-.drop.on{display:block}
-.drop .st{padding:16px 20px;color:var(--t2);text-align:center}
-.it{display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--line);color:var(--t2)}
-.it:last-child{border:0}.it:hover,.it.f{background:var(--hover);color:var(--t1)}.it.f{box-shadow:inset 3px 0 0 var(--p)}
-.it img{width:44px;height:62px;object-fit:cover;border-radius:6px;background:var(--card)}
-.it b{display:block;color:var(--t1)}.it small{color:var(--t3)}
-#hist{left:0;right:0}
-#sw{display:none;gap:8px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}#sw.on{display:flex}
-.sw{padding:10px 20px;border:1px solid transparent;border-radius:50px;font:600 .85rem Inter,sans-serif;cursor:pointer;background:rgba(255,255,255,.05);color:var(--t2)}
-.sw:hover{color:var(--t1)}.sw.on{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff}
-.pb{display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}.pb.on{display:block}
-.pb h2{padding:14px 20px;font-size:1rem;color:var(--t2);background:rgba(0,0,0,.25);border-bottom:1px solid var(--line)}
-.wrap{position:relative;height:60vh;min-height:340px;background:#0a0a14}
-.sk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--t3);background:#0a0a14;z-index:1;text-align:center;padding:20px}
-.sk.h{opacity:0;pointer-events:none}
+:root{--p:#f97316;--pd:#ea580c;--bg:#0b0b1a;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.08);--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--r:14px}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;line-height:1.5;background-image:radial-gradient(ellipse at 15% 0,rgba(139,92,246,.14),transparent 55%),radial-gradient(ellipse at 90% 10%,rgba(249,115,22,.10),transparent 45%);background-attachment:fixed}
+button{font-family:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:50;background:rgba(11,11,26,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;text-decoration:none;background:linear-gradient(135deg,#f97316,#fbbf24);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:0;color:var(--t2);font-weight:600;font-size:.92rem;padding:8px 14px;border-radius:999px}
+nav button:hover{color:var(--t1);background:var(--card)}
+nav button.on{color:#fff;background:linear-gradient(135deg,var(--p),var(--pd))}
+nav i{font-style:normal;opacity:.75;margin-left:5px;font-size:.8rem}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+.search{position:relative;max-width:720px;margin:0 auto 32px}
+.box{display:flex;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:8px}
+.box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px rgba(249,115,22,.25)}
+.box input{flex:1;min-width:0;padding:12px 14px;font:500 1rem Inter,sans-serif;background:transparent;border:0;outline:0;color:var(--t1)}
+.box input::placeholder{color:var(--t3)}
+.btn{padding:11px 20px;font-weight:600;font-size:.92rem;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.06);color:var(--t1)}
+.btn:hover{background:rgba(255,255,255,.12)}
+.btn.p{border:0;background:linear-gradient(135deg,var(--p),var(--pd))}
+.btn.on{border-color:var(--p);color:var(--p)}
+.spin{width:18px;height:18px;margin:auto 8px;border:2px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite;display:none}.spin.on{display:block}@keyframes s{to{transform:rotate(360deg)}}
+.drop{display:none;position:absolute;top:100%;left:0;right:0;margin-top:8px;background:#14142b;border:1px solid var(--line);border-radius:var(--r);max-height:380px;overflow-y:auto;z-index:60;box-shadow:0 20px 50px rgba(0,0,0,.5)}.drop.on{display:block}
+.drop .st{padding:18px;color:var(--t2);text-align:center}
+.it{display:flex;align-items:center;gap:14px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--line)}.it:last-child{border:0}
+.it:hover,.it.f{background:rgba(255,255,255,.07)}.it.f{box-shadow:inset 3px 0 0 var(--p)}
+.it img,.it .ph{width:44px;height:62px;object-fit:cover;border-radius:6px;background:var(--card);flex:none}
+.it b{display:block}.it small{color:var(--t3)}
+#player{display:none;margin-bottom:40px}#player.on{display:block}
+.pl-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.pl-head h2{font-size:1.3rem;font-weight:700}.pl-head h2 small{color:var(--t3);font-weight:500;font-size:.9rem;margin-left:8px}
+.pl-act{display:flex;gap:8px;flex-wrap:wrap}
+.wrap{position:relative;height:62vh;min-height:320px;background:#05050d;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
-.wh{margin-top:36px}
-.wh-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.wh-head h3{font-size:1.1rem}
-.wh-head button{background:none;border:0;color:var(--t3);cursor:pointer;font:500 .85rem Inter,sans-serif}.wh-head button:hover{color:var(--p)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px}
-.wc{cursor:pointer}.wc .po{aspect-ratio:2/3;border-radius:var(--rs);background:var(--card) center/cover;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:.8rem}
-.wc:hover .po{border-color:var(--p)}.wc .n{font-size:.85rem;font-weight:600;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wc .d{font-size:.75rem;color:var(--t3)}
-@media(max-width:700px){.logo a{font-size:2rem}.box{flex-direction:column}.btn{width:100%}.wrap{height:40vh;min-height:240px}}
+.sk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--t3);z-index:1;transition:opacity .3s}.sk.h{opacity:0;pointer-events:none}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}.sec-h h3{font-size:1.2rem;font-weight:700}.sec-h span{color:var(--t3);font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px}
+.wc{position:relative;cursor:pointer}
+.po{aspect-ratio:2/3;border-radius:var(--r);background:var(--card) center/cover no-repeat;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform .2s,border-color .2s}
+.wc:hover .po{transform:translateY(-4px);border-color:var(--p)}
+.n{font-size:.88rem;font-weight:600;margin-top:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.d{font-size:.76rem;color:var(--t3)}
+.ac{position:absolute;left:8px;right:8px;top:8px;display:flex;justify-content:space-between;opacity:0;transition:opacity .15s}
+.wc:hover .ac,.wc:focus-within .ac{opacity:1}
+@media(hover:none){.ac{opacity:1}}
+.ac button{width:32px;height:32px;border-radius:50%;border:0;background:rgba(10,10,20,.85);color:#fff;font-size:.95rem;backdrop-filter:blur(6px)}
+.ac button:hover{background:var(--p)}.ac .x:hover{background:#ef4444}
+.ac div{display:flex;gap:6px}
+.empty{grid-column:1/-1;text-align:center;color:var(--t2);padding:50px 20px;border:1px dashed var(--line);border-radius:var(--r)}
+@media(max-width:700px){.top-in{gap:10px}.wrap{height:42vh}.grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:14px}}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="logo"><a href="./">🎬 <span><span class="logo-text">KinoLyaL</span><span class="logo-sub">ищи по названию</span></span></a></div>
+<header class="top"><div class="top-in">
+  <a class="logo" href="./">🎬 KinoLyaL</a>
+  <nav id="nav"></nav>
+</div></header>
+<main>
   <section class="search">
     <div class="box">
-      <div class="in">🔍
-        <input id="q" type="text" placeholder="Введите ID, ссылку или название фильма" autocomplete="off" autofocus />
-        <div class="spin" id="spin"></div>
-        <div id="hist" class="drop"></div>
-      </div>
-      <button class="btn btn-p" id="go">▶ Найти</button>
-      <button class="btn" id="share">🔗 Поделиться</button>
+      <input id="q" type="text" placeholder="Название, ID или ссылка КиноПоиска" autocomplete="off" autofocus />
+      <div class="spin" id="spin"></div>
+      <button class="btn p" id="go">Найти</button>
     </div>
     <div id="res" class="drop"></div>
   </section>
-  <section><div id="sw"></div><div id="pc"></div></section>
-  <section class="wh" id="wh" hidden>
-    <div class="wh-head"><h3>История просмотров</h3><button id="whClear">Очистить</button></div>
-    <div class="grid" id="whGrid"></div>
+  <section id="player">
+    <div class="pl-head"><h2 id="plTitle"></h2><div class="pl-act" id="plAct"></div></div>
+    <div class="wrap" id="wrap"><div class="sk" id="sk">Загрузка плеера…</div></div>
   </section>
-</div>
+  <section>
+    <div class="sec-h"><h3 id="tabTitle"></h3><span id="tabCount"></span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
 <script>
 const WORKER='https://foxs-rss-proxy.ssr5577.workers.dev';
-const ALLOHA_TOKEN='e7b61f129f4a392ac4bf6726a9dd6a';
-// ref: '' = referrer по умолчанию (как на рабочих сайтах), для Zenith — no-referrer
-const PLAYERS=[
-  {name:'Collaps',ref:'no-referrer',url:id=>`https://api.zenithjs.ws/embed/kp/${id}`},
-  {name:'Alloha',ref:'',url:id=>`https://harald-as.newplayjj.com/?kp=${id}&token=${ALLOHA_TOKEN}`}
-];
-const K={player:'kinolyal_last_player',search:'kinolyal_search_history',watch:'kinolyal_watch_history'};
+const TOKEN='e7b61f129f4a392ac4bf6726a9dd6a';
+const playerUrl=id=>`https://harald-as.newplayjj.com/?kp=${id}&token=${TOKEN}`;
+const LIB_KEY='kinolyal_library_v2';
+const TABS={watching:{label:'Смотрю',empty:'Здесь появятся фильмы, которые вы открыли.'},watched:{label:'Просмотрено',empty:'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'},later:{label:'Буду смотреть',empty:'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'}};
 const $=id=>document.getElementById(id);
-const q=$('q'),res=$('res'),hist=$('hist');
-let focus=-1;
+const q=$('q'),res=$('res');
+let tab='watching',current=null,focus=-1;
 
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
-const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const store=()=>{try{localStorage.setItem(LIB_KEY,JSON.stringify(lib))}catch(e){}};
 const extractID=s=>{const m=s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);return m?m[1]:s.trim()};
 const isID=s=>/^\d{1,10}$/.test(s);
 
-/* ---------- история поиска ---------- */
-function addSearch(v){if(v.length<2)return;let h=load(K.search,[]).filter(x=>x!==v);h.unshift(v);save(K.search,h.slice(0,10))}
-function showHist(){
-  const h=load(K.search,[]);
-  if(!h.length||q.value.trim()){hist.classList.remove('on');return}
-  hist.innerHTML=h.map((x,i)=>`<div class="it" data-i="${i}">🕐 ${esc(x)}</div>`).join('');
-  hist.querySelectorAll('.it').forEach(el=>el.onclick=()=>{q.value=h[el.dataset.i];hist.classList.remove('on');search()});
-  hist.classList.add('on');
+/* ---------- библиотека: одна запись на фильм (ключ — ID КиноПоиска) ---------- */
+let lib=load(LIB_KEY,null);
+if(!lib){ // перенос старой истории без дублей
+  lib={};
+  load('kinolyal_watch_history',[]).forEach(x=>{const id=String(x.id);if(!lib[id]||x.name)lib[id]={id,name:x.name||'',year:x.year||'',poster:x.poster||'',status:'watching',ts:x.ts||Date.now()}});
+  store();
 }
-q.addEventListener('focus',showHist);
-q.addEventListener('input',showHist);
-document.addEventListener('click',e=>{if(!e.target.closest('.in'))hist.classList.remove('on')});
+function put(id,meta,status){
+  id=String(id);const o=lib[id]||{};
+  lib[id]={id,name:meta?.name||o.name||'',year:meta?.year||o.year||'',poster:meta?.poster||o.poster||'',status:status||o.status||'watching',ts:Date.now()};
+  store();renderAll();
+}
+function remove(id){delete lib[id];store();if(current===id)closePlayer();renderAll()}
+const list=st=>Object.values(lib).filter(x=>x.status===st).sort((a,b)=>b.ts-a.ts);
 
-/* ---------- история просмотров ---------- */
-function rememberWatch(id,meta){
-  let h=load(K.watch,[]);
-  const old=h.find(x=>x.id===id)||{};
-  h=h.filter(x=>x.id!==id);
-  h.unshift({id,name:(meta&&meta.name)||old.name||'',year:(meta&&meta.year)||old.year||'',poster:(meta&&meta.poster)||old.poster||'',ts:Date.now()});
-  save(K.watch,h.slice(0,40));
-  renderWatch();
+/* ---------- интерфейс ---------- */
+function renderNav(){
+  $('nav').innerHTML=Object.entries(TABS).map(([k,t])=>`<button data-t="${k}" class="${k===tab?'on':''}">${t.label}<i>${list(k).length}</i></button>`).join('');
+  $('nav').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;renderAll()});
 }
 function ago(ts){
   const m=Math.round((Date.now()-ts)/60000);
@@ -123,15 +125,53 @@ function ago(ts){
   const h=Math.round(m/60);if(h<24)return h+' ч назад';
   return new Date(ts).toLocaleDateString('ru-RU');
 }
-function renderWatch(){
-  const h=load(K.watch,[]),box=$('wh');
-  box.hidden=!h.length;
-  $('whGrid').innerHTML=h.map(x=>`<div class="wc" data-id="${esc(x.id)}">
+function renderGrid(){
+  const items=list(tab);
+  $('tabTitle').textContent=TABS[tab].label;
+  $('tabCount').textContent=items.length?items.length+' шт.':'';
+  // кнопка быстрого переноса: куда отправить из текущей вкладки
+  const moves={watching:[['watched','✓','Просмотрено']],watched:[['watching','↺','Смотреть снова']],later:[['watched','✓','Просмотрено']]};
+  $('grid').innerHTML=items.length?items.map(x=>`<div class="wc" data-id="${esc(x.id)}">
     <div class="po" ${x.poster?`style="background-image:url('${esc(x.poster)}')"`:''}>${x.poster?'':'🎬'}</div>
-    <div class="n">${esc(x.name||'ID '+x.id)}</div><div class="d">${esc(ago(x.ts))}</div></div>`).join('');
-  $('whGrid').querySelectorAll('.wc').forEach(el=>el.onclick=()=>{q.value=el.dataset.id;loadPlayers(el.dataset.id)});
+    <div class="ac"><div>${moves[tab].map(m=>`<button data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}</div><button class="x" title="Удалить из списка">✕</button></div>
+    <div class="n">${esc(x.name||'ID '+x.id)}</div><div class="d">${x.year?esc(x.year)+' · ':''}${ago(x.ts)}</div></div>`).join('')
+    :`<div class="empty">${TABS[tab].empty}</div>`;
+  $('grid').querySelectorAll('.wc').forEach(el=>{
+    const id=el.dataset.id;
+    el.onclick=()=>openFilm(id);
+    el.querySelectorAll('[data-mv]').forEach(b=>b.onclick=e=>{e.stopPropagation();put(id,null,b.dataset.mv)});
+    el.querySelector('.x').onclick=e=>{e.stopPropagation();remove(id)};
+  });
 }
-$('whClear').onclick=()=>{if(confirm('Очистить историю просмотров?')){save(K.watch,[]);renderWatch()}};
+function renderPlayerBar(){
+  if(!current)return;
+  const o=lib[current]||{};
+  $('plTitle').innerHTML=esc(o.name||'ID '+current)+(o.year?`<small>${esc(o.year)}</small>`:'');
+  $('plAct').innerHTML=[['watched','✓ Просмотрено'],['later','🕒 Буду смотреть']].map(([s,l])=>`<button class="btn ${o.status===s?'on':''}" data-s="${s}">${l}</button>`).join('')+'<button class="btn" id="plClose">Закрыть</button>';
+  $('plAct').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{put(current,null,o.status===b.dataset.s?'watching':b.dataset.s)});
+  $('plClose').onclick=closePlayer;
+}
+function renderAll(){renderNav();renderGrid();renderPlayerBar()}
+
+/* ---------- плеер (Alloha) ---------- */
+function openFilm(id,meta){
+  id=String(id);current=id;
+  put(id,meta,lib[id]?.status==='watched'?'watched':'watching'); // открыли — «смотрю», если ещё не просмотрено
+  $('wrap').innerHTML='<div class="sk" id="sk">Загрузка плеера…</div>';
+  const f=document.createElement('iframe');
+  f.allowFullscreen=true;f.title='Плеер для ID '+id;
+  f.onload=()=>$('sk')?.classList.add('h');
+  f.src=playerUrl(id);
+  $('wrap').appendChild(f);
+  setTimeout(()=>$('sk')?.classList.add('h'),8000);
+  $('player').classList.add('on');
+  $('player').scrollIntoView({behavior:'smooth',block:'start'});
+  try{history.replaceState(null,'','?id='+id)}catch(e){}
+}
+function closePlayer(){
+  current=null;$('wrap').innerHTML='';$('player').classList.remove('on');
+  try{history.replaceState(null,'',location.pathname)}catch(e){}
+}
 
 /* ---------- поиск ---------- */
 q.addEventListener('keydown',e=>{
@@ -140,18 +180,17 @@ q.addEventListener('keydown',e=>{
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){
     e.preventDefault();
     focus=e.key==='ArrowDown'?Math.min(focus+1,items.length-1):Math.max(focus-1,0);
-    items.forEach((it,i)=>it.classList.toggle('f',i===focus));
-    items[focus].scrollIntoView({block:'nearest'});
+    items.forEach((it,i)=>it.classList.toggle('f',i===focus));items[focus].scrollIntoView({block:'nearest'});
   }else if(e.key==='Enter'){e.preventDefault();focus>=0?items[focus].click():search()}
   else if(e.key==='Escape'){res.classList.remove('on');focus=-1}
 });
+document.addEventListener('click',e=>{if(!e.target.closest('.search'))res.classList.remove('on')});
 $('go').onclick=search;
 async function search(){
   const raw=q.value.trim();if(!raw)return;
-  res.classList.remove('on');hist.classList.remove('on');res.innerHTML='';focus=-1;
-  addSearch(raw);
+  res.classList.remove('on');res.innerHTML='';focus=-1;
   const id=extractID(raw);
-  if(isID(id)){loadPlayers(id);return}
+  if(isID(id)){openFilm(id);q.value='';return}
   $('spin').classList.add('on');
   await byTitle(raw);
   $('spin').classList.remove('on');
@@ -159,81 +198,38 @@ async function search(){
 async function byTitle(title){
   res.classList.add('on');
   const key='search_'+title.toLowerCase();
-  try{const c=sessionStorage.getItem(key);if(c){render(JSON.parse(c));return}}catch(e){}
-  res.innerHTML='<p class="st">🔎 Ищем…</p>';
+  try{const c=sessionStorage.getItem(key);if(c){showResults(JSON.parse(c));return}}catch(e){}
+  res.innerHTML='<p class="st">Ищем…</p>';
   try{
-    const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),12000);
+    const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),12000);
     const r=await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`,{signal:ctl.signal});
     clearTimeout(to);
     if(!r.ok)throw new Error('HTTP '+r.status);
     const j=await r.json();if(j.error)throw new Error(j.error);
     const data=j.results||[];
     try{sessionStorage.setItem(key,JSON.stringify(data))}catch(e){}
-    render(data);
+    showResults(data);
   }catch(e){
     console.error('Поиск:',e);
-    const why=e.name==='AbortError'?'сервер поиска не ответил за 12 с':e.message==='Failed to fetch'?'запрос заблокирован (сеть или CORS воркера)':e.message;
-    res.innerHTML=`<p class="st">❌ Ошибка поиска: ${esc(why)}.<br>Введите ID вручную.</p>`;
+    const why=e.name==='AbortError'?'сервер поиска не ответил за 12 с':e.message==='Failed to fetch'?'запрос заблокирован (сеть или CORS)':e.message;
+    res.innerHTML=`<p class="st">Ошибка поиска: ${esc(why)}.<br>Введите ID вручную.</p>`;
   }
 }
-function render(data){
-  if(!data.length){res.innerHTML='<p class="st">😕 Ничего не найдено.</p>';return}
-  if(data.length===1){res.classList.remove('on');q.value=data[0].id;loadPlayers(data[0].id,data[0]);return}
+function showResults(data){
+  if(!data.length){res.innerHTML='<p class="st">Ничего не найдено.</p>';return}
+  if(data.length===1){res.classList.remove('on');q.value='';openFilm(data[0].id,data[0]);return}
   res.innerHTML='';
   data.forEach(r=>{
     const it=document.createElement('div');it.className='it';
-    it.innerHTML=`${r.poster?`<img src="${esc(r.poster)}" alt="" loading="lazy">`:''}<div><b>${esc(r.name)}</b>${r.year?`<small>${esc(r.year)}</small>`:''}</div>`;
-    it.onclick=()=>{res.classList.remove('on');q.value=r.id;loadPlayers(r.id,r)};
+    it.innerHTML=`${r.poster?`<img src="${esc(r.poster)}" alt="" loading="lazy">`:'<div class="ph"></div>'}<div><b>${esc(r.name)}</b>${r.year?`<small>${esc(r.year)}</small>`:''}</div>`;
+    it.onclick=()=>{res.classList.remove('on');q.value='';openFilm(r.id,r)};
     res.appendChild(it);
   });
 }
 
-/* ---------- плееры ---------- */
-function loadPlayers(id,meta){
-  const pc=$('pc'),sw=$('sw');
-  pc.innerHTML='';sw.innerHTML='';sw.classList.remove('on');
-  let active=PLAYERS.findIndex(p=>p.name===load(K.player,''));if(active<0)active=0;
-  PLAYERS.forEach((p,i)=>{
-    const b=document.createElement('div');b.className='pb'+(i===active?' on':'');
-    b.innerHTML=`<h2>${esc(p.name)}</h2><div class="wrap"><div class="sk">Загрузка плеера…</div></div>`;
-    pc.appendChild(b);
-    const open=()=>{
-      const w=b.querySelector('.wrap');if(w.querySelector('iframe'))return;
-      const sk=w.querySelector('.sk');
-      const f=document.createElement('iframe');
-      f.allowFullscreen=true;f.title=`Плеер ${p.name} для ID ${id}`;
-      if(p.ref)f.referrerPolicy=p.ref;
-      f.onload=()=>sk.classList.add('h');
-      f.src=p.url(id);
-      w.appendChild(f);
-      // iframe.onload срабатывает и на страницу с ошибкой, поэтому снимаем заглушку по таймеру
-      setTimeout(()=>sk.classList.add('h'),8000);
-    };
-    if(i===active)open();
-    const btn=document.createElement('button');btn.className='sw'+(i===active?' on':'');btn.textContent=`${i+1}. ${p.name}`;
-    btn.onclick=()=>{
-      sw.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));
-      pc.querySelectorAll('.pb').forEach(x=>x.classList.remove('on'));
-      btn.classList.add('on');b.classList.add('on');save(K.player,p.name);open();
-    };
-    sw.appendChild(btn);
-  });
-  if(PLAYERS.length>1)sw.classList.add('on');
-  rememberWatch(id,meta);
-  try{history.replaceState(null,'',`?id=${id}`)}catch(e){}
-  pc.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-/* ---------- ссылка и старт ---------- */
-$('share').onclick=()=>{
-  const id=extractID(q.value);
-  if(!isID(id)){alert('Введите корректный ID или ссылку');return}
-  navigator.clipboard.writeText(`${location.origin}${location.pathname}?id=${id}`)
-    .then(()=>alert('✅ Ссылка скопирована!')).catch(()=>alert('❌ Не удалось скопировать'));
-};
-renderWatch();
+renderAll();
 const startId=new URLSearchParams(location.search).get('id');
-if(startId&&isID(startId)){q.value=startId;loadPlayers(startId)}
+if(startId&&isID(startId))openFilm(startId);
 </script>
 </body>
 </html>
