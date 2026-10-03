@@ -8,6 +8,22 @@
 <link rel="preconnect" href="https://api.alloha.tv" crossorigin>
 <link rel="preconnect" href="https://foxs-rss-proxy.ssr5577.workers.dev" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+/* Определение ТВ до отрисовки (только ES5). Переопределение: ?tv=1 / ?tv=0 или кнопка в подвале. */
+(function(){
+  var tv=false,p=null;
+  try{
+    var m=location.search.match(/[?&]tv=([01])/);
+    if(m)localStorage.setItem('kinolyal_tv',m[1]);
+    p=localStorage.getItem('kinolyal_tv');
+  }catch(e){}
+  if(p==='1')tv=true;
+  else if(p==='0')tv=false;
+  else tv=/SMART-?TV|SmartTV|Tizen|Web0S|webOS|NetCast|HbbTV|VIDAA|BRAVIA|Hisense|Roku|CrKey|AFT[A-Z]|Android.*TV|GoogleTV|AppleTV|Xbox|PlayStation/i.test(navigator.userAgent);
+  window.__TV=tv;
+  if(tv)document.documentElement.className+=' tv';
+})();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--p:#f97316;--pd:#ea580c;--pl:#fbbf24;--bg:#08080f;--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.075);--line:rgba(255,255,255,.08);--t1:#f4f5f9;--t2:#9aa3b5;--t3:#667085;--r:18px}
@@ -18,11 +34,12 @@ button{font-family:inherit;cursor:pointer}
 ::selection{background:var(--p);color:#fff}
 ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:2px solid transparent;background-clip:content-box}
 /* шапка */
-.top{position:sticky;top:0;z-index:50;background:rgba(8,8,15,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
-.top-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;text-decoration:none;color:var(--t1)}
-.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:.8rem;color:#fff;background:linear-gradient(135deg,var(--p),#e11d48);box-shadow:0 6px 20px rgba(249,115,22,.45)}
-nav{display:flex;gap:4px;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+.top{position:sticky;top:0;z-index:50;background:rgba(8,8,15,.85);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
+.top-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;text-decoration:none;color:var(--t1)}
+.mark{width:34px;height:34px;margin-right:10px;border-radius:10px;display:grid;place-items:center;font-size:.8rem;color:#fff;background:linear-gradient(135deg,var(--p),#e11d48);box-shadow:0 6px 20px rgba(249,115,22,.45)}
+nav{display:flex;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+nav button+button{margin-left:4px}
 nav button{background:none;border:0;color:var(--t2);font-weight:600;font-size:.88rem;padding:8px 16px;border-radius:999px;transition:.2s;white-space:nowrap}
 nav button:hover{color:var(--t1)}
 nav button.on{color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 4px 16px rgba(249,115,22,.4)}
@@ -30,13 +47,14 @@ nav i{font-style:normal;margin-left:6px;padding:1px 7px;border-radius:999px;back
 main{max-width:1180px;margin:0 auto;padding:36px 24px 90px}
 /* hero */
 .hero{text-align:center;margin:18px auto 26px;max-width:720px}
-.hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.hero h1{font-size:2.6rem;font-size:clamp(1.9rem,5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1.1}
 .hero em{font-style:normal;background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero p{color:var(--t2);margin-top:12px;font-size:1rem}
 body.playing .hero{display:none}
 /* поиск */
 .search{position:relative;max-width:720px;margin:0 auto 40px;z-index:40}
-.box{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 20px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.35);transition:.2s}
+.box{display:flex;align-items:center;padding:8px 8px 8px 20px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.35);transition:.2s}
+.box>*+*{margin-left:8px}
 .box:focus-within{border-color:rgba(249,115,22,.7);box-shadow:0 0 0 4px rgba(249,115,22,.18),0 20px 50px rgba(0,0,0,.4)}
 .box svg{width:20px;height:20px;flex:none;color:var(--t3)}
 .box input{flex:1;min-width:0;padding:12px 4px;font:500 1.02rem Inter,sans-serif;background:transparent;border:0;outline:0;color:var(--t1)}
@@ -50,30 +68,35 @@ body.playing .hero{display:none}
 .drop{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:rgba(18,18,32,.97);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:var(--r);max-height:420px;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.65);animation:pop .18s ease}.drop.on{display:block}
 @keyframes pop{from{opacity:0;transform:translateY(-6px)}}
 .drop .st{padding:20px;color:var(--t2);text-align:center}
-.it{display:flex;align-items:center;gap:16px;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .15s}.it:last-child{border:0}
-.it:hover,.it.f{background:rgba(249,115,22,.1)}.it.f{box-shadow:inset 3px 0 0 var(--p)}
-.it img,.it .ph{width:46px;height:66px;object-fit:cover;border-radius:8px;background:var(--card2);flex:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.it{display:flex;align-items:center;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .15s}.it:last-child{border:0}
+.it:hover,.it.f,.it:focus{background:rgba(249,115,22,.1);outline:0}.it.f,.it:focus{box-shadow:inset 3px 0 0 var(--p)}
+.it img,.it .ph{width:46px;height:66px;margin-right:16px;object-fit:cover;border-radius:8px;background:var(--card2);flex:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
 .it b{display:block;font-weight:600}.it small{display:inline-block;margin-top:2px;padding:1px 9px;border-radius:999px;background:var(--card2);color:var(--t2);font-size:.75rem}
 /* плеер */
 #player{display:none;margin-bottom:48px;animation:pop .35s ease}#player.on{display:block}
-.pl-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
-.pl-head h2{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}.pl-head h2 small{color:var(--t2);font-weight:500;font-size:.95rem;margin-left:10px}
-.pl-act{display:flex;gap:8px;flex-wrap:wrap}
+.pl-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+.pl-head h2{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-right:14px}.pl-head h2 small{color:var(--t2);font-weight:500;font-size:.95rem;margin-left:10px}
+.pl-act{display:flex;flex-wrap:wrap}
+.pl-act>*{margin:0 8px 8px 0}
 .wrap{position:relative;height:66vh;min-height:320px;background:#000;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(249,115,22,.10)}
-.wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
-.sk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--t3);z-index:1;transition:opacity .3s}.sk.h{opacity:0;pointer-events:none}
-.sk::before{content:"";width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite}
+.wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:2}
+.wrap:focus{outline:0}
+.sk{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;color:var(--t3);z-index:1;transition:opacity .3s}.sk.h{opacity:0;pointer-events:none}
+.sk::before{content:"";width:22px;height:22px;margin-right:12px;border:2px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite}
 /* списки */
-.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:20px}.sec-h h3{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.sec-h{display:flex;align-items:center;margin-bottom:20px}.sec-h h3{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-right:12px}
 .sec-h span{padding:2px 10px;border-radius:999px;background:var(--card2);color:var(--t2);font-size:.78rem;font-weight:600}.sec-h span:empty{display:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:24px 20px}
-.wc{position:relative;cursor:pointer;animation:rise .45s both}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));grid-gap:24px 20px;gap:24px 20px}
+.wc{position:relative;cursor:pointer;animation:rise .45s both;outline:0}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}}
 .wc:nth-child(2){animation-delay:.04s}.wc:nth-child(3){animation-delay:.08s}.wc:nth-child(4){animation-delay:.12s}.wc:nth-child(5){animation-delay:.16s}.wc:nth-child(6){animation-delay:.2s}
-.po{position:relative;aspect-ratio:2/3;border-radius:var(--r);background:var(--card) center/cover no-repeat;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s,border-color .25s}
-.po::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:.25s}
+.po{position:relative;border-radius:var(--r);background:var(--card) center/cover no-repeat;border:1px solid var(--line);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s,border-color .25s}
+.po::before{content:"";display:block;padding-top:150%}
+.ph0{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.po::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:.25s}
 .wc:hover .po{transform:translateY(-6px) scale(1.02);border-color:rgba(249,115,22,.6);box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 30px rgba(249,115,22,.22)}
 .wc:hover .po::after{opacity:1}
+.wc:focus .po{border-color:var(--p)}
 .play{position:absolute;left:50%;top:50%;z-index:2;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 8px 28px rgba(249,115,22,.6);opacity:0;transform:scale(.7);transition:.25s}
 .wc:hover .play{opacity:1;transform:scale(1)}
 .n{font-size:.92rem;font-weight:600;margin-top:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.d{font-size:.78rem;color:var(--t3)}
@@ -82,10 +105,13 @@ body.playing .hero{display:none}
 @media(hover:none){.ac{opacity:1}.play{display:none}}
 .ac button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(8,8,15,.8);color:#fff;font-size:.95rem;backdrop-filter:blur(8px);transition:.15s}
 .ac button:hover{background:var(--p);transform:scale(1.08)}.ac .x:hover{background:#ef4444}
-.ac div{display:flex;gap:6px}
+.ac div{display:flex}
+.ac div button+button{margin-left:6px}
 .empty{grid-column:1/-1;text-align:center;color:var(--t2);padding:64px 20px;border:1px dashed rgba(255,255,255,.14);border-radius:var(--r);background:var(--card)}
 .empty::before{content:"🍿";display:block;font-size:2.6rem;margin-bottom:10px}
 footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
+.lnk{background:none;border:0;color:var(--t2);font-size:inherit;text-decoration:underline;padding:4px 10px;border-radius:10px}
+.lnk:hover{color:var(--t1)}
 /* телефон: меню — нижняя панель */
 @media(max-width:700px){
   main{padding:20px 16px 110px}
@@ -95,9 +121,71 @@ footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
   nav i{display:none}
   .box{padding:6px 6px 6px 14px}.btn{padding:10px 16px}
   .wrap{height:44vh;border-radius:16px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));grid-gap:18px 14px;gap:18px 14px}
   .hero{margin-top:6px}
 }
+
+/* ===== меню действий (на ТВ — по долгому OK) ===== */
+#sheet{display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:100;background:rgba(0,0,0,.75);align-items:center;justify-content:center}
+#sheet.on{display:flex}
+.sh-box{min-width:22rem;max-width:90vw;padding:1.4rem;background:#14142b;border:1px solid var(--line);border-radius:1.4rem;box-shadow:0 40px 100px rgba(0,0,0,.8)}
+.sh-t{font-size:1.15rem;font-weight:800;margin-bottom:1rem;max-width:24rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#shBtns .btn{display:block;width:100%;text-align:left;margin-bottom:.6rem}
+#hint{display:none}
+
+/* ===== ТВ-режим: «10-foot UI» ===== */
+html.tv{font-size:calc(16px + .5vw)}
+html.tv ::-webkit-scrollbar{display:none}
+html.tv .top-in{max-width:none;padding:.7rem 5vw}
+html.tv main{max-width:none;padding:1.6rem 5vw 7rem}
+html.tv .logo{font-size:1.5rem}
+html.tv .mark{width:2.3rem;height:2.3rem;font-size:.9rem;border-radius:.7rem}
+html.tv nav{position:static;left:auto;right:auto;bottom:auto;justify-content:flex-start;padding:.3rem;background:var(--card);box-shadow:none;backdrop-filter:none}
+html.tv nav button{flex:none;padding:.55rem 1.3rem;font-size:1rem}
+html.tv nav i{display:inline-block;font-size:.8rem}
+html.tv .hero{max-width:60rem}
+html.tv .hero h1{font-size:2.8rem}
+html.tv .hero p{font-size:1.1rem}
+html.tv .search{max-width:60rem}
+html.tv .box{padding:.5rem .5rem .5rem 1.4rem}
+html.tv .box svg{width:1.4rem;height:1.4rem}
+html.tv .box input{font-size:1.15rem;padding:.8rem .3rem}
+html.tv .btn{font-size:1rem;padding:.7rem 1.6rem}
+html.tv .it{padding:.7rem 1.2rem}
+html.tv .it img,html.tv .it .ph{width:3.4rem;height:4.9rem;margin-right:1.2rem}
+html.tv .it b{font-size:1.1rem}
+html.tv .it small{font-size:.85rem}
+html.tv .drop{max-height:60vh}
+html.tv .drop .st{font-size:1rem}
+html.tv .pl-head h2{font-size:1.9rem}
+html.tv .pl-head h2 small{font-size:1.1rem}
+html.tv .wrap{height:72vh;border-radius:1.2rem}
+html.tv .wrap:focus::after{content:"OK — управлять плеером";position:absolute;left:50%;bottom:1.2rem;z-index:3;transform:translateX(-50%);padding:.5rem 1.2rem;border-radius:999px;background:rgba(0,0,0,.75);color:#fff;font-size:1rem;pointer-events:none}
+html.tv .sec-h h3{font-size:1.7rem}
+html.tv .sec-h span{font-size:.95rem}
+html.tv .grid{grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));grid-gap:2rem 1.5rem;gap:2rem 1.5rem}
+html.tv .n{font-size:1rem}
+html.tv .d{font-size:.85rem}
+html.tv .empty{font-size:1.1rem;padding:4rem 1rem}
+html.tv .play{display:grid;width:3.2rem;height:3.2rem;margin:-1.6rem 0 0 -1.6rem}
+/* действия на карточке без мыши недоступны — показываем их только при наведении указателя (Magic Remote) */
+html.tv .ac{opacity:0}
+html.tv .wc:focus-within .ac{opacity:0}
+html.tv .wc:hover .ac{opacity:1}
+/* фокус: крупно и заметно */
+html.tv .wc:focus .po{transform:translateY(-8px) scale(1.07);border-color:#fff;box-shadow:0 0 0 4px #fff,0 26px 60px rgba(0,0,0,.7),0 0 44px rgba(249,115,22,.55)}
+html.tv .wc:focus .po::after{opacity:1}
+html.tv .wc:focus .play{opacity:1;transform:scale(1)}
+html.tv .wc:focus .n{color:#fff}
+html.tv .btn:focus,html.tv nav button:focus,html.tv .lnk:focus{outline:0;transform:scale(1.07);box-shadow:0 0 0 3px var(--bg),0 0 0 6px #fff,0 0 26px rgba(249,115,22,.6)}
+html.tv .it:focus{background:rgba(249,115,22,.22);box-shadow:inset .3rem 0 0 var(--p)}
+html.tv .wrap:focus{border-color:#fff;box-shadow:0 0 0 5px #fff,0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(249,115,22,.35)}
+html.tv footer{font-size:.95rem;padding-bottom:6rem}
+html.tv .sh-box{min-width:26rem}
+html.tv #hint{display:block;position:fixed;left:0;right:0;bottom:0;z-index:70;text-align:center;padding:.6rem 5vw;background:rgba(8,8,15,.94);border-top:1px solid var(--line);color:var(--t2);font-size:.85rem}
+html.tv #hint span{margin:0 1.1rem;white-space:nowrap}
+html.tv #hint b{color:var(--pl)}
+html.tv body.playing #hint{display:none}
 </style>
 </head>
 <body>
@@ -110,7 +198,7 @@ footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
   <section class="search">
     <div class="box">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="text" placeholder="Название, ID или ссылка КиноПоиска" autocomplete="off" autofocus />
+      <input id="q" type="text" placeholder="Название, ID или ссылка КиноПоиска" autocomplete="off" enterkeyhint="search" />
       <div class="spin" id="spin"></div>
       <button class="btn p" id="go">Найти</button>
     </div>
@@ -118,49 +206,79 @@ footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
   </section>
   <section id="player">
     <div class="pl-head"><h2 id="plTitle"></h2><div class="pl-act" id="plAct"></div></div>
-    <div class="wrap" id="wrap"><div class="sk" id="sk">Загрузка плеера…</div></div>
+    <div class="wrap" id="wrap" tabindex="-1"><div class="sk" id="sk">Загрузка плеера…</div></div>
   </section>
   <section>
     <div class="sec-h"><h3 id="tabTitle"></h3><span id="tabCount"></span></div>
     <div class="grid" id="grid"></div>
   </section>
 </main>
-<footer>KinoLyaL · ваша история хранится только в этом браузере</footer>
+<footer>KinoLyaL · ваша история хранится только в этом браузере · <button class="lnk" id="tvToggle"></button></footer>
+<div id="sheet" role="dialog" aria-modal="true"><div class="sh-box"><div class="sh-t" id="shTitle"></div><div id="shBtns"></div></div></div>
+<div id="hint"><span><b>◀ ▲ ▼ ▶</b> выбор</span><span><b>OK</b> открыть</span><span><b>удерживать OK</b> меню фильма</span><span><b>Назад</b> закрыть</span></div>
 <script>
+(function(){
+var TV=!!window.__TV;
 const WORKER='https://foxs-rss-proxy.ssr5577.workers.dev';
 const TOKEN='e7b61f129f4a392ac4bf6726a9dd6a';
 const playerUrl=id=>`https://harald-as.newplayjj.com/?kp=${id}&token=${TOKEN}`;
 const LIB_KEY='kinolyal_library_v2';
 const TABS={watching:{label:'Смотрю',empty:'Здесь появятся фильмы, которые вы открыли.'},watched:{label:'Просмотрено',empty:'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'},later:{label:'Буду смотреть',empty:'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'}};
+const SL={watching:'↺ Вернуть в «Смотрю»',watched:'✓ Просмотрено',later:'🕒 Буду смотреть'};
 const $=id=>document.getElementById(id);
 const q=$('q'),res=$('res');
-let tab='watching',current=null,focus=-1,workerDown=false;
+const arr=l=>Array.prototype.slice.call(l);
+let tab='watching',current=null,focus=-1,workerDown=false,pushed=false,needFocus=false,sheetId=null,sheetT=0,lpTimer=null,lpFired=false;
 
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const store=()=>{try{localStorage.setItem(LIB_KEY,JSON.stringify(lib))}catch(e){}};
 const extractID=s=>{const m=s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);return m?m[1]:s.trim()};
 const isID=s=>/^\d{1,10}$/.test(s);
+// постер: только http(s) или путь с «/»; для CSS url('…') экранируем всё опасное
+const safeUrl=s=>/^(https?:\/\/|\/)/i.test(s||'')?String(s):'';
+const cssUrl=s=>safeUrl(s).replace(/[\s'"()\\]/g,c=>'%'+('0'+c.charCodeAt(0).toString(16)).slice(-2));
 
 /* ---------- библиотека: одна запись на фильм (ключ — ID КиноПоиска) ---------- */
 let lib=load(LIB_KEY,null);
-if(!lib){ // перенос старой истории без дублей
+if(!lib||typeof lib!=='object'||Array.isArray(lib)){ // перенос старой истории без дублей
   lib={};
-  load('kinolyal_watch_history',[]).forEach(x=>{const id=String(x.id);if(!lib[id]||x.name)lib[id]={id,name:x.name||'',year:x.year||'',poster:x.poster||'',status:'watching',ts:x.ts||Date.now()}});
+  const old=load('kinolyal_watch_history',[]);
+  if(Array.isArray(old))old.forEach(x=>{if(!x)return;const id=String(x.id);if(!lib[id]||x.name)lib[id]={id,name:x.name||'',year:x.year||'',poster:x.poster||'',status:'watching',ts:x.ts||Date.now()}});
   store();
 }
 function put(id,meta,status){
   id=String(id);const o=lib[id]||{};
-  lib[id]={id,name:meta?.name||o.name||'',year:meta?.year||o.year||'',poster:meta?.poster||o.poster||'',status:status||o.status||'watching',ts:Date.now()};
+  lib[id]={id,name:(meta&&meta.name)||o.name||'',year:(meta&&meta.year)||o.year||'',poster:(meta&&meta.poster)||o.poster||'',status:status||o.status||'watching',ts:Date.now()};
   store();renderAll();
 }
 function remove(id){delete lib[id];store();if(current===id)closePlayer();renderAll()}
-const list=st=>Object.values(lib).filter(x=>x.status===st).sort((a,b)=>b.ts-a.ts);
+const list=st=>Object.values(lib).filter(x=>x&&x.status===st).sort((a,b)=>b.ts-a.ts);
+
+/* ---------- сохранение фокуса при перерисовке ---------- */
+function focusKey(el){
+  if(!el||!el.closest)return null;
+  const n=el.closest('nav button');if(n)return 'nav:'+n.dataset.t;
+  const w=el.closest('.wc');if(w)return 'wc:'+w.dataset.id;
+  if(el.dataset&&el.dataset.s)return 's:'+el.dataset.s;
+  if(el.id==='plClose'||el.id==='plFs')return 'id:'+el.id;
+  return null;
+}
+function findKey(k){
+  if(!k)return null;
+  const t=k.split(':'),v=t.slice(1).join(':');
+  if(t[0]==='nav')return document.querySelector('nav button[data-t="'+v+'"]');
+  if(t[0]==='wc')return document.querySelector('.wc[data-id="'+v+'"]');
+  if(t[0]==='s')return document.querySelector('#plAct [data-s="'+v+'"]');
+  if(t[0]==='id')return document.getElementById(v);
+  return null;
+}
+function softFocus(el){try{el.focus({preventScroll:true})}catch(e){el.focus()}}
 
 /* ---------- интерфейс ---------- */
 function renderNav(){
   $('nav').innerHTML=Object.entries(TABS).map(([k,t])=>`<button data-t="${k}" class="${k===tab?'on':''}">${t.label}<i>${list(k).length}</i></button>`).join('');
-  $('nav').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;renderAll()});
+  arr($('nav').querySelectorAll('button')).forEach(b=>b.onclick=()=>{tab=b.dataset.t;renderAll()});
 }
 function ago(ts){
   const m=Math.round((Date.now()-ts)/60000);
@@ -174,15 +292,19 @@ function renderGrid(){
   $('tabCount').textContent=items.length?items.length+' шт.':'';
   // кнопка быстрого переноса: куда отправить из текущей вкладки
   const moves={watching:[['watched','✓','Просмотрено']],watched:[['watching','↺','Смотреть снова']],later:[['watched','✓','Просмотрено']]};
-  $('grid').innerHTML=items.length?items.map(x=>`<div class="wc" data-id="${esc(x.id)}">
-    <div class="po" ${x.poster?`style="background-image:url('${esc(x.poster)}')"`:''}>${x.poster?'':'🎬'}<span class="play">▶</span></div>
-    <div class="ac"><div>${moves[tab].map(m=>`<button data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}</div><button class="x" title="Удалить из списка">✕</button></div>
-    <div class="n">${esc(x.name||'ID '+x.id)}</div><div class="d">${x.year?esc(x.year)+' · ':''}${ago(x.ts)}</div></div>`).join('')
+  const ti=TV?' tabindex="-1"':'';
+  $('grid').innerHTML=items.length?items.map(x=>{
+    const p=safeUrl(x.poster);
+    return `<div class="wc" data-id="${esc(x.id)}" tabindex="0" role="button">
+    <div class="po" ${p?`style="background-image:url('${esc(cssUrl(p))}')"`:''}>${p?'':'<span class="ph0">🎬</span>'}<span class="play">▶</span></div>
+    <div class="ac"><div>${moves[tab].map(m=>`<button${ti} data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}</div><button${ti} class="x" title="Удалить из списка">✕</button></div>
+    <div class="n">${esc(x.name||'ID '+x.id)}</div><div class="d">${x.year?esc(x.year)+' · ':''}${ago(x.ts)}</div></div>`}).join('')
     :`<div class="empty">${TABS[tab].empty}</div>`;
-  $('grid').querySelectorAll('.wc').forEach(el=>{
+  arr($('grid').querySelectorAll('.wc')).forEach(el=>{
     const id=el.dataset.id;
     el.onclick=()=>openFilm(id);
-    el.querySelectorAll('[data-mv]').forEach(b=>b.onclick=e=>{e.stopPropagation();put(id,null,b.dataset.mv)});
+    el.onkeydown=e=>{if(!TV&&e.target===el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openFilm(id)}};
+    arr(el.querySelectorAll('[data-mv]')).forEach(b=>b.onclick=e=>{e.stopPropagation();put(id,null,b.dataset.mv)});
     el.querySelector('.x').onclick=e=>{e.stopPropagation();remove(id)};
   });
 }
@@ -190,31 +312,57 @@ function renderPlayerBar(){
   if(!current)return;
   const o=lib[current]||{};
   $('plTitle').innerHTML=esc(o.name||'ID '+current)+(o.year?`<small>${esc(o.year)}</small>`:'');
-  $('plAct').innerHTML=[['watched','✓ Просмотрено'],['later','🕒 Буду смотреть']].map(([s,l])=>`<button class="btn ${o.status===s?'on':''}" data-s="${s}">${l}</button>`).join('')+'<button class="btn" id="plClose">Закрыть</button>';
-  $('plAct').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{put(current,null,o.status===b.dataset.s?'watching':b.dataset.s)});
-  $('plClose').onclick=closePlayer;
+  $('plAct').innerHTML=[['watched','✓ Просмотрено'],['later','🕒 Буду смотреть']].map(([s,l])=>`<button class="btn ${o.status===s?'on':''}" data-s="${s}">${l}</button>`).join('')
+    +(TV?'<button class="btn" id="plFs">⛶ На весь экран</button>':'')+'<button class="btn" id="plClose">Закрыть</button>';
+  arr($('plAct').querySelectorAll('[data-s]')).forEach(b=>b.onclick=()=>{put(current,null,o.status===b.dataset.s?'watching':b.dataset.s)});
+  const fs=$('plFs');
+  if(fs)fs.onclick=()=>{const w=$('wrap');const rq=w.requestFullscreen||w.webkitRequestFullscreen||w.mozRequestFullScreen;if(rq)rq.call(w)};
+  $('plClose').onclick=()=>closePlayer();
 }
-function renderAll(){renderNav();renderGrid();renderPlayerBar()}
+function renderAll(){
+  const k=focusKey(document.activeElement);
+  renderNav();renderGrid();renderPlayerBar();
+  const el=findKey(k);
+  if(el){if(document.activeElement!==el)softFocus(el)}
+  else if(TV&&(!document.activeElement||document.activeElement===document.body)&&!$('sheet').classList.contains('on'))focusFirst();
+}
 
 /* ---------- плеер (Alloha) ---------- */
+function hideSk(){const s=$('sk');if(s)s.classList.add('h')}
 function openFilm(id,meta){
   id=String(id);current=id;
-  put(id,meta,lib[id]?.status==='watched'?'watched':'watching'); // открыли — «смотрю», если ещё не просмотрено
+  put(id,meta,(lib[id]&&lib[id].status==='watched')?'watched':'watching'); // открыли — «смотрю», если ещё не просмотрено
   $('wrap').innerHTML='<div class="sk" id="sk">Загрузка плеера…</div>';
   const f=document.createElement('iframe');
-  f.allowFullscreen=true;f.title='Плеер для ID '+id;
-  f.onload=()=>$('sk')?.classList.add('h');
+  f.allowFullscreen=true;
+  f.setAttribute('allow','autoplay; fullscreen; picture-in-picture; encrypted-media');
+  f.title='Плеер для ID '+id;
+  f.onload=hideSk;
   f.src=playerUrl(id);
   $('wrap').appendChild(f);
-  setTimeout(()=>$('sk')?.classList.add('h'),8000);
+  setTimeout(hideSk,8000);
   $('player').classList.add('on');document.body.classList.add('playing');
   $('player').scrollIntoView({behavior:'smooth',block:'start'});
-  try{history.replaceState(null,'','?id='+id)}catch(e){}
+  try{
+    if(TV){ // на ТВ кнопка «Назад» = history.back → закрывает плеер
+      if(pushed)history.replaceState({p:1},'','?id='+id);
+      else{history.pushState({p:1},'','?id='+id);pushed=true}
+    }else history.replaceState(null,'','?id='+id);
+  }catch(e){}
+  if(TV)softFocus($('wrap'));
 }
-function closePlayer(){
+function closePlayer(fromPop){
+  const id=current;
   current=null;$('wrap').innerHTML='';$('player').classList.remove('on');document.body.classList.remove('playing');
-  try{history.replaceState(null,'',location.pathname)}catch(e){}
+  try{
+    if(TV){
+      if(pushed){pushed=false;if(!fromPop)history.back()}
+      setTimeout(()=>{try{if(/[?&]id=/.test(location.search))history.replaceState(null,'',location.pathname)}catch(e){}},60);
+    }else history.replaceState(null,'',location.pathname);
+  }catch(e){}
+  if(TV&&id)refocus(id);
 }
+window.addEventListener('popstate',()=>{if(TV&&current){pushed=false;closePlayer(true)}});
 
 /* ---------- поиск ---------- */
 q.addEventListener('keydown',e=>{
@@ -231,18 +379,25 @@ document.addEventListener('click',e=>{if(!e.target.closest('.search'))res.classL
 $('go').onclick=search;
 async function search(){
   const raw=q.value.trim();if(!raw)return;
-  res.classList.remove('on');res.innerHTML='';focus=-1;
+  res.classList.remove('on');res.innerHTML='';focus=-1;needFocus=TV;
   const id=extractID(raw);
   if(isID(id)){openFilm(id);q.value='';return}
   $('spin').classList.add('on');
   await byTitle(raw);
   $('spin').classList.remove('on');
 }
-/* Поиск идёт параллельно по двум источникам: воркер (много результатов, но *.workers.dev
-   часто недоступен без VPN) и API Alloha (один лучший результат, домен другой). */
-const timeout=(ms)=>{const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal};
+/* fetch с таймаутом; AbortController есть не на всех ТВ-браузерах */
+function fetchT(url,ms){
+  return new Promise((ok,bad)=>{
+    const c=typeof AbortController!=='undefined'?new AbortController():null;
+    const t=setTimeout(()=>{if(c)c.abort();bad(new Error('timeout'))},ms);
+    fetch(url,c?{signal:c.signal}:undefined).then(r=>{clearTimeout(t);ok(r)},e=>{clearTimeout(t);bad(e)});
+  });
+}
+/* Поиск идёт параллельно по трём источникам: воркер (много результатов, но *.workers.dev
+   часто недоступен без VPN), прокси на своём домене и API Alloha (один лучший результат). */
 async function viaWorker(title){
-  const r=await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`,{signal:timeout(8000)});
+  const r=await fetchT(`${WORKER}/search?search=${encodeURIComponent(title)}`,8000);
   if(!r.ok)throw new Error('HTTP '+r.status);
   const j=await r.json();if(j.error)throw new Error(j.error);
   return j.results||[];
@@ -250,14 +405,14 @@ async function viaWorker(title){
 /* Прокси на своём домене (netlify.toml): /api/search -> kinopoiskapiunofficial.tech.
    Браузер ходит только на ваш netlify.app, поэтому работает и без VPN. */
 async function viaProxy(title){
-  const r=await fetch(`/api/search?keyword=${encodeURIComponent(title)}&page=1`,{signal:timeout(8000)});
+  const r=await fetchT(`/api/search?keyword=${encodeURIComponent(title)}&page=1`,8000);
   if(!r.ok)throw new Error('HTTP '+r.status);
   const j=await r.json();
   return(j.films||[]).map(f=>({id:String(f.filmId),name:f.nameRu||f.nameEn||'Без названия',year:f.year||'',
     poster:(f.posterUrlPreview||f.posterUrl||'').replace('https://kinopoiskapiunofficial.tech/','/kpimg/')}));
 }
 async function viaAlloha(title){
-  const r=await fetch(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`,{signal:timeout(8000)});
+  const r=await fetchT(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`,8000);
   if(!r.ok)throw new Error('HTTP '+r.status);
   const j=await r.json();
   const d=j&&j.data;
@@ -270,7 +425,6 @@ async function byTitle(title){
   try{const c=sessionStorage.getItem(key);if(c){showResults(JSON.parse(c));return}}catch(e){}
   res.innerHTML='<p class="st">Ищем…</p>';
   let all=[],errors=[],pending=3,shown=false,fails=0;
-  const myQuery=q.value;
   await new Promise(done=>{
     const finish=(list,err)=>{
       pending--;
@@ -296,11 +450,14 @@ async function byTitle(title){
 }
 function showResults(data){
   if(!data.length){res.innerHTML='<p class="st">Ничего не найдено.</p>';return}
+  const keepIdx=arr(res.querySelectorAll('.it')).indexOf(document.activeElement);
   res.innerHTML='';
   data.forEach(r=>{
-    const it=document.createElement('div');it.className='it';
-    it.innerHTML=`${r.poster?`<img src="${esc(r.poster)}" alt="" loading="lazy">`:'<div class="ph"></div>'}<div><b>${esc(r.name)}</b>${r.year?`<small>${esc(r.year)}</small>`:''}</div>`;
+    const it=document.createElement('div');it.className='it';it.tabIndex=0;it.setAttribute('role','option');
+    const p=safeUrl(r.poster);
+    it.innerHTML=`${p?`<img src="${esc(p)}" alt="" loading="lazy">`:'<div class="ph"></div>'}<div><b>${esc(r.name)}</b>${r.year?`<small>${esc(r.year)}</small>`:''}</div>`;
     it.onclick=()=>{res.classList.remove('on');q.value='';openFilm(r.id,r)};
+    it.onkeydown=e=>{if(!TV&&(e.key==='Enter'||e.key===' ')){e.preventDefault();it.click()}};
     res.appendChild(it);
   });
   if(workerDown){
@@ -308,11 +465,151 @@ function showResults(data){
     n.textContent='Показан только лучший вариант: полный поиск недоступен без VPN. Точнее найдёте по ID с КиноПоиска.';
     res.appendChild(n);
   }
+  if(TV){
+    const its=res.querySelectorAll('.it');
+    if(keepIdx>=0&&its[keepIdx])softFocus(its[keepIdx]); // прогрессивная выдача не должна сбивать фокус
+    else if(needFocus&&its[0]){
+      const a=document.activeElement;
+      if(a===q||a===$('go')||a===document.body)softFocus(its[0]);
+    }
+    if(its.length)needFocus=false;
+  }
 }
 
+/* ---------- меню действий над фильмом (долгое OK) ---------- */
+function refocus(id){const el=findKey('wc:'+id);if(el)focusEl(el);else focusFirst()}
+function openSheet(id){
+  const o=lib[id];if(!o)return;
+  $('shTitle').textContent=o.name||('ID '+id);
+  const acts=[['play','▶ Смотреть']];
+  Object.keys(TABS).forEach(s=>{if(s!==o.status)acts.push([s,SL[s]])});
+  acts.push(['del','🗑 Удалить из списка'],['cancel','Отмена']);
+  $('shBtns').innerHTML=acts.map(a=>`<button class="btn" data-a="${a[0]}">${a[1]}</button>`).join('');
+  arr($('shBtns').querySelectorAll('button')).forEach(b=>b.onclick=()=>{
+    const a=b.dataset.a;closeSheet(false);
+    if(a==='play')openFilm(id);
+    else if(a==='del'){remove(id);focusFirst()}
+    else if(a==='cancel')refocus(id);
+    else{put(id,null,a);refocus(id)}
+  });
+  sheetT=Date.now();sheetId=id;$('sheet').classList.add('on');
+  const f=$('shBtns').querySelector('button');if(f)f.focus();
+}
+function closeSheet(back){
+  const id=sheetId;sheetId=null;
+  $('sheet').classList.remove('on');
+  if(back&&id)refocus(id);
+}
+
+/* ---------- ТВ: пространственная навигация пультом ---------- */
+function visible(el){return el&&el.offsetWidth>0&&el.offsetHeight>0}
+function candidates(){
+  const sheet=$('sheet');
+  let els;
+  if(sheet.classList.contains('on'))els=arr(sheet.querySelectorAll('button'));
+  else{
+    els=arr(document.querySelectorAll('nav button'));
+    els.push(q,$('go'));
+    if(res.classList.contains('on'))els=els.concat(arr(res.querySelectorAll('.it')));
+    else{
+      if(current)els=els.concat(arr(document.querySelectorAll('#plAct .btn')),[$('wrap')]);
+      els=els.concat(arr(document.querySelectorAll('.wc')),[$('tvToggle')]);
+    }
+  }
+  return els.filter(visible);
+}
+function reveal(el){
+  if(el.closest('.top')||el.closest('#sheet'))return;
+  if(el.closest('.wc'))el.scrollIntoView({block:'center'});
+  else if(el.closest('.drop'))el.scrollIntoView({block:'nearest'});
+  else if(el.closest('#player'))$('player').scrollIntoView({block:'start'});
+  else if(el.closest('footer'))el.scrollIntoView({block:'end'});
+  else if(el.closest('.search'))window.scrollTo(0,0);
+}
+function focusEl(el){
+  softFocus(el);
+  if(res.classList.contains('on')&&el!==q&&el!==$('go')&&!res.contains(el)){res.classList.remove('on');focus=-1}
+  reveal(el);
+}
+function focusFirst(){const c=document.querySelector('.wc');focusEl(c||q)}
+function navMove(dir){
+  const els=candidates();if(!els.length)return;
+  const cur=document.activeElement;
+  if(els.indexOf(cur)<0){focusEl(els[0]);return}
+  const a=cur.getBoundingClientRect();
+  const acx=a.left+a.width/2,acy=a.top+a.height/2;
+  let best=null,bs=Infinity;
+  els.forEach(el=>{
+    if(el===cur)return;
+    const b=el.getBoundingClientRect();
+    const dx=b.left+b.width/2-acx,dy=b.top+b.height/2-acy;
+    const vOverlap=Math.max(0,Math.max(a.top,b.top)-Math.min(a.bottom,b.bottom));
+    const hOverlap=Math.max(0,Math.max(a.left,b.left)-Math.min(a.right,b.right));
+    let main,cross,off;
+    if(dir==='Right'){if(dx<=2)return;main=Math.max(0,b.left-a.right);cross=vOverlap;off=Math.abs(dy)}
+    else if(dir==='Left'){if(dx>=-2)return;main=Math.max(0,a.left-b.right);cross=vOverlap;off=Math.abs(dy)}
+    else if(dir==='Down'){if(dy<=2)return;main=Math.max(0,b.top-a.bottom);cross=hOverlap;off=Math.abs(dx)}
+    else{if(dy>=-2)return;main=Math.max(0,a.top-b.bottom);cross=hOverlap;off=Math.abs(dx)}
+    const s=main+cross*3+off*.35+Math.sqrt(dx*dx+dy*dy)*.05;
+    if(s<bs){bs=s;best=el}
+  });
+  if(best)focusEl(best);
+}
+const DIRS={37:'Left',38:'Up',39:'Right',40:'Down'};
+document.addEventListener('keydown',e=>{
+  if(!TV)return;
+  const k=e.key,kc=e.keyCode,t=document.activeElement,typing=t===q;
+  const sheetOn=$('sheet').classList.contains('on');
+  // удерживаемый OK, который открыл меню, не должен нажать первую кнопку меню
+  if(sheetOn&&kc===13&&(e.repeat||Date.now()-sheetT<450)){e.preventDefault();e.stopImmediatePropagation();return}
+  // «Назад»
+  if(k==='Escape'||k==='GoBack'||k==='BrowserBack'||k==='XF86Back'||kc===10009||kc===461||(kc===8&&!typing)){
+    if(sheetOn){e.preventDefault();e.stopImmediatePropagation();closeSheet(true);return}
+    if(res.classList.contains('on')){e.preventDefault();e.stopImmediatePropagation();res.classList.remove('on');focus=-1;focusEl(q);return}
+    if(current){e.preventDefault();e.stopImmediatePropagation();closePlayer();return}
+    return;
+  }
+  const dir=DIRS[kc];
+  if(dir){
+    if(typing){ // в поле ввода стрелки влево/вправо двигают курсор, пока он не упрётся в край
+      const s=q.selectionStart,en=q.selectionEnd;
+      if(dir==='Left'&&(s>0||s!==en))return;
+      if(dir==='Right'&&(en<q.value.length||s!==en))return;
+    }
+    e.preventDefault();e.stopImmediatePropagation();navMove(dir);return;
+  }
+  if(kc===13&&t&&t.classList){
+    if(t.classList.contains('wc')){
+      e.preventDefault();
+      if(!e.repeat){lpFired=false;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;openSheet(t.dataset.id)},650)}
+      return;
+    }
+    if(t.classList.contains('it')){e.preventDefault();t.click();return}
+    if(t.id==='wrap'){e.preventDefault();const f=t.querySelector('iframe');if(f)f.focus();return}
+  }
+  if((k==='ContextMenu'||kc===93)&&t&&t.classList&&t.classList.contains('wc')){e.preventDefault();openSheet(t.dataset.id)}
+},true);
+document.addEventListener('keyup',e=>{
+  if(!TV||e.keyCode!==13)return;
+  clearTimeout(lpTimer);
+  const t=document.activeElement;
+  if(t&&t.classList&&t.classList.contains('wc')&&!lpFired&&!$('sheet').classList.contains('on'))openFilm(t.dataset.id);
+  lpFired=false;
+},true);
+
+/* ---------- переключатель ТВ-режима ---------- */
+const tvb=$('tvToggle');
+tvb.textContent=TV?'📺 ТВ-режим: вкл (выключить)':'📺 Режим для ТВ';
+tvb.onclick=()=>{
+  try{localStorage.setItem('kinolyal_tv',TV?'0':'1')}catch(e){}
+  location.href=location.pathname+(current?'?id='+current:'');
+};
+
 renderAll();
+if(!TV)q.focus();
 const startId=new URLSearchParams(location.search).get('id');
 if(startId&&isID(startId))openFilm(startId);
+})();
 </script>
 </body>
 </html>
