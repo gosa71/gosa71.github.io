@@ -4,31 +4,39 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KinoLyaL — фильмы и сериалы</title>
-<meta name="description" content="KinoLyaL — смотрите фильмы и сериалы по названию, ID или ссылке КиноПоиска. Личная библиотека: смотрю, просмотрено, буду смотреть." />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#08080f" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f97316'/%3E%3Cpath d='M12 9v14l11-7z' fill='%23fff'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://harald-as.newplayjj.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.alloha.tv" crossorigin>
+<link rel="preconnect" href="https://foxs-rss-proxy.ssr5577.workers.dev" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--p:#f97316;--pd:#ea580c;--pl:#fbbf24;--bg:#08080f;--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.075);--line:rgba(255,255,255,.08);--t1:#f4f5f9;--t2:#9aa3b5;--t3:#667085;--r:18px}
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 12% -5%,rgba(139,92,246,.20),transparent 70%),radial-gradient(640px 400px at 92% 0,rgba(249,115,22,.16),transparent 70%) no-repeat}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(700px 420px at 12% -5%,rgba(139,92,246,.20),transparent 70%),radial-gradient(640px 400px at 92% 0,rgba(249,115,22,.16),transparent 70%);background-repeat:no-repeat;background-attachment:fixed}
 button{font-family:inherit;cursor:pointer}
 ::selection{background:var(--p);color:#fff}
 ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:2px solid transparent;background-clip:content-box}
+/* шапка */
+.top{position:sticky;top:0;z-index:50;background:rgba(8,8,15,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
+.top-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;text-decoration:none;color:var(--t1)}
+.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:.8rem;color:#fff;background:linear-gradient(135deg,var(--p),#e11d48);box-shadow:0 6px 20px rgba(249,115,22,.45)}
+nav{display:flex;gap:4px;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+nav button{background:none;border:0;color:var(--t2);font-weight:600;font-size:.88rem;padding:8px 16px;border-radius:999px;transition:.2s;white-space:nowrap}
+nav button:hover{color:var(--t1)}
+.side .sb.on{color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 4px 16px rgba(249,115,22,.4)}
+nav i{font-style:normal;margin-left:6px;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.72rem}
+main{max-width:1180px;margin:0 auto;padding:36px 24px 90px}
 /* hero */
 .hero{text-align:center;margin:18px auto 26px;max-width:720px}
 .hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1.1}
 .hero em{font-style:normal;background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero p{color:var(--t2);margin-top:12px;font-size:1rem}
+body.playing .hero{display:none}
 /* поиск */
 .search{position:relative;max-width:720px;margin:0 auto 40px;z-index:40}
-.box{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 20px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.35);transition:.2s}
+.box{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 20px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.35);transition:.2s}
 .box:focus-within{border-color:rgba(249,115,22,.7);box-shadow:0 0 0 4px rgba(249,115,22,.18),0 20px 50px rgba(0,0,0,.4)}
 .box svg{width:20px;height:20px;flex:none;color:var(--t3)}
 .box input{flex:1;min-width:0;padding:12px 4px;font:500 1.02rem Inter,sans-serif;background:transparent;border:0;outline:0;color:var(--t1)}
@@ -39,7 +47,15 @@ button{font-family:inherit;cursor:pointer}
 .btn.p:hover{box-shadow:0 8px 28px rgba(249,115,22,.6)}
 .btn.on{border-color:var(--p);color:var(--pl);background:rgba(249,115,22,.14)}
 .spin{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite;display:none}.spin.on{display:block}@keyframes s{to{transform:rotate(360deg)}}
+.drop{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:rgba(18,18,32,.97);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:var(--r);max-height:420px;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.65);animation:pop .18s ease}.drop.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}}
+.drop .st{padding:20px;color:var(--t2);text-align:center}
+.it{display:flex;align-items:center;gap:16px;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .15s}.it:last-child{border:0}
+.it:hover,.it.f{background:rgba(249,115,22,.1)}.it.f{box-shadow:inset 3px 0 0 var(--p)}
+.it img,.it .ph{width:46px;height:66px;object-fit:cover;border-radius:8px;background:var(--card2);flex:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.it b{display:block;font-weight:600}.it small{display:inline-block;margin-top:2px;padding:1px 9px;border-radius:999px;background:var(--card2);color:var(--t2);font-size:.75rem}
 /* плеер */
+#player-unused{display:none;margin-bottom:48px;animation:pop .35s ease}#player.on{display:block}
 .pl-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
 .pl-head h2{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}.pl-head h2 small{color:var(--t2);font-weight:500;font-size:.95rem;margin-left:10px}
 .pl-act{display:flex;gap:8px;flex-wrap:wrap}
@@ -54,43 +70,63 @@ button{font-family:inherit;cursor:pointer}
 .wc{position:relative;cursor:pointer;animation:rise .45s both}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}}
 .wc:nth-child(2){animation-delay:.04s}.wc:nth-child(3){animation-delay:.08s}.wc:nth-child(4){animation-delay:.12s}.wc:nth-child(5){animation-delay:.16s}.wc:nth-child(6){animation-delay:.2s}
-.po{position:relative;aspect-ratio:2/3;border-radius:var(--r);background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s,border-color .25s}
-.po img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
-.wc::before{content:"";position:absolute;top:0;left:0;right:0;aspect-ratio:2/3;border-radius:var(--r);box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 30px rgba(249,115,22,.22);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
-.wc:hover::before{opacity:1;transform:translateY(-6px) scale(1.02)}
+.po{position:relative;aspect-ratio:2/3;border-radius:var(--r);background:var(--card) center/cover no-repeat;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s,border-color .25s}
 .po::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:.25s}
-.wc:hover .po{transform:translateY(-6px) scale(1.02);border-color:rgba(249,115,22,.6)}
+.wc:hover .po{transform:translateY(-6px) scale(1.02);border-color:rgba(249,115,22,.6);box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 30px rgba(249,115,22,.22)}
 .wc:hover .po::after{opacity:1}
-.play{position:absolute;left:50%;top:50%;z-index:2;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;font-size:1.1rem;color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 8px 28px rgba(249,115,22,.6);opacity:0;transform:scale(.7);transition:.25s}
+.play{position:absolute;left:50%;top:50%;z-index:2;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 8px 28px rgba(249,115,22,.6);opacity:0;transform:scale(.7);transition:.25s}
 .wc:hover .play{opacity:1;transform:scale(1)}
 .n{font-size:.92rem;font-weight:600;margin-top:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.d{font-size:.78rem;color:var(--t3)}
 .ac{position:absolute;left:8px;right:8px;top:8px;z-index:3;display:flex;justify-content:space-between;opacity:0;transition:opacity .15s}
 .wc:hover .ac,.wc:focus-within .ac{opacity:1}
 @media(hover:none){.ac{opacity:1}.play{display:none}}
-.ac button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(8,8,15,.88);color:#fff;font-size:.95rem;transition:.15s}
+.ac button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(8,8,15,.8);color:#fff;font-size:.95rem;backdrop-filter:blur(8px);transition:.15s}
 .ac button:hover{background:var(--p);transform:scale(1.08)}.ac .x:hover{background:#ef4444}
 .ac div{display:flex;gap:6px}
 .empty{grid-column:1/-1;text-align:center;color:var(--t2);padding:64px 20px;border:1px dashed rgba(255,255,255,.14);border-radius:var(--r);background:var(--card)}
 .empty .i{display:block;width:44px;height:44px;margin:0 auto 12px;opacity:.5}
 footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
+/* телефон: меню — нижняя панель */
+@media(max-width:700px){
+  main{padding:20px 16px 110px}
+  .top-in{padding:10px 16px}
+  nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;justify-content:space-around;padding:6px;background:rgba(18,18,32,.9);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.6)}
+  nav button{flex:1;padding:10px 6px;font-size:.8rem}
+  nav i{display:none}
+  .box{padding:6px 6px 6px 14px}.btn{padding:10px 16px}
+  .wrap{height:44vh;border-radius:16px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px}
+  .hero{margin-top:6px}
+}
+
 /* фокус (клавиатура и пульт ТВ) */
 :focus{outline:none}
 :focus-visible{outline:3px solid var(--pl);outline-offset:3px;border-radius:12px}
 .wc:focus-visible{outline:none}
 .wc:focus .po{transform:translateY(-6px) scale(1.03);border-color:var(--pl);box-shadow:0 0 0 4px var(--pl),0 22px 50px rgba(0,0,0,.6)}
 .wc:focus .po::after{opacity:1}.wc:focus .play{opacity:1;transform:scale(1)}
+.it:focus{background:rgba(249,115,22,.18);box-shadow:inset 4px 0 0 var(--pl)}
 .tvbar{display:none}
 /* ТВ-режим: интерфейс «с дивана» (10-foot UI) */
 body.tv{font-size:20px;cursor:none}
-body.tv .wc{animation:none}
+body.tv *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+body.tv .wc,body.tv #player{animation:none}
+body.tv .top{background:#0b0b14}
+body.tv .top-in{padding:18px 5vw}
 body.tv .mark{width:46px;height:46px;font-size:1.05rem;border-radius:13px}
 body.tv .logo{font-size:1.7rem}
+body.tv nav button{font-size:1.15rem;padding:12px 26px}
+body.tv nav i{font-size:.9rem}
+body.tv main{padding:34px 5vw 120px}
 body.tv .hero h1{font-size:3rem}body.tv .hero p{font-size:1.2rem}
 body.tv .search{max-width:960px}
 body.tv .box{padding:10px 10px 10px 28px}
 body.tv .box input{font-size:1.4rem;padding:18px 8px}
 body.tv .box svg{width:28px;height:28px}
 body.tv .btn{font-size:1.15rem;padding:16px 32px}
+body.tv .it{padding:14px 22px;gap:22px}
+body.tv .it img,body.tv .it .ph{width:64px;height:92px}
+body.tv .it b{font-size:1.3rem}body.tv .it small{font-size:.95rem}
 body.tv .wrap{height:74vh}
 body.tv .pl-head h2{font-size:2rem}
 body.tv .sec-h h3{font-size:1.9rem}
@@ -98,11 +134,11 @@ body.tv .grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:34px
 body.tv .n{font-size:1.15rem;margin-top:12px}body.tv .d{font-size:.95rem}
 body.tv .ac,body.tv .play{display:none}
 body.tv :focus-visible{outline-width:5px;outline-offset:5px}
-body.tv .btn:focus{outline:5px solid var(--pl);outline-offset:4px;transform:scale(1.06)}
+body.tv .btn:focus,body.tv nav button:focus{outline:5px solid var(--pl);outline-offset:4px;transform:scale(1.06)}
 body.tv .box:focus-within{border-color:var(--pl);box-shadow:0 0 0 5px rgba(251,191,36,.55)}
 body.tv footer{display:none}
 body.tv .tvbar{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:12px 5vw;background:rgba(8,8,15,.96);border-top:1px solid var(--line);color:var(--t2);font-size:.95rem}
-.tvbar b{color:var(--t1)}
+.tvbar b{color:var(--t1)}.tvbar .r{color:#f87171}.tvbar .g{color:#4ade80}.tvbar .y{color:#facc15}
 
 /* рейтинг, сортировка, тосты, быстрые действия */
 .rt{position:absolute;left:8px;bottom:8px;z-index:2;padding:2px 9px;border-radius:999px;background:rgba(8,8,15,.82);color:var(--pl);font-size:.78rem;font-weight:700}
@@ -111,24 +147,23 @@ body.tv .tvbar{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;posit
 .tools select{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:var(--t1);font:600 .8rem Inter,sans-serif}
 .tools select option{background:#14142b}
 .btn.sm{padding:8px 14px;font-size:.8rem}
+.it .inf{flex:1;min-width:0}
+.rt2{padding:2px 10px;border-radius:999px;background:rgba(251,191,36,.14);color:var(--pl);font-size:.8rem;font-weight:700;white-space:nowrap}
+.qa{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--card2);color:var(--t1);font-size:1.1rem;transition:.15s}
+.qa:hover{background:var(--p);transform:scale(1.1)}
 #toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:80;display:flex;gap:14px;align-items:center;padding:12px 20px;background:#1b1b30;border:1px solid var(--line);border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:.25s;max-width:92vw;font-size:.9rem}
 #toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 #toast button{background:none;border:0;color:var(--pl);font-weight:700;cursor:pointer;font-size:.9rem}
-@media(max-width:700px){
-  #toast{bottom:92px}.tools{margin-left:0;width:100%}
-  .box{padding:6px 6px 6px 14px}.btn{padding:10px 16px}
-  .wrap{height:44vh;border-radius:16px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px}
-  .hero{margin-top:6px}
-}
-body.tv .tools{display:none}body.tv #toast{bottom:80px;font-size:1.1rem}
+@media(max-width:700px){#toast{bottom:92px}.tools{margin-left:0;width:100%}}
+body.tv .tools,body.tv .qa{display:none}body.tv #toast{bottom:80px;font-size:1.1rem}
 
 /* боковое меню и разделы */
-.side{position:fixed;top:0;bottom:0;left:0;width:248px;z-index:60;display:flex;flex-direction:column;gap:6px;padding:22px 14px;background:rgba(10,10,20,.97);border-right:1px solid var(--line);overflow-y:auto}
+.side{position:fixed;top:0;bottom:0;left:0;width:248px;z-index:60;display:flex;flex-direction:column;gap:6px;padding:22px 14px;background:rgba(10,10,20,.92);border-right:1px solid var(--line);backdrop-filter:blur(18px);overflow-y:auto}
 .side .logo{padding:4px 10px 20px}
-.sb{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:0;border-radius:12px;background:none;color:var(--t2);font:600 .95rem Inter,sans-serif;text-align:left;cursor:pointer;transition:.15s}
+.sb{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:0;border-radius:12px;background:none;color:var(--t2);font:600 .95rem Inter,sans-serif;text-align:left;cursor:pointer;transition:.15s}
 .sb:hover{background:var(--card2);color:var(--t1)}
 .sb.on{color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 6px 20px rgba(249,115,22,.35)}
+.sb .ic{width:22px;text-align:center;font-size:1.05rem}
 .sb i{margin-left:auto;font-style:normal;font-size:.75rem;padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.14)}
 .side-sep{margin:20px 14px 6px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)}
 main{max-width:none;margin:0 0 0 248px;padding:36px 32px 90px}
@@ -146,8 +181,8 @@ main{max-width:none;margin:0 0 0 248px;padding:36px 32px 90px}
   .burger{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
   main{margin-left:0;padding:70px 16px 60px}
 }
-body.tv .side{padding:28px 18px}
-body.tv main{padding:34px 4vw 120px}
+body.tv .side{width:300px;padding:28px 18px}
+body.tv main{margin-left:300px;padding:34px 4vw 120px}
 body.tv .sb{font-size:1.25rem;padding:16px 18px}
 body.tv .sb:focus{outline:5px solid var(--pl);outline-offset:3px}
 body.tv #exp,body.tv #imp,body.tv .side-sep,body.tv .burger{display:none}
@@ -155,8 +190,9 @@ body.tv #exp,body.tv #imp,body.tv .side-sep,body.tv .burger{display:none}
 /* сворачиваемое меню (только на широких экранах) */
 .side-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 18px 10px}
 .side-top .logo{padding:0}
-.collapse{display:flex;width:34px;height:34px;flex:none;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--t2);font-size:1rem;cursor:pointer;transition:.2s}
+.collapse{width:34px;height:34px;flex:none;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--t2);font-size:1rem;cursor:pointer;transition:.2s}
 .collapse:hover{background:var(--card2);color:var(--t1)}
+.sb{position:relative}
 .side,main{transition:width .25s ease,margin-left .25s ease,padding .25s ease}
 @media(min-width:901px){
   body.side-min .side{width:76px;padding:22px 10px}
@@ -176,7 +212,7 @@ body.tv :focus{outline:5px solid var(--pl);outline-offset:4px}
 body.tv .wc:focus{outline:none}
 body.tv input:focus{outline:none}
 /* aspect-ratio появился только в Chrome 88 */
-@supports not (aspect-ratio:2/3){.po,.wc::before{height:0;padding-bottom:150%}}
+@supports not (aspect-ratio:2/3){.po{height:0;padding-bottom:150%}}
 /* на ТВ с узким CSS-экраном (≤900 px) боковое меню не должно прятаться как на телефоне */
 body.tv .side{transform:none!important;width:300px}
 body.tv .scrim,body.tv .burger{display:none!important}
@@ -186,11 +222,10 @@ body.tv main{margin-left:300px!important}
 /* SVG-иконки */
 .i{width:1.2em;height:1.2em;flex:none;vertical-align:-.25em}
 .btn .i{margin-right:6px;width:1.05em;height:1.05em}
-.sb .ic{width:22px;display:flex;justify-content:center;font-size:1.15rem}
+.sb .ic{display:flex;justify-content:center;font-size:1.15rem}
 .sb .ic .i{vertical-align:middle}
-.ac button,.play{display:flex}
-.ac button,.collapse,.burger,.play{align-items:center;justify-content:center;padding:0}
-.ac button .i,.collapse .i{width:16px;height:16px;vertical-align:middle}
+.ac button,.collapse,.burger,.play{display:flex;align-items:center;justify-content:center;padding:0}
+.play{display:flex}.ac button .i,.collapse .i{width:16px;height:16px;vertical-align:middle}
 .play .i{width:22px;height:22px;margin-left:3px}
 .mark .i{width:16px;height:16px;margin-left:2px;vertical-align:middle}
 .tvbar .dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:8px}
@@ -400,14 +435,9 @@ let view = 'home',
   lastResults = [];
 function renderSide() {
   const act = view === 'watch' ? prevView : view;
-  const cnt = {};
-  Object.values(lib).forEach(x => cnt[x.status] = (cnt[x.status] || 0) + 1);
-  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${ic(g)}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${cnt[k] || 0}</i>` : ''}</button>`).join('');
+  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${ic(g)}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${list(k).length}</i>` : ''}</button>`).join('');
+  $('sideNav').querySelectorAll('button').forEach(b => b.onclick = () => go(b.dataset.v));
 }
-$('sideNav').onclick = e => {
-  const b = e.target.closest('button[data-v]');
-  if (b) go(b.dataset.v);
-};
 function go(v) {
   if (view === 'watch' && v !== 'watch') {
     current = null;
@@ -438,43 +468,38 @@ function ago(ts) {
 function card(x, o) {
   const pic = safeUrl(x.poster);
   return `<div class="wc" tabindex="0" data-id="${esc(x.id)}">
-    <div class="po">${pic ? `<img src="${esc(x.poster)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ic('film')}${rnum(x) ? `<span class="rt">${ic('star')}${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">${ic('play')}</span></div>
+    <div class="po" ${pic ? `style="background-image:url('${esc(x.poster)}')"` : ''}>${pic ? '' : ic('film')}${rnum(x) ? `<span class="rt">${ic('star')}${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">${ic('play')}</span></div>
     <div class="ac"><div>${(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${ic(m[1])}</button>`).join('')}${o.add ? `<button data-add title="Буду смотреть">${ic('plus')}</button>` : ''}</div>${o.del ? `<button class="x" title="Удалить из списка">${ic('x')}</button>` : ''}</div>
     <div class="n">${esc(x.name || 'ID ' + x.id)}</div><div class="d">${o.sub || ''}</div></div>`;
 }
 const subOf = (x, withAgo) => [x.year, (x.genres || [])[0], withAgo ? ago(x.ts) : ''].filter(Boolean).map(esc).join(' · ');
-function onCardClick(e) {
-  const el = e.target.closest('.wc');
-  if (!el || !this.contains(el)) return;
-  const id = el.dataset.id,
-    byId = this._byId || {};
-  const mv = e.target.closest('[data-mv]');
-  if (mv) {
-    const prev = lib[id].status;
-    put(id, null, mv.dataset.mv);
-    toast('Перенесено: ' + TABS[mv.dataset.mv].label, 'Отменить', () => put(id, null, prev));
-    return;
-  }
-  if (e.target.closest('.x')) {
-    remove(id);
-    return;
-  }
-  if (e.target.closest('[data-add]')) {
-    const r = byId[id];
-    if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
-      put(id, r, 'later');
-      toast('«' + r.name + '» добавлен в «Буду смотреть»');
-    }
-    return;
-  }
-  openFilm(id, byId[id]);
-}
-/* делегирование: один обработчик на контейнер вместо четырёх на каждую карточку */
 function bind(box, items) {
   const byId = {};
   items.forEach(x => byId[String(x.id)] = x);
-  box._byId = byId;
-  box.onclick = onCardClick;
+  box.querySelectorAll('.wc').forEach(el => {
+    const id = el.dataset.id;
+    el.onclick = () => openFilm(id, byId[id]);
+    el.querySelectorAll('[data-mv]').forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const prev = lib[id].status;
+      put(id, null, b.dataset.mv);
+      toast('Перенесено: ' + TABS[b.dataset.mv].label, 'Отменить', () => put(id, null, prev));
+    });
+    const x = el.querySelector('.x');
+    if (x) x.onclick = e => {
+      e.stopPropagation();
+      remove(id);
+    };
+    const ad = el.querySelector('[data-add]');
+    if (ad) ad.onclick = e => {
+      e.stopPropagation();
+      const r = byId[id];
+      if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
+        put(id, r, 'later');
+        toast('«' + r.name + '» добавлен в «Буду смотреть»');
+      }
+    };
+  });
 }
 function renderList() {
   const items = list(view);
@@ -535,7 +560,6 @@ function openFilm(id, meta) {
   $('wrap').innerHTML = '<div class="sk" id="sk">Загрузка плеера…</div>';
   const f = document.createElement('iframe');
   f.allowFullscreen = true;
-  f.setAttribute('allow', 'autoplay; fullscreen; encrypted-media; picture-in-picture');
   f.title = 'Плеер для ID ' + id;
   f.onload = () => {
     var _$;
