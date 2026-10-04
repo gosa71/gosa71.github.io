@@ -60,8 +60,8 @@ body.playing .hero{display:none}
 .pl-head h2{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}.pl-head h2 small{color:var(--t2);font-weight:500;font-size:.95rem;margin-left:10px}
 .pl-act{display:flex;gap:8px;flex-wrap:wrap}
 .wrap{position:relative;height:66vh;min-height:320px;background:#000;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(249,115,22,.10)}
-.wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
-.sk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--t3);z-index:1;transition:opacity .3s}.sk.h{opacity:0;pointer-events:none}
+.wrap iframe{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;border:0;z-index:2}
+.sk{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--t3);z-index:1;transition:opacity .3s}.sk.h{opacity:0;pointer-events:none}
 .sk::before{content:"";width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:s .8s linear infinite}
 /* списки */
 .sec-h{display:flex;align-items:center;gap:12px;margin-bottom:20px}.sec-h h3{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
@@ -71,7 +71,7 @@ body.playing .hero{display:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}}
 .wc:nth-child(2){animation-delay:.04s}.wc:nth-child(3){animation-delay:.08s}.wc:nth-child(4){animation-delay:.12s}.wc:nth-child(5){animation-delay:.16s}.wc:nth-child(6){animation-delay:.2s}
 .po{position:relative;aspect-ratio:2/3;border-radius:var(--r);background:var(--card) center/cover no-repeat;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s,border-color .25s}
-.po::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:.25s}
+.po::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:.25s}
 .wc:hover .po{transform:translateY(-6px) scale(1.02);border-color:rgba(249,115,22,.6);box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 30px rgba(249,115,22,.22)}
 .wc:hover .po::after{opacity:1}
 .play{position:absolute;left:50%;top:50%;z-index:2;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;color:#fff;background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 8px 28px rgba(249,115,22,.6);opacity:0;transform:scale(.7);transition:.25s}
@@ -158,7 +158,7 @@ body.tv .tvbar{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;posit
 body.tv .tools,body.tv .qa{display:none}body.tv #toast{bottom:80px;font-size:1.1rem}
 
 /* боковое меню и разделы */
-.side{position:fixed;inset:0 auto 0 0;width:248px;z-index:60;display:flex;flex-direction:column;gap:6px;padding:22px 14px;background:rgba(10,10,20,.92);border-right:1px solid var(--line);backdrop-filter:blur(18px);overflow-y:auto}
+.side{position:fixed;top:0;bottom:0;left:0;width:248px;z-index:60;display:flex;flex-direction:column;gap:6px;padding:22px 14px;background:rgba(10,10,20,.92);border-right:1px solid var(--line);backdrop-filter:blur(18px);overflow-y:auto}
 .side .logo{padding:4px 10px 20px}
 .sb{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:0;border-radius:12px;background:none;color:var(--t2);font:600 .95rem Inter,sans-serif;text-align:left;cursor:pointer;transition:.15s}
 .sb:hover{background:var(--card2);color:var(--t1)}
@@ -176,7 +176,7 @@ main{max-width:none;margin:0 0 0 248px;padding:36px 32px 90px}
 @media(max-width:900px){
   .side{transform:translateX(-100%);transition:transform .25s;width:272px}
   body.drawer .side{transform:none}
-  .scrim{display:block;position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s}
+  .scrim{display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:55;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s}
   body.drawer .scrim{opacity:1;pointer-events:auto}
   .burger{display:grid;place-items:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
   main{margin-left:0;padding:70px 16px 60px}
@@ -205,6 +205,19 @@ body.tv #exp,body.tv #imp,body.tv .side-sep,body.tv .burger{display:none}
 }
 @media(max-width:900px){.collapse{display:none}}
 body.tv .collapse{display:none}
+
+/* ===== ТВ: надёжность на старых браузерах телевизоров ===== */
+/* фокус виден даже там, где нет :focus-visible */
+body.tv :focus{outline:5px solid var(--pl);outline-offset:4px}
+body.tv .wc:focus{outline:none}
+body.tv input:focus{outline:none}
+/* aspect-ratio появился только в Chrome 88 */
+@supports not (aspect-ratio:2/3){.po{height:0;padding-bottom:150%}}
+/* на ТВ с узким CSS-экраном (≤900 px) боковое меню не должно прятаться как на телефоне */
+body.tv .side{transform:none!important;width:300px}
+body.tv .scrim,body.tv .burger{display:none!important}
+body.tv main{margin-left:300px!important}
+.side-tv{margin-top:6px}
 </style>
 </head>
 <body>
@@ -216,6 +229,7 @@ body.tv .collapse{display:none}
   <div class="side-sep">Данные</div>
   <button class="sb" id="exp" title="Скачать резервную копию"><span class="ic">⤓</span><span class="lb">Экспорт</span></button>
   <button class="sb" id="imp" title="Загрузить резервную копию"><span class="ic">⤒</span><span class="lb">Импорт</span></button>
+  <button class="sb side-tv" id="tvToggle" title="Режим для телевизора"><span class="ic">▭</span><span class="lb" id="tvLabel">Режим ТВ</span></button>
   <input type="file" id="impFile" accept="application/json,.json" hidden>
 </aside>
 <main>
@@ -253,329 +267,647 @@ body.tv .collapse{display:none}
 <div id="toast" role="status" aria-live="polite"></div>
 <div class="tvbar"><span><b>OK</b> — открыть</span><span><b class="g">●</b> перенести в «Просмотрено»</span><span><b class="y">●</b> «Буду смотреть»</span><span><b class="r">●</b> удалить</span><span><b>Назад</b> — закрыть плеер</span></div>
 <script>
-const WORKER='https://foxs-rss-proxy.ssr5577.workers.dev';
-const TOKEN='e7b61f129f4a392ac4bf6726a9dd6a';
-const playerUrl=id=>`https://harald-as.newplayjj.com/?kp=${id}&token=${TOKEN}`;
-const LIB_KEY='kinolyal_library_v2';
-const TABS={watching:{label:'Смотрю',empty:'Здесь появятся фильмы, которые вы открыли.'},watched:{label:'Просмотрено',empty:'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'},later:{label:'Буду смотреть',empty:'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'}};
-const $=id=>document.getElementById(id);
-const q=$('q');
-let current=null,workerDown=false;
-
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
-const store=()=>{try{localStorage.setItem(LIB_KEY,JSON.stringify(lib))}catch(e){}};
-const extractID=s=>{const m=s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);return m?m[1]:s.trim()};
-const isID=s=>/^\d{1,10}$/.test(s);
+const WORKER = 'https://foxs-rss-proxy.ssr5577.workers.dev';
+const TOKEN = 'e7b61f129f4a392ac4bf6726a9dd6a';
+const playerUrl = id => `https://harald-as.newplayjj.com/?kp=${id}&token=${TOKEN}`;
+const LIB_KEY = 'kinolyal_library_v2';
+const TABS = {
+  watching: {
+    label: 'Смотрю',
+    empty: 'Здесь появятся фильмы, которые вы открыли.'
+  },
+  watched: {
+    label: 'Просмотрено',
+    empty: 'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'
+  },
+  later: {
+    label: 'Буду смотреть',
+    empty: 'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'
+  }
+};
+const $ = id => document.getElementById(id);
+const q = $('q');
+let current = null,
+  workerDown = false;
+const esc = s => String(s !== null && s !== void 0 ? s : '').replace(/[&<>"']/g, c => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+})[c]);
+const load = (k, d) => {
+  try {
+    var _JSON$parse;
+    return (_JSON$parse = JSON.parse(localStorage.getItem(k))) !== null && _JSON$parse !== void 0 ? _JSON$parse : d;
+  } catch (e) {
+    return d;
+  }
+};
+const store = () => {
+  try {
+    localStorage.setItem(LIB_KEY, JSON.stringify(lib));
+  } catch (e) {}
+};
+const extractID = s => {
+  const m = s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
+  return m ? m[1] : s.trim();
+};
+const isID = s => /^\d{1,10}$/.test(s);
 
 /* ---------- библиотека: одна запись на фильм (ключ — ID КиноПоиска) ---------- */
-let lib=load(LIB_KEY,null);
-if(!lib){ // перенос старой истории без дублей
-  lib={};
-  load('kinolyal_watch_history',[]).forEach(x=>{const id=String(x.id);if(!lib[id]||x.name)lib[id]={id,name:x.name||'',year:x.year||'',poster:x.poster||'',status:'watching',ts:x.ts||Date.now()}});
+let lib = load(LIB_KEY, null);
+if (!lib) {
+  // перенос старой истории без дублей
+  lib = {};
+  load('kinolyal_watch_history', []).forEach(x => {
+    const id = String(x.id);
+    if (!lib[id] || x.name) lib[id] = {
+      id,
+      name: x.name || '',
+      year: x.year || '',
+      poster: x.poster || '',
+      status: 'watching',
+      ts: x.ts || Date.now()
+    };
+  });
   store();
 }
-const safeUrl=u=>/^(https:\/\/|\/kpimg\/)/.test(u||'')&&!/['"()\s\\]/.test(u)?u:'';
-function put(id,meta,status){
-  id=String(id);const o=lib[id]||{};
-  lib[id]={id,name:meta?.name||o.name||'',year:meta?.year||o.year||'',poster:safeUrl(meta?.poster)||o.poster||'',
-    rating:meta?.rating??o.rating??null,genres:meta?.genres?.length?meta.genres:(o.genres||[]),status:status||o.status||'watching',ts:Date.now()};
-  store();renderAll();
+const safeUrl = u => /^(https:\/\/|\/kpimg\/)/.test(u || '') && !/['"()\s\\]/.test(u) ? u : '';
+function put(id, meta, status) {
+  var _ref, _meta$rating, _meta$genres;
+  id = String(id);
+  const o = lib[id] || {};
+  lib[id] = {
+    id,
+    name: (meta === null || meta === void 0 ? void 0 : meta.name) || o.name || '',
+    year: (meta === null || meta === void 0 ? void 0 : meta.year) || o.year || '',
+    poster: safeUrl(meta === null || meta === void 0 ? void 0 : meta.poster) || o.poster || '',
+    rating: (_ref = (_meta$rating = meta === null || meta === void 0 ? void 0 : meta.rating) !== null && _meta$rating !== void 0 ? _meta$rating : o.rating) !== null && _ref !== void 0 ? _ref : null,
+    genres: meta !== null && meta !== void 0 && (_meta$genres = meta.genres) !== null && _meta$genres !== void 0 && _meta$genres.length ? meta.genres : o.genres || [],
+    status: status || o.status || 'watching',
+    ts: Date.now()
+  };
+  store();
+  renderAll();
 }
-function remove(id){
-  const old=lib[id];if(!old)return;
-  delete lib[id];store();if(current===id)closePlayer();renderAll();
-  toast('«'+(old.name||'ID '+id)+'» удалён','Отменить',()=>{lib[id]=old;store();renderAll()});
+function remove(id) {
+  const old = lib[id];
+  if (!old) return;
+  delete lib[id];
+  store();
+  if (current === id) closePlayer();
+  renderAll();
+  toast('«' + (old.name || 'ID ' + id) + '» удалён', 'Отменить', () => {
+    lib[id] = old;
+    store();
+    renderAll();
+  });
 }
-let sortBy=load('kl_sort','date');
-const rnum=x=>x&&x.rating&&!String(x.rating).includes('%')?parseFloat(x.rating)||0:0;
-const SORTS={date:(a,b)=>b.ts-a.ts,rating:(a,b)=>rnum(b)-rnum(a)||b.ts-a.ts,year:(a,b)=>(+b.year||0)-(+a.year||0)||b.ts-a.ts,name:(a,b)=>(a.name||'~').localeCompare(b.name||'~','ru')};
-const list=st=>Object.values(lib).filter(x=>x.status===st).sort(SORTS[sortBy]||SORTS.date);
+let sortBy = load('kl_sort', 'date');
+const rnum = x => x && x.rating && !String(x.rating).includes('%') ? parseFloat(x.rating) || 0 : 0;
+const SORTS = {
+  date: (a, b) => b.ts - a.ts,
+  rating: (a, b) => rnum(b) - rnum(a) || b.ts - a.ts,
+  year: (a, b) => (+b.year || 0) - (+a.year || 0) || b.ts - a.ts,
+  name: (a, b) => (a.name || '~').localeCompare(b.name || '~', 'ru')
+};
+const list = st => Object.values(lib).filter(x => x.status === st).sort(SORTS[sortBy] || SORTS.date);
 let toastTimer;
-function toast(msg,label,fn){
-  const t=$('toast');t.innerHTML='<span>'+esc(msg)+'</span>'+(label?'<button>'+esc(label)+'</button>':'');
+function toast(msg, label, fn) {
+  const t = $('toast');
+  t.innerHTML = '<span>' + esc(msg) + '</span>' + (label ? '<button>' + esc(label) + '</button>' : '');
   t.classList.add('on');
-  if(label)t.querySelector('button').onclick=()=>{fn();t.classList.remove('on')};
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),6000);
+  if (label) t.querySelector('button').onclick = () => {
+    fn();
+    t.classList.remove('on');
+  };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 6000);
 }
 
 /* ---------- навигация по разделам ---------- */
-const NAVITEMS=[['home','⌂','Главная'],['search','⌕','Поиск'],['watching','▶','Смотрю'],['watched','✓','Просмотрено'],['later','◷','Буду смотреть']];
-const MOVES={watching:[['watched','✓','Просмотрено']],watched:[['watching','↺','Смотреть снова']],later:[['watched','✓','Просмотрено']]};
-let view='home',prevView='home',lastResults=[];
-function renderSide(){
-  const act=view==='watch'?prevView:view;
-  $('sideNav').innerHTML=NAVITEMS.map(([k,g,l])=>`<button class="sb ${k===act?'on':''}" data-v="${k}" title="${l}"><span class="ic">${g}</span><span class="lb">${l}</span>${TABS[k]?`<i>${list(k).length}</i>`:''}</button>`).join('');
-  $('sideNav').querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+const NAVITEMS = [['home', '⌂', 'Главная'], ['search', '⌕', 'Поиск'], ['watching', '▶', 'Смотрю'], ['watched', '✓', 'Просмотрено'], ['later', '◷', 'Буду смотреть']];
+const MOVES = {
+  watching: [['watched', '✓', 'Просмотрено']],
+  watched: [['watching', '↺', 'Смотреть снова']],
+  later: [['watched', '✓', 'Просмотрено']]
+};
+let view = 'home',
+  prevView = 'home',
+  lastResults = [];
+function renderSide() {
+  const act = view === 'watch' ? prevView : view;
+  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${g}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${list(k).length}</i>` : ''}</button>`).join('');
+  $('sideNav').querySelectorAll('button').forEach(b => b.onclick = () => go(b.dataset.v));
 }
-function go(v){
-  if(view==='watch'&&v!=='watch'){current=null;$('wrap').innerHTML=''}  // уходим со страницы плеера — видео останавливается
-  view=v;
-  const page=TABS[v]?'list':v;
-  ['home','search','list','watch'].forEach(k=>$('v-'+k).classList.toggle('on',k===page));
-  if(v==='home')$('slotHome').appendChild($('searchBox'));   // одна строка поиска живёт только на «Главной» и в «Поиске»
-  if(v==='search')$('slotSearch').appendChild($('searchBox'));
+function go(v) {
+  if (view === 'watch' && v !== 'watch') {
+    current = null;
+    $('wrap').innerHTML = '';
+  } // уходим со страницы плеера — видео останавливается
+  view = v;
+  const page = TABS[v] ? 'list' : v;
+  ['home', 'search', 'list', 'watch'].forEach(k => $('v-' + k).classList.toggle('on', k === page));
+  if (v === 'home') $('slotHome').appendChild($('searchBox')); // одна строка поиска живёт только на «Главной» и в «Поиске»
+  if (v === 'search') $('slotSearch').appendChild($('searchBox'));
   document.body.classList.remove('drawer');
   renderAll();
-  window.scrollTo(0,0);
-  if(v==='search'&&matchMedia('(hover:hover)').matches)q.focus();
+  window.scrollTo(0, 0);
+  if (v === 'search' && matchMedia('(hover:hover)').matches) q.focus();
 }
-$('burger').onclick=()=>document.body.classList.toggle('drawer');
-$('scrim').onclick=()=>document.body.classList.remove('drawer');
+$('burger').onclick = () => document.body.classList.toggle('drawer');
+$('scrim').onclick = () => document.body.classList.remove('drawer');
 
 /* ---------- карточки ---------- */
-function ago(ts){
-  const m=Math.round((Date.now()-ts)/60000);
-  if(m<1)return'только что';if(m<60)return m+' мин назад';
-  const h=Math.round(m/60);if(h<24)return h+' ч назад';
+function ago(ts) {
+  const m = Math.round((Date.now() - ts) / 60000);
+  if (m < 1) return 'только что';
+  if (m < 60) return m + ' мин назад';
+  const h = Math.round(m / 60);
+  if (h < 24) return h + ' ч назад';
   return new Date(ts).toLocaleDateString('ru-RU');
 }
-function card(x,o){
-  const pic=safeUrl(x.poster);
+function card(x, o) {
+  const pic = safeUrl(x.poster);
   return `<div class="wc" tabindex="0" data-id="${esc(x.id)}">
-    <div class="po" ${pic?`style="background-image:url('${esc(x.poster)}')"`:''}>${pic?'':'🎬'}${rnum(x)?`<span class="rt">${rnum(x).toFixed(1)}</span>`:''}${o.tag?`<span class="tag">${esc(o.tag)}</span>`:''}<span class="play">▶</span></div>
-    <div class="ac"><div>${(o.moves||[]).map(m=>`<button data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}${o.add?'<button data-add title="Буду смотреть">＋</button>':''}</div>${o.del?'<button class="x" title="Удалить из списка">✕</button>':''}</div>
-    <div class="n">${esc(x.name||'ID '+x.id)}</div><div class="d">${o.sub||''}</div></div>`;
+    <div class="po" ${pic ? `style="background-image:url('${esc(x.poster)}')"` : ''}>${pic ? '' : '🎬'}${rnum(x) ? `<span class="rt">${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">▶</span></div>
+    <div class="ac"><div>${(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}${o.add ? '<button data-add title="Буду смотреть">＋</button>' : ''}</div>${o.del ? '<button class="x" title="Удалить из списка">✕</button>' : ''}</div>
+    <div class="n">${esc(x.name || 'ID ' + x.id)}</div><div class="d">${o.sub || ''}</div></div>`;
 }
-const subOf=(x,withAgo)=>[x.year,(x.genres||[])[0],withAgo?ago(x.ts):''].filter(Boolean).map(esc).join(' · ');
-function bind(box,items){
-  const byId={};items.forEach(x=>byId[String(x.id)]=x);
-  box.querySelectorAll('.wc').forEach(el=>{
-    const id=el.dataset.id;
-    el.onclick=()=>openFilm(id,byId[id]);
-    el.querySelectorAll('[data-mv]').forEach(b=>b.onclick=e=>{e.stopPropagation();const prev=lib[id].status;put(id,null,b.dataset.mv);toast('Перенесено: '+TABS[b.dataset.mv].label,'Отменить',()=>put(id,null,prev))});
-    const x=el.querySelector('.x');if(x)x.onclick=e=>{e.stopPropagation();remove(id)};
-    const ad=el.querySelector('[data-add]');
-    if(ad)ad.onclick=e=>{e.stopPropagation();const r=byId[id];
-      if(lib[id])toast('Уже в списке: '+TABS[lib[id].status].label);else{put(id,r,'later');toast('«'+r.name+'» → Буду смотреть')}};
+const subOf = (x, withAgo) => [x.year, (x.genres || [])[0], withAgo ? ago(x.ts) : ''].filter(Boolean).map(esc).join(' · ');
+function bind(box, items) {
+  const byId = {};
+  items.forEach(x => byId[String(x.id)] = x);
+  box.querySelectorAll('.wc').forEach(el => {
+    const id = el.dataset.id;
+    el.onclick = () => openFilm(id, byId[id]);
+    el.querySelectorAll('[data-mv]').forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const prev = lib[id].status;
+      put(id, null, b.dataset.mv);
+      toast('Перенесено: ' + TABS[b.dataset.mv].label, 'Отменить', () => put(id, null, prev));
+    });
+    const x = el.querySelector('.x');
+    if (x) x.onclick = e => {
+      e.stopPropagation();
+      remove(id);
+    };
+    const ad = el.querySelector('[data-add]');
+    if (ad) ad.onclick = e => {
+      e.stopPropagation();
+      const r = byId[id];
+      if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
+        put(id, r, 'later');
+        toast('«' + r.name + '» → Буду смотреть');
+      }
+    };
   });
 }
-function renderList(){
-  const items=list(view);
-  $('tabTitle').textContent=TABS[view].label;
-  $('tabCount').textContent=items.length?items.length+' шт.':'';
-  $('grid').innerHTML=items.length?items.map(x=>card(x,{moves:MOVES[view],del:true,sub:subOf(x,view==='watching')})).join(''):`<div class="empty">${TABS[view].empty}</div>`;
-  bind($('grid'),items);
+function renderList() {
+  const items = list(view);
+  $('tabTitle').textContent = TABS[view].label;
+  $('tabCount').textContent = items.length ? items.length + ' шт.' : '';
+  $('grid').innerHTML = items.length ? items.map(x => card(x, {
+    moves: MOVES[view],
+    del: true,
+    sub: subOf(x, view === 'watching')
+  })).join('') : `<div class="empty">${TABS[view].empty}</div>`;
+  bind($('grid'), items);
 }
-function renderHome(){
-  const items=Object.values(lib).filter(x=>x.status==='watching').sort(SORTS.date).slice(0,6);
-  $('homeGrid').innerHTML=items.length?items.map(x=>card(x,{moves:MOVES.watching,del:true,sub:subOf(x,true)})).join(''):'<div class="empty">Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
-  bind($('homeGrid'),items);
+function renderHome() {
+  const items = Object.values(lib).filter(x => x.status === 'watching').sort(SORTS.date).slice(0, 6);
+  $('homeGrid').innerHTML = items.length ? items.map(x => card(x, {
+    moves: MOVES.watching,
+    del: true,
+    sub: subOf(x, true)
+  })).join('') : '<div class="empty">Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
+  bind($('homeGrid'), items);
 }
-function renderResults(){
-  const items=lastResults;
-  $('resGrid').innerHTML=items.map(r=>{const k=String(r.id);return card(r,{add:!lib[k],tag:lib[k]?TABS[lib[k].status].label:'',sub:subOf(r,false)})}).join('');
-  bind($('resGrid'),items);
+function renderResults() {
+  const items = lastResults;
+  $('resGrid').innerHTML = items.map(r => {
+    const k = String(r.id);
+    return card(r, {
+      add: !lib[k],
+      tag: lib[k] ? TABS[lib[k].status].label : '',
+      sub: subOf(r, false)
+    });
+  }).join('');
+  bind($('resGrid'), items);
 }
-function renderPlayerBar(){
-  if(view!=='watch'||!current)return;
-  const o=lib[current]||{};
-  $('plTitle').innerHTML=esc(o.name||'ID '+current)+(o.year?`<small>${esc(o.year)}</small>`:'');
-  $('plAct').innerHTML=[['watched','✓ Просмотрено'],['later','🕒 Буду смотреть']].map(([s,l])=>`<button class="btn ${o.status===s?'on':''}" data-s="${s}">${l}</button>`).join('');
-  $('plAct').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{put(current,null,o.status===b.dataset.s?'watching':b.dataset.s)});
+function renderPlayerBar() {
+  if (view !== 'watch' || !current) return;
+  const o = lib[current] || {};
+  $('plTitle').innerHTML = esc(o.name || 'ID ' + current) + (o.year ? `<small>${esc(o.year)}</small>` : '');
+  $('plAct').innerHTML = [['watched', '✓ Просмотрено'], ['later', '🕒 Буду смотреть']].map(([s, l]) => `<button class="btn ${o.status === s ? 'on' : ''}" data-s="${s}">${l}</button>`).join('');
+  $('plAct').querySelectorAll('[data-s]').forEach(b => b.onclick = () => {
+    put(current, null, o.status === b.dataset.s ? 'watching' : b.dataset.s);
+  });
 }
-$('plBack').onclick=()=>closePlayer();
-function renderAll(){
+$('plBack').onclick = () => closePlayer();
+function renderAll() {
   renderSide();
-  if(view==='home')renderHome();
-  else if(TABS[view])renderList();
-  else if(view==='search'&&lastResults.length)renderResults();
+  if (view === 'home') renderHome();else if (TABS[view]) renderList();else if (view === 'search' && lastResults.length) renderResults();
   renderPlayerBar();
 }
 
 /* ---------- плеер (Alloha) ---------- */
-function openFilm(id,meta){
-  id=String(id);
-  if(view!=='watch')prevView=view;
-  current=id;
-  put(id,meta,lib[id]?.status==='watched'?'watched':'watching'); // открыли — «смотрю», если ещё не просмотрено
+function openFilm(id, meta) {
+  var _lib$id;
+  id = String(id);
+  if (view !== 'watch') prevView = view;
+  current = id;
+  put(id, meta, ((_lib$id = lib[id]) === null || _lib$id === void 0 ? void 0 : _lib$id.status) === 'watched' ? 'watched' : 'watching'); // открыли — «смотрю», если ещё не просмотрено
   go('watch');
-  $('wrap').innerHTML='<div class="sk" id="sk">Загрузка плеера…</div>';
-  const f=document.createElement('iframe');
-  f.allowFullscreen=true;f.title='Плеер для ID '+id;
-  f.onload=()=>$('sk')?.classList.add('h');
-  f.src=playerUrl(id);
+  $('wrap').innerHTML = '<div class="sk" id="sk">Загрузка плеера…</div>';
+  const f = document.createElement('iframe');
+  f.allowFullscreen = true;
+  f.title = 'Плеер для ID ' + id;
+  f.onload = () => {
+    var _$;
+    return (_$ = $('sk')) === null || _$ === void 0 ? void 0 : _$.classList.add('h');
+  };
+  f.src = playerUrl(id);
   $('wrap').appendChild(f);
-  setTimeout(()=>$('sk')?.classList.add('h'),8000);
-  try{history.state&&history.state.kl?history.replaceState({kl:1},'','?id='+id):history.pushState({kl:1},'','?id='+id)}catch(e){}
-  if(isTV)setTimeout(()=>$('plAct').querySelector('button')?.focus({preventScroll:true}),50);
+  setTimeout(() => {
+    var _$2;
+    return (_$2 = $('sk')) === null || _$2 === void 0 ? void 0 : _$2.classList.add('h');
+  }, 8000);
+  try {
+    history.state && history.state.kl ? history.replaceState({
+      kl: 1
+    }, '', '?id=' + id) : history.pushState({
+      kl: 1
+    }, '', '?id=' + id);
+  } catch (e) {}
+  if (isTV) setTimeout(() => {
+    var _$$querySelector;
+    return (_$$querySelector = $('plAct').querySelector('button')) === null || _$$querySelector === void 0 ? void 0 : _$$querySelector.focus({
+      preventScroll: true
+    });
+  }, 50);
 }
-function closePlayer(fromPop){
-  if(view!=='watch')return;
-  go(prevView||'home');
-  if(!fromPop)try{history.state&&history.state.kl?history.back():history.replaceState(null,'',location.pathname)}catch(e){}
+function closePlayer(fromPop) {
+  if (view !== 'watch') return;
+  go(prevView || 'home');
+  if (!fromPop) try {
+    history.state && history.state.kl ? history.back() : history.replaceState(null, '', location.pathname);
+  } catch (e) {}
 }
-window.addEventListener('popstate',()=>{if(view==='watch')closePlayer(true);try{history.replaceState(null,'',location.pathname)}catch(e){}});
+window.addEventListener('popstate', () => {
+  if (view === 'watch') closePlayer(true);
+  try {
+    history.replaceState(null, '', location.pathname);
+  } catch (e) {}
+});
 
 /* ---------- поиск (только «Главная» и «Поиск») ---------- */
-q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();search()}});
-$('go').onclick=search;
-async function search(){
-  const raw=q.value.trim();if(!raw)return;
-  const id=extractID(raw);
-  if(isID(id)){q.value='';openFilm(id);return}
-  if(view!=='search')go('search');
+q.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    search();
+  }
+});
+$('go').onclick = search;
+async function search() {
+  const raw = q.value.trim();
+  if (!raw) return;
+  const id = extractID(raw);
+  if (isID(id)) {
+    q.value = '';
+    openFilm(id);
+    return;
+  }
+  if (view !== 'search') go('search');
   $('spin').classList.add('on');
   await byTitle(raw);
   $('spin').classList.remove('on');
 }
 /* Поиск идёт параллельно по двум источникам: воркер (много результатов, но *.workers.dev
    часто недоступен без VPN) и API Alloha (один лучший результат, домен другой). */
-const timeout=(ms)=>{const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal};
-async function viaWorker(title){
-  const r=await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`,{signal:timeout(8000)});
-  if(!r.ok)throw new Error('HTTP '+r.status);
-  const j=await r.json();if(j.error)throw new Error(j.error);
-  return j.results||[];
+const timeout = ms => {
+  if (typeof AbortController === 'undefined') return undefined;
+  const c = new AbortController();
+  setTimeout(() => c.abort(), ms);
+  return c.signal;
+};
+async function viaWorker(title) {
+  const r = await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`, {
+    signal: timeout(8000)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  if (j.error) throw new Error(j.error);
+  return j.results || [];
 }
 /* Прокси на своём домене (netlify.toml): /api/search -> kinopoiskapiunofficial.tech.
    Браузер ходит только на ваш netlify.app, поэтому работает и без VPN. */
-async function viaProxy(title){
-  const r=await fetch(`/api/search?keyword=${encodeURIComponent(title)}&page=1`,{signal:timeout(8000)});
-  if(!r.ok)throw new Error('HTTP '+r.status);
-  const j=await r.json();
-  return(j.films||[]).map(f=>({id:String(f.filmId),name:f.nameRu||f.nameEn||'Без названия',year:f.year||'',rating:f.rating||null,genres:(f.genres||[]).map(g=>g.genre),
-    poster:(f.posterUrlPreview||f.posterUrl||'').replace('https://kinopoiskapiunofficial.tech/','/kpimg/')}));
-}
-async function viaAlloha(title){
-  const r=await fetch(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`,{signal:timeout(8000)});
-  if(!r.ok)throw new Error('HTTP '+r.status);
-  const j=await r.json();
-  const d=j&&j.data;
-  if(!d||!d.id_kp)return[];
-  return[{id:String(d.id_kp),name:d.name||d.original_name||('ID '+d.id_kp),year:d.year||'',poster:d.poster||''}];
-}
-async function byTitle(title){
-  const msg=$('resMsg');
-  const key='search_v2_'+title.toLowerCase();
-  try{const c=sessionStorage.getItem(key);if(c){showResults(JSON.parse(c));return}}catch(e){}
-  lastResults=[];$('resGrid').innerHTML='';msg.className='big';msg.textContent='Ищем…';
-  let all=[],errors=[],pending=3,shown=false,fails=0;
-  await new Promise(done=>{
-    const finish=(list,err)=>{
-      pending--;
-      if(err)errors.push(err);
-      if(list&&list.length){
-        const seen=new Set(all.map(x=>String(x.id)));
-        list.forEach(x=>{if(!seen.has(String(x.id)))all.push(x)});
-        if(view==='search'){showResults(all);shown=true}
-      }
-      if(pending===0)done();
-    };
-    workerDown=false;
-    viaProxy(title).then(l=>finish(l),e=>{fails++;workerDown=fails>=2;finish(null,e)});
-    viaWorker(title).then(l=>finish(l),e=>{fails++;workerDown=fails>=2;finish(null,e)});
-    viaAlloha(title).then(l=>finish(l),e=>finish(null,e));
+async function viaProxy(title) {
+  const r = await fetch(`/api/search?keyword=${encodeURIComponent(title)}&page=1`, {
+    signal: timeout(8000)
   });
-  if(all.length){try{sessionStorage.setItem(key,JSON.stringify(all))}catch(e){}return}
-  if(shown)return;
-  msg.className='big';
-  if(errors.length===3){console.error('Поиск:',errors);msg.innerHTML='Не удалось связаться с серверами поиска (без VPN они могут быть недоступны).<br>Введите ID с КиноПоиска вручную.'}
-  else msg.textContent='Ничего не найдено.';
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  return (j.films || []).map(f => ({
+    id: String(f.filmId),
+    name: f.nameRu || f.nameEn || 'Без названия',
+    year: f.year || '',
+    rating: f.rating || null,
+    genres: (f.genres || []).map(g => g.genre),
+    poster: (f.posterUrlPreview || f.posterUrl || '').replace('https://kinopoiskapiunofficial.tech/', '/kpimg/')
+  }));
 }
-function showResults(data){
-  lastResults=data;
-  const msg=$('resMsg');
-  if(!data.length){$('resGrid').innerHTML='';msg.className='big';msg.textContent='Ничего не найдено.';return}
-  msg.className='';
-  msg.textContent=workerDown?'Показан только лучший вариант: полный поиск недоступен без VPN. Точнее найдёте по ID с КиноПоиска.':'';
+async function viaAlloha(title) {
+  const r = await fetch(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`, {
+    signal: timeout(8000)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  const d = j && j.data;
+  if (!d || !d.id_kp) return [];
+  return [{
+    id: String(d.id_kp),
+    name: d.name || d.original_name || 'ID ' + d.id_kp,
+    year: d.year || '',
+    poster: d.poster || ''
+  }];
+}
+async function byTitle(title) {
+  const msg = $('resMsg');
+  const key = 'search_v2_' + title.toLowerCase();
+  try {
+    const c = sessionStorage.getItem(key);
+    if (c) {
+      showResults(JSON.parse(c));
+      return;
+    }
+  } catch (e) {}
+  lastResults = [];
+  $('resGrid').innerHTML = '';
+  msg.className = 'big';
+  msg.textContent = 'Ищем…';
+  let all = [],
+    errors = [],
+    pending = 3,
+    shown = false,
+    fails = 0;
+  await new Promise(done => {
+    const finish = (list, err) => {
+      pending--;
+      if (err) errors.push(err);
+      if (list && list.length) {
+        const seen = new Set(all.map(x => String(x.id)));
+        list.forEach(x => {
+          if (!seen.has(String(x.id))) all.push(x);
+        });
+        if (view === 'search') {
+          showResults(all);
+          shown = true;
+        }
+      }
+      if (pending === 0) done();
+    };
+    workerDown = false;
+    viaProxy(title).then(l => finish(l), e => {
+      fails++;
+      workerDown = fails >= 2;
+      finish(null, e);
+    });
+    viaWorker(title).then(l => finish(l), e => {
+      fails++;
+      workerDown = fails >= 2;
+      finish(null, e);
+    });
+    viaAlloha(title).then(l => finish(l), e => finish(null, e));
+  });
+  if (all.length) {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(all));
+    } catch (e) {}
+    return;
+  }
+  if (shown) return;
+  msg.className = 'big';
+  if (errors.length === 3) {
+    console.error('Поиск:', errors);
+    msg.innerHTML = 'Не удалось связаться с серверами поиска (без VPN они могут быть недоступны).<br>Введите ID с КиноПоиска вручную.';
+  } else msg.textContent = 'Ничего не найдено.';
+}
+function showResults(data) {
+  lastResults = data;
+  const msg = $('resMsg');
+  if (!data.length) {
+    $('resGrid').innerHTML = '';
+    msg.className = 'big';
+    msg.textContent = 'Ничего не найдено.';
+    return;
+  }
+  msg.className = '';
+  msg.textContent = workerDown ? 'Показан только лучший вариант: полный поиск недоступен без VPN. Точнее найдёте по ID с КиноПоиска.' : '';
   renderResults();
 }
 
 /* ---------- ТВ: определение и навигация пультом ---------- */
-const isTV=(()=>{
-  let p=new URLSearchParams(location.search).get('tv');
-  try{if(p!==null)localStorage.setItem('kl_tv',p);else p=localStorage.getItem('kl_tv')}catch(e){}
-  return p==='1'||(p!=='0'&&/SMART-TV|SmartTV|Tizen|Web0S|WebOS|NetCast|HbbTV|BRAVIA|Android TV|AFTB|AFTM|AFTT|CrKey|VIDAA|Hisense|Philips/i.test(navigator.userAgent));
+const isTV = (() => {
+  let p = new URLSearchParams(location.search).get('tv');
+  try {
+    if (p !== null) localStorage.setItem('kl_tv', p);else p = localStorage.getItem('kl_tv');
+  } catch (e) {}
+  if (p === '1') return true;
+  if (p === '0') return false;
+  if (/SMART-TV|SmartTV|Tizen|Web0S|WebOS|NetCast|HbbTV|BRAVIA|Android TV|AFTB|AFTM|AFTT|CrKey|VIDAA|Hisense|Philips|Roku|Tesla/i.test(navigator.userAgent)) return true;
+  // ТВ-браузеры обычно сообщают «нет указателя» и не имеют сенсора (планшеты и ноутбуки с мышью под это не попадают)
+  try {
+    if ((matchMedia('(pointer:none)').matches || matchMedia('(hover:none)').matches) && !navigator.maxTouchPoints && screen.width >= 960) return true;
+  } catch (e) {}
+  return false;
 })();
-if(isTV)document.body.classList.add('tv');
-
-const KEY={back:[461,10009,27,'GoBack','BrowserBack'],red:[403,46,'Delete'],green:[404],yellow:[405]};
-const is=(e,k)=>KEY[k].includes(e.keyCode)||KEY[k].includes(e.key);
-const NAV='.side .sb,#q,#go,.wc,#plAct button,#plBack,#wrap iframe';
-const seen=el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0};
-function spatial(dir){
-  const cur=document.activeElement,list=[...document.querySelectorAll(NAV)].filter(seen);
-  if(!list.length)return;
-  if(!cur||!cur.matches||!cur.matches(NAV)){(document.querySelector('.side .sb.on')||list[0]).focus();return}
-  const a=cur.getBoundingClientRect(),cx=a.left+a.width/2,cy=a.top+a.height/2;
-  let best=null,bs=1e9;
-  list.forEach(el=>{
-    if(el===cur)return;
-    const r=el.getBoundingClientRect(),dx=r.left+r.width/2-cx,dy=r.top+r.height/2-cy;
-    const main=dir==='L'?-dx:dir==='R'?dx:dir==='U'?-dy:dy,perp=(dir==='L'||dir==='R')?Math.abs(dy):Math.abs(dx);
-    if(main<4)return;
-    const sc=main+perp*2.5;
-    if(sc<bs){bs=sc;best=el}
+if (isTV) document.body.classList.add('tv');
+const KEY = {
+  back: [461, 10009, 27, 'GoBack', 'BrowserBack'],
+  red: [403, 46, 'Delete'],
+  green: [404],
+  yellow: [405]
+};
+const is = (e, k) => KEY[k].includes(e.keyCode) || KEY[k].includes(e.key);
+const NAV = '.side .sb,#q,#go,.wc,#plAct button,#plBack,#wrap iframe';
+const seen = el => {
+  const r = el.getBoundingClientRect();
+  return r.width > 0 && r.height > 0;
+};
+function spatial(dir) {
+  const cur = document.activeElement,
+    list = [...document.querySelectorAll(NAV)].filter(seen);
+  if (!list.length) return;
+  if (!cur || !cur.matches || !cur.matches(NAV)) {
+    (document.querySelector('.side .sb.on') || list[0]).focus();
+    return;
+  }
+  const a = cur.getBoundingClientRect(),
+    cx = a.left + a.width / 2,
+    cy = a.top + a.height / 2;
+  let best = null,
+    bs = 1e9;
+  list.forEach(el => {
+    if (el === cur) return;
+    const r = el.getBoundingClientRect(),
+      dx = r.left + r.width / 2 - cx,
+      dy = r.top + r.height / 2 - cy;
+    const main = dir === 'L' ? -dx : dir === 'R' ? dx : dir === 'U' ? -dy : dy,
+      perp = dir === 'L' || dir === 'R' ? Math.abs(dy) : Math.abs(dx);
+    if (main < 4) return;
+    const sc = main + perp * 2.5;
+    if (sc < bs) {
+      bs = sc;
+      best = el;
+    }
   });
-  if(best){best.focus({preventScroll:true});best.scrollIntoView({block:'center',behavior:'smooth'})}
+  if (best) {
+    best.focus({
+      preventScroll: true
+    });
+    best.scrollIntoView({
+      block: 'center',
+      behavior: 'smooth'
+    });
+  }
 }
-function refocusCard(i){
-  const cards=document.querySelectorAll('.wc');
-  (cards[Math.min(i,cards.length-1)]||document.querySelector('.side .sb.on'))?.focus({preventScroll:true});
+function refocusCard(i) {
+  var _ref2;
+  const cards = document.querySelectorAll('.wc');
+  (_ref2 = cards[Math.min(i, cards.length - 1)] || document.querySelector('.side .sb.on')) === null || _ref2 === void 0 || _ref2.focus({
+    preventScroll: true
+  });
 }
-document.addEventListener('keydown',e=>{
-  const t=e.target,inInput=t&&t.tagName==='INPUT';
+document.addEventListener('keydown', e => {
+  const t = e.target,
+    inInput = t && t.tagName === 'INPUT';
   // «Назад» на пульте: закрыть список → закрыть плеер
-  if(is(e,'back')||(isTV&&e.key==='Backspace'&&!inInput)){
-    if(view==='watch'){closePlayer();e.preventDefault();if(isTV)setTimeout(()=>refocusCard(0),80)}
+  if (is(e, 'back') || isTV && e.key === 'Backspace' && !inInput) {
+    if (view === 'watch') {
+      closePlayer();
+      e.preventDefault();
+      if (isTV) setTimeout(() => refocusCard(0), 80);
+    }
     return;
   }
   // цветные кнопки / Delete на карточке
-  const card=t&&t.closest&&t.closest('.wc');
-  if(card&&(is(e,'red')||is(e,'green')||is(e,'yellow'))){
-    const id=card.dataset.id,i=[...document.querySelectorAll('.wc')].indexOf(card);
+  const card = t && t.closest && t.closest('.wc');
+  if (card && (is(e, 'red') || is(e, 'green') || is(e, 'yellow'))) {
+    const id = card.dataset.id,
+      i = [...document.querySelectorAll('.wc')].indexOf(card);
     e.preventDefault();
-    if(is(e,'red'))remove(id);
-    else if(lib[id])put(id,null,is(e,'yellow')?'later':(lib[id].status==='watched'?'watching':'watched'));
-    setTimeout(()=>refocusCard(i),30);return;
+    if (is(e, 'red')) remove(id);else if (lib[id]) put(id, null, is(e, 'yellow') ? 'later' : lib[id].status === 'watched' ? 'watching' : 'watched');
+    setTimeout(() => refocusCard(i), 30);
+    return;
   }
-  if(e.defaultPrevented)return;
-  if(e.key==='Enter'&&t&&t.matches&&t.matches('.wc')){e.preventDefault();t.click();return}
-  if(e.key==='Enter'&&t&&t.matches&&t.matches('#wrap iframe'))return;
-  const dir={ArrowLeft:'L',ArrowRight:'R',ArrowUp:'U',ArrowDown:'D'}[e.key];
-  if(!dir)return;
-  if(inInput&&(dir==='L'||dir==='R'))return; // каретка в поле ввода
-  e.preventDefault();spatial(dir);
+  if (e.defaultPrevented) return;
+  if (e.key === 'Enter' && t && t.matches && t.matches('.wc')) {
+    e.preventDefault();
+    t.click();
+    return;
+  }
+  if (e.key === 'Enter' && t && t.matches && t.matches('#wrap iframe')) return;
+  const dir = {
+    ArrowLeft: 'L',
+    ArrowRight: 'R',
+    ArrowUp: 'U',
+    ArrowDown: 'D'
+  }[e.key];
+  if (!dir) return;
+  if (inInput && (dir === 'L' || dir === 'R')) return; // каретка в поле ввода
+  e.preventDefault();
+  spatial(dir);
 });
-if(isTV)setTimeout(()=>(document.querySelector('.side .sb.on')||q).focus({preventScroll:true}),100);
-
-$('sort').value=sortBy;
-$('sort').onchange=e=>{sortBy=e.target.value;try{localStorage.setItem('kl_sort',JSON.stringify(sortBy))}catch(x){}renderList()};
-$('exp').onclick=()=>{
-  const b=new Blob([JSON.stringify({app:'kinolyal',v:2,lib},null,1)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(b);
-  a.download='kinolyal-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('Резервная копия сохранена');
+if (isTV) setTimeout(() => (document.querySelector('.side .sb.on') || q).focus({
+  preventScroll: true
+}), 100);
+$('sort').value = sortBy;
+$('sort').onchange = e => {
+  sortBy = e.target.value;
+  try {
+    localStorage.setItem('kl_sort', JSON.stringify(sortBy));
+  } catch (x) {}
+  renderList();
 };
-$('imp').onclick=()=>$('impFile').click();
-$('impFile').onchange=async e=>{
-  const f=e.target.files[0];e.target.value='';if(!f)return;
-  try{
-    const j=JSON.parse(await f.text()),inc=j.lib||j;let n=0;
-    Object.values(inc).forEach(x=>{
-      if(!x||!/^\d{1,10}$/.test(String(x.id)))return;
-      const id=String(x.id);
-      if(!lib[id]||(+x.ts||0)>(lib[id].ts||0)){ // при совпадении побеждает более свежая запись
-        lib[id]={id,name:String(x.name||'').slice(0,200),year:x.year||'',poster:safeUrl(x.poster),rating:x.rating??null,
-          genres:Array.isArray(x.genres)?x.genres.slice(0,5).map(String):[],status:TABS[x.status]?x.status:'watching',ts:+x.ts||Date.now()};
+$('exp').onclick = () => {
+  const b = new Blob([JSON.stringify({
+    app: 'kinolyal',
+    v: 2,
+    lib
+  }, null, 1)], {
+    type: 'application/json'
+  });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'kinolyal-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('Резервная копия сохранена');
+};
+$('imp').onclick = () => $('impFile').click();
+$('impFile').onchange = async e => {
+  const f = e.target.files[0];
+  e.target.value = '';
+  if (!f) return;
+  try {
+    const j = JSON.parse(await f.text()),
+      inc = j.lib || j;
+    let n = 0;
+    Object.values(inc).forEach(x => {
+      if (!x || !/^\d{1,10}$/.test(String(x.id))) return;
+      const id = String(x.id);
+      if (!lib[id] || (+x.ts || 0) > (lib[id].ts || 0)) {
+        var _x$rating;
+        // при совпадении побеждает более свежая запись
+        lib[id] = {
+          id,
+          name: String(x.name || '').slice(0, 200),
+          year: x.year || '',
+          poster: safeUrl(x.poster),
+          rating: (_x$rating = x.rating) !== null && _x$rating !== void 0 ? _x$rating : null,
+          genres: Array.isArray(x.genres) ? x.genres.slice(0, 5).map(String) : [],
+          status: TABS[x.status] ? x.status : 'watching',
+          ts: +x.ts || Date.now()
+        };
         n++;
       }
     });
-    store();renderAll();toast(n?'Импортировано: '+n:'Новых записей нет');
-  }catch(err){toast('Не удалось прочитать файл')}
+    store();
+    renderAll();
+    toast(n ? 'Импортировано: ' + n : 'Новых записей нет');
+  } catch (err) {
+    toast('Не удалось прочитать файл');
+  }
 };
 
+/* ручной переключатель ТВ-режима (если автоопределение ошиблось) */
+$('tvLabel').textContent = isTV ? 'Обычный режим' : 'Режим ТВ';
+$('tvToggle').onclick = () => {
+  try {
+    localStorage.setItem('kl_tv', isTV ? '0' : '1');
+  } catch (e) {}
+  location.href = location.pathname + '?tv=' + (isTV ? '0' : '1');
+};
 /* сворачивание меню: состояние запоминается */
-let sideMin=load('kl_side_min',false);
-const applySide=()=>{document.body.classList.toggle('side-min',sideMin&&!isTV);
-  const c=$('collapse');c.title=c.ariaLabel=sideMin?'Развернуть меню':'Свернуть меню'};
-$('collapse').onclick=()=>{sideMin=!sideMin;try{localStorage.setItem('kl_side_min',JSON.stringify(sideMin))}catch(e){}applySide()};
+let sideMin = load('kl_side_min', false);
+const applySide = () => {
+  document.body.classList.toggle('side-min', sideMin && !isTV);
+  const c = $('collapse');
+  c.title = c.ariaLabel = sideMin ? 'Развернуть меню' : 'Свернуть меню';
+};
+$('collapse').onclick = () => {
+  sideMin = !sideMin;
+  try {
+    localStorage.setItem('kl_side_min', JSON.stringify(sideMin));
+  } catch (e) {}
+  applySide();
+};
 applySide();
-
 go('home');
-const startId=new URLSearchParams(location.search).get('id');
-if(startId&&isID(startId))openFilm(startId);
+const startId = new URLSearchParams(location.search).get('id');
+if (startId && isID(startId)) openFilm(startId);
 </script>
 </body>
 </html>
