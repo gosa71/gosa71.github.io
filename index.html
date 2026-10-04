@@ -84,7 +84,7 @@ body.playing .hero{display:none}
 .ac button:hover{background:var(--p);transform:scale(1.08)}.ac .x:hover{background:#ef4444}
 .ac div{display:flex;gap:6px}
 .empty{grid-column:1/-1;text-align:center;color:var(--t2);padding:64px 20px;border:1px dashed rgba(255,255,255,.14);border-radius:var(--r);background:var(--card)}
-.empty::before{content:"🍿";display:block;font-size:2.6rem;margin-bottom:10px}
+.empty .i{display:block;width:44px;height:44px;margin:0 auto 12px;opacity:.5}
 footer{text-align:center;color:var(--t3);font-size:.8rem;padding:0 20px 40px}
 /* телефон: меню — нижняя панель */
 @media(max-width:700px){
@@ -142,7 +142,7 @@ body.tv .tvbar{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;posit
 
 /* рейтинг, сортировка, тосты, быстрые действия */
 .rt{position:absolute;left:8px;bottom:8px;z-index:2;padding:2px 9px;border-radius:999px;background:rgba(8,8,15,.82);color:var(--pl);font-size:.78rem;font-weight:700}
-.rt::before{content:"★ "}
+.rt .i{width:.9em;height:.9em;margin-right:4px;vertical-align:-.1em}
 .tools{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .tools select{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:var(--t1);font:600 .8rem Inter,sans-serif}
 .tools select option{background:#14142b}
@@ -178,7 +178,7 @@ main{max-width:none;margin:0 0 0 248px;padding:36px 32px 90px}
   body.drawer .side{transform:none}
   .scrim{display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:55;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s}
   body.drawer .scrim{opacity:1;pointer-events:auto}
-  .burger{display:grid;place-items:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
+  .burger{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
   main{margin-left:0;padding:70px 16px 60px}
 }
 body.tv .side{width:300px;padding:28px 18px}
@@ -218,18 +218,31 @@ body.tv .side{transform:none!important;width:300px}
 body.tv .scrim,body.tv .burger{display:none!important}
 body.tv main{margin-left:300px!important}
 .side-tv{margin-top:6px}
+
+/* SVG-иконки */
+.i{width:1.2em;height:1.2em;flex:none;vertical-align:-.25em}
+.btn .i{margin-right:6px;width:1.05em;height:1.05em}
+.sb .ic{display:flex;justify-content:center;font-size:1.15rem}
+.sb .ic .i{vertical-align:middle}
+.ac button,.collapse,.burger,.play{display:flex;align-items:center;justify-content:center;padding:0}
+.play{display:flex}.ac button .i,.collapse .i{width:16px;height:16px;vertical-align:middle}
+.play .i{width:22px;height:22px;margin-left:3px}
+.mark .i{width:16px;height:16px;margin-left:2px;vertical-align:middle}
+.tvbar .dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:8px}
+.tvbar .dot.g{background:#4ade80}.tvbar .dot.y{background:#facc15}.tvbar .dot.r{background:#f87171}
+body.tv .sb .ic .i{width:26px;height:26px}body.tv .back .i{width:22px;height:22px}
 </style>
 </head>
 <body>
-<button class="burger" id="burger" aria-label="Меню">☰</button>
+<button class="burger" id="burger" aria-label="Меню"><span data-ic="menu"></span></button>
 <div class="scrim" id="scrim"></div>
 <aside class="side" id="side">
-  <div class="side-top"><a class="logo" href="./"><span class="mark">▶</span><span class="logo-text">KinoLyaL</span></a><button class="collapse" id="collapse" title="Свернуть меню" aria-label="Свернуть меню">«</button></div>
+  <div class="side-top"><a class="logo" href="./"><span class="mark"><span data-ic="play"></span></span><span class="logo-text">KinoLyaL</span></a><button class="collapse" id="collapse" title="Свернуть меню" aria-label="Свернуть меню"><span data-ic="chevl"></span></button></div>
   <div id="sideNav"></div>
   <div class="side-sep">Данные</div>
-  <button class="sb" id="exp" title="Скачать резервную копию"><span class="ic">⤓</span><span class="lb">Экспорт</span></button>
-  <button class="sb" id="imp" title="Загрузить резервную копию"><span class="ic">⤒</span><span class="lb">Импорт</span></button>
-  <button class="sb side-tv" id="tvToggle" title="Режим для телевизора"><span class="ic">▭</span><span class="lb" id="tvLabel">Режим ТВ</span></button>
+  <button class="sb" id="exp" title="Скачать резервную копию"><span class="ic" data-ic="down"></span><span class="lb">Экспорт</span></button>
+  <button class="sb" id="imp" title="Загрузить резервную копию"><span class="ic" data-ic="up"></span><span class="lb">Импорт</span></button>
+  <button class="sb side-tv" id="tvToggle" title="Режим для телевизора"><span class="ic" data-ic="tv"></span><span class="lb" id="tvLabel">Режим ТВ</span></button>
   <input type="file" id="impFile" accept="application/json,.json" hidden>
 </aside>
 <main>
@@ -259,13 +272,13 @@ body.tv main{margin-left:300px!important}
     <div class="grid" id="grid"></div>
   </section>
   <section class="view" id="v-watch">
-    <button class="btn back" id="plBack">← Назад</button>
+    <button class="btn back" id="plBack"><span data-ic="back"></span>Назад</button>
     <div class="pl-head"><h2 id="plTitle"></h2><div class="pl-act" id="plAct"></div></div>
     <div class="wrap" id="wrap"><div class="sk" id="sk">Загрузка плеера…</div></div>
   </section>
 </main>
 <div id="toast" role="status" aria-live="polite"></div>
-<div class="tvbar"><span><b>OK</b> — открыть</span><span><b class="g">●</b> перенести в «Просмотрено»</span><span><b class="y">●</b> «Буду смотреть»</span><span><b class="r">●</b> удалить</span><span><b>Назад</b> — закрыть плеер</span></div>
+<div class="tvbar"><span><b>OK</b> — открыть</span><span><i class="dot g"></i> перенести в «Просмотрено»</span><span><i class="dot y"></i> «Буду смотреть»</span><span><i class="dot r"></i> удалить</span><span><b>Назад</b> — закрыть плеер</span></div>
 <script>
 const WORKER = 'https://foxs-rss-proxy.ssr5577.workers.dev';
 const TOKEN = 'e7b61f129f4a392ac4bf6726a9dd6a';
@@ -286,6 +299,30 @@ const TABS = {
   }
 };
 const $ = id => document.getElementById(id);
+
+/* ---------- иконки (SVG вместо символов: на ТВ шрифты их не содержат) ---------- */
+const ICO = {
+  home: ['<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>'],
+  search: ['<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'],
+  play: ['<path d="M7 4v16l13-8z"/>', 1],
+  check: ['<path d="M5 12l5 5 9-10"/>'],
+  clock: ['<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
+  down: ['<path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/>'],
+  up: ['<path d="M12 16V5"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>'],
+  tv: ['<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>'],
+  chevl: ['<path d="M15 6l-6 6 6 6"/>'],
+  menu: ['<path d="M4 7h16M4 12h16M4 17h16"/>'],
+  plus: ['<path d="M12 5v14M5 12h14"/>'],
+  x: ['<path d="M6 6l12 12M18 6L6 18"/>'],
+  undo: ['<path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v5h5"/>'],
+  back: ['<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>'],
+  star: ['<path d="M12 3l2.8 6 6.2.7-4.6 4.2 1.3 6.3L12 17l-5.7 3.2 1.3-6.3L3 9.7 9.2 9z"/>', 1],
+  film: ['<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>']
+};
+const ic = n => '<svg class="i" viewBox="0 0 24 24" fill="' + (ICO[n][1] ? 'currentColor' : 'none') + '" stroke="' + (ICO[n][1] ? 'none' : 'currentColor') + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[n][0] + '</svg>';
+document.querySelectorAll('[data-ic]').forEach(e => {
+  e.innerHTML = ic(e.dataset.ic);
+});
 const q = $('q');
 let current = null,
   workerDown = false;
@@ -387,18 +424,18 @@ function toast(msg, label, fn) {
 }
 
 /* ---------- навигация по разделам ---------- */
-const NAVITEMS = [['home', '⌂', 'Главная'], ['search', '⌕', 'Поиск'], ['watching', '▶', 'Смотрю'], ['watched', '✓', 'Просмотрено'], ['later', '◷', 'Буду смотреть']];
+const NAVITEMS = [['home', 'home', 'Главная'], ['search', 'search', 'Поиск'], ['watching', 'play', 'Смотрю'], ['watched', 'check', 'Просмотрено'], ['later', 'clock', 'Буду смотреть']];
 const MOVES = {
-  watching: [['watched', '✓', 'Просмотрено']],
-  watched: [['watching', '↺', 'Смотреть снова']],
-  later: [['watched', '✓', 'Просмотрено']]
+  watching: [['watched', 'check', 'Просмотрено']],
+  watched: [['watching', 'undo', 'Смотреть снова']],
+  later: [['watched', 'check', 'Просмотрено']]
 };
 let view = 'home',
   prevView = 'home',
   lastResults = [];
 function renderSide() {
   const act = view === 'watch' ? prevView : view;
-  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${g}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${list(k).length}</i>` : ''}</button>`).join('');
+  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${ic(g)}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${list(k).length}</i>` : ''}</button>`).join('');
   $('sideNav').querySelectorAll('button').forEach(b => b.onclick = () => go(b.dataset.v));
 }
 function go(v) {
@@ -431,8 +468,8 @@ function ago(ts) {
 function card(x, o) {
   const pic = safeUrl(x.poster);
   return `<div class="wc" tabindex="0" data-id="${esc(x.id)}">
-    <div class="po" ${pic ? `style="background-image:url('${esc(x.poster)}')"` : ''}>${pic ? '' : '🎬'}${rnum(x) ? `<span class="rt">${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">▶</span></div>
-    <div class="ac"><div>${(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${m[1]}</button>`).join('')}${o.add ? '<button data-add title="Буду смотреть">＋</button>' : ''}</div>${o.del ? '<button class="x" title="Удалить из списка">✕</button>' : ''}</div>
+    <div class="po" ${pic ? `style="background-image:url('${esc(x.poster)}')"` : ''}>${pic ? '' : ic('film')}${rnum(x) ? `<span class="rt">${ic('star')}${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">${ic('play')}</span></div>
+    <div class="ac"><div>${(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${ic(m[1])}</button>`).join('')}${o.add ? `<button data-add title="Буду смотреть">${ic('plus')}</button>` : ''}</div>${o.del ? `<button class="x" title="Удалить из списка">${ic('x')}</button>` : ''}</div>
     <div class="n">${esc(x.name || 'ID ' + x.id)}</div><div class="d">${o.sub || ''}</div></div>`;
 }
 const subOf = (x, withAgo) => [x.year, (x.genres || [])[0], withAgo ? ago(x.ts) : ''].filter(Boolean).map(esc).join(' · ');
@@ -459,7 +496,7 @@ function bind(box, items) {
       const r = byId[id];
       if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
         put(id, r, 'later');
-        toast('«' + r.name + '» → Буду смотреть');
+        toast('«' + r.name + '» добавлен в «Буду смотреть»');
       }
     };
   });
@@ -472,7 +509,7 @@ function renderList() {
     moves: MOVES[view],
     del: true,
     sub: subOf(x, view === 'watching')
-  })).join('') : `<div class="empty">${TABS[view].empty}</div>`;
+  })).join('') : `<div class="empty">${ic('film')}${TABS[view].empty}</div>`;
   bind($('grid'), items);
 }
 function renderHome() {
@@ -481,7 +518,7 @@ function renderHome() {
     moves: MOVES.watching,
     del: true,
     sub: subOf(x, true)
-  })).join('') : '<div class="empty">Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
+  })).join('') : '<div class="empty">' + ic('film') + 'Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
   bind($('homeGrid'), items);
 }
 function renderResults() {
@@ -500,7 +537,7 @@ function renderPlayerBar() {
   if (view !== 'watch' || !current) return;
   const o = lib[current] || {};
   $('plTitle').innerHTML = esc(o.name || 'ID ' + current) + (o.year ? `<small>${esc(o.year)}</small>` : '');
-  $('plAct').innerHTML = [['watched', '✓ Просмотрено'], ['later', '🕒 Буду смотреть']].map(([s, l]) => `<button class="btn ${o.status === s ? 'on' : ''}" data-s="${s}">${l}</button>`).join('');
+  $('plAct').innerHTML = [['watched', 'check', 'Просмотрено'], ['later', 'clock', 'Буду смотреть']].map(([s, i, l]) => `<button class="btn ${o.status === s ? 'on' : ''}" data-s="${s}">${ic(i)}${l}</button>`).join('');
   $('plAct').querySelectorAll('[data-s]').forEach(b => b.onclick = () => {
     put(current, null, o.status === b.dataset.s ? 'watching' : b.dataset.s);
   });
