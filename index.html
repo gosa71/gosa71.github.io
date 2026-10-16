@@ -210,56 +210,48 @@ body.tv main{margin-left:300px!important}
 .tvbar .dot.g{background:#4ade80}.tvbar .dot.y{background:#facc15}.tvbar .dot.r{background:#f87171}
 body.tv .sb .ic .i{width:26px;height:26px}body.tv .back .i{width:22px;height:22px}
 
-/* ===== Режим кинотеатра: свет гаснет вокруг плеера (пока не fullscreen) ===== */
+/* ===== Режим кинотеатра: затемняется всё КРОМЕ плеера ===== */
+/* Оверлей z-index:4. Зона #v-watch целиком выше (z-index:6) — плеер не темнеет. */
 body.cinema::after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:5;
-  background:rgba(0,0,0,.92);
+  z-index:4;
+  background:rgba(0,0,0,.88);
   pointer-events:none;
   animation:cinemaIn .35s ease;
 }
 @keyframes cinemaIn{from{opacity:0}to{opacity:1}}
 
-/* боковое меню почти невидимо, но при наведении возвращается */
+/* меню и прочий UI — под оверлеем */
 body.cinema .side{
-  opacity:.12;
-  filter:grayscale(1) brightness(.45);
+  z-index:3 !important;
+  opacity:.1;
+  filter:grayscale(1) brightness(.4);
   transition:opacity .3s,filter .3s;
   pointer-events:none;
 }
-body.cinema .side:hover,
-body.cinema .side:focus-within{
-  opacity:1;
-  filter:none;
-  pointer-events:auto;
+body.cinema .burger,
+body.cinema .tvbar{
+  z-index:3 !important;
+  opacity:.12;
+  pointer-events:none;
 }
+body.cinema .scrim{display:none!important}
 
-/* всё в main, кроме зоны плеера, тоже под затемнением */
-body.cinema main{position:relative;z-index:1}
-body.cinema .pl-head,
-body.cinema .back,
-body.cinema .wrap{
+/* вся страница просмотра (кнопка Назад + заголовок + плеер) НАД оверлеем */
+body.cinema #v-watch{
   position:relative;
   z-index:6;
 }
-/* заголовок и кнопки чуть приглушены, но читаемы */
-body.cinema .pl-head,
-body.cinema .back{
-  filter:brightness(.95);
-}
 body.cinema .wrap{
-  box-shadow:0 30px 90px rgba(0,0,0,.95),0 0 140px rgba(249,115,22,.25);
-  border-color:rgba(249,115,22,.25);
+  box-shadow:0 30px 90px rgba(0,0,0,.95),0 0 120px rgba(249,115,22,.22);
+  border-color:rgba(249,115,22,.3);
 }
 body.cinema .back{
   background:rgba(255,255,255,.1);
   border-color:rgba(255,255,255,.18);
 }
-body.cinema .burger{opacity:.2;pointer-events:none}
-body.cinema .scrim{display:none!important}
-body.cinema .tvbar{opacity:.15;pointer-events:none}
 
 .cinema-hint{
   position:fixed;
@@ -283,8 +275,8 @@ body.cinema .cinema-hint{opacity:1;transform:translate(-50%,0)}
 body.cinema .cinema-hint b{color:var(--pl)}
 body.tv .cinema-hint{font-size:1.05rem;top:20px}
 @media(max-width:700px){
-  body.cinema .side{opacity:0;pointer-events:none}
-  body.cinema .burger{opacity:.18}
+  body.cinema .side{opacity:0}
+  body.cinema .burger{opacity:.1}
 }
 </style>
 </head>
