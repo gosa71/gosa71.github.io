@@ -7,10 +7,10 @@
 <meta name="color-scheme" content="dark" />
 <meta name="theme-color" content="#08080f" />
 <meta name="description" content="KinoLyaL — онлайн-кинотеатр: поиск фильмов и сериалов по названию, ID или ссылке с КиноПоиска, личная библиотека и просмотр." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%23f97316'/%3E%3Cpath%20d='M12%209v14l11-7z'%20fill='%23fff'/%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://harald-as.newplayjj.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="icon" href__="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%23f97316'/%3E%3Cpath%20d='M12%209v14l11-7z'%20fill='%23fff'/%3E%3C/svg%3E" />
+<link rel="preconnect" href__="https://harald-as.newplayjj.com" crossorigin>
+<link rel="preconnect" href__="https://fonts.gstatic.com" crossorigin>
+<link href__="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--p:#f97316;--pd:#ea580c;--pl:#fbbf24;--bg:#08080f;--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.075);--line:rgba(255,255,255,.08);--t1:#f4f5f9;--t2:#9aa3b5;--t3:#667085;--r:18px}
@@ -136,12 +136,12 @@ body.tv .tvbar{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;posit
 body.tv .tools,body.tv .qa{display:none}body.tv #toast{bottom:80px;font-size:1.1rem}
 /* телефон */
 @media(max-width:700px){
-  main{padding:20px 16px 110px}
-  .box{padding:6px 6px 6px 14px}.btn{padding:10px 16px}
-  .wrap{height:44vh;border-radius:16px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px}
-  .hero{margin-top:6px}
-  #toast{bottom:92px}.tools{margin-left:0;width:100%}
+  main{padding:20px 16px 110px}
+  .box{padding:6px 6px 6px 14px}.btn{padding:10px 16px}
+  .wrap{height:44vh;border-radius:16px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px}
+  .hero{margin-top:6px}
+  #toast{bottom:92px}.tools{margin-left:0;width:100%}
 }
 /* боковое меню и разделы */
 .side{position:fixed;top:0;bottom:0;left:0;width:248px;z-index:60;display:flex;flex-direction:column;gap:6px;padding:22px 14px;background:rgba(10,10,20,.96);border-right:1px solid var(--line);overflow-y:auto}
@@ -160,13 +160,13 @@ main{max-width:none;margin:0 0 0 248px;padding:36px 32px 90px}
 #resMsg{text-align:center;color:var(--t2);margin:-12px 0 24px;min-height:1.4em;font-size:.95rem}
 #resMsg.big{padding:40px 0;font-size:1rem}
 @media(max-width:900px){
-  .side{transform:translateX(-100%);transition:transform .25s;width:272px}
-  body.drawer .side{transform:none}
-  .scrim{display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:55;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s}
-  body.drawer .scrim{opacity:1;pointer-events:auto}
-  .burger{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
-  main{margin-left:0;padding:70px 16px 60px}
-  .collapse{display:none}
+  .side{transform:translateX(-100%);transition:transform .25s;width:272px}
+  body.drawer .side{transform:none}
+  .scrim{display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:55;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s}
+  body.drawer .scrim{opacity:1;pointer-events:auto}
+  .burger{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;left:12px;z-index:50;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(18,18,32,.92);color:#fff;font-size:1.25rem}
+  main{margin-left:0;padding:70px 16px 60px}
+  .collapse{display:none}
 }
 body.tv .side{padding:28px 18px}
 body.tv main{padding:34px 4vw 120px}
@@ -180,20 +180,23 @@ body.tv #exp,body.tv #imp,body.tv .side-sep,body.tv .burger{display:none}
 .collapse:hover{background:var(--card2);color:var(--t1)}
 .side,main{transition:width .25s ease,margin-left .25s ease,padding .25s ease}
 @media(min-width:901px){
-  body.side-min .side{width:76px;padding:22px 10px}
-  body.side-min main{margin-left:76px}
-  body.side-min .side-top{flex-direction:column;gap:12px;padding:4px 0 16px}
-  body.side-min .logo-text,body.side-min .lb,body.side-min .side-sep{display:none}
-  body.side-min .sb{justify-content:center;padding:12px 0}
-  body.side-min .sb i{position:absolute;top:3px;right:5px;padding:0 6px;font-size:.65rem;background:var(--p);color:#fff}
-  body.side-min .collapse{transform:rotate(180deg)}
+  body.side-min .side{width:76px;padding:22px 10px}
+  body.side-min main{margin-left:76px}
+  body.side-min .side-top{flex-direction:column;gap:12px;padding:4px 0 16px}
+  body.side-min .logo-text,body.side-min .lb,body.side-min .side-sep{display:none}
+  body.side-min .sb{justify-content:center;padding:12px 0}
+  body.side-min .sb i{position:absolute;top:3px;right:5px;padding:0 6px;font-size:.65rem;background:var(--p);color:#fff}
+  body.side-min .collapse{transform:rotate(180deg)}
 }
 body.tv .collapse{display:none}
 /* ===== ТВ: надёжность на старых браузерах телевизоров ===== */
+/* фокус виден даже там, где нет :focus-visible */
 body.tv :focus{outline:5px solid var(--pl);outline-offset:4px}
 body.tv .wc:focus{outline:none}
 body.tv input:focus{outline:none}
+/* aspect-ratio появился только в Chrome 88 */
 @supports not (aspect-ratio:2/3){.po{height:0;padding-bottom:150%}}
+/* на ТВ с узким CSS-экраном (≤900 px) боковое меню не должно прятаться как на телефоне */
 body.tv .side{transform:none!important;width:300px}
 body.tv .scrim,body.tv .burger{display:none!important}
 body.tv main{margin-left:300px!important}
@@ -209,120 +212,65 @@ body.tv main{margin-left:300px!important}
 .tvbar .dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:8px}
 .tvbar .dot.g{background:#4ade80}.tvbar .dot.y{background:#facc15}.tvbar .dot.r{background:#f87171}
 body.tv .sb .ic .i{width:26px;height:26px}body.tv .back .i{width:22px;height:22px}
-
-/* ===== Режим кинотеатра: затемняется всё КРОМЕ плеера ===== */
-/* Оверлей z-index:4. Зона #v-watch целиком выше (z-index:6) — плеер не темнеет. */
-body.cinema::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:4;
-  background:rgba(0,0,0,.88);
-  pointer-events:none;
-  animation:cinemaIn .35s ease;
-}
+/* ===== Режим кинотеатра: «свет гаснет» вокруг плеера, пока не fullscreen ===== */
+body.cinema::after{content:"";position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.88);pointer-events:none;animation:cinemaIn .35s ease}
 @keyframes cinemaIn{from{opacity:0}to{opacity:1}}
-
-/* меню и прочий UI — под оверлеем */
-body.cinema .side{
-  z-index:3 !important;
-  opacity:.1;
-  filter:grayscale(1) brightness(.4);
-  transition:opacity .3s,filter .3s;
-  pointer-events:none;
-}
-body.cinema .burger,
-body.cinema .tvbar{
-  z-index:3 !important;
-  opacity:.12;
-  pointer-events:none;
-}
-body.cinema .scrim{display:none!important}
-
-/* вся страница просмотра (кнопка Назад + заголовок + плеер) НАД оверлеем */
-body.cinema #v-watch{
-  position:relative;
-  z-index:6;
-}
-body.cinema .wrap{
-  box-shadow:0 30px 90px rgba(0,0,0,.95),0 0 120px rgba(249,115,22,.22);
-  border-color:rgba(249,115,22,.3);
-}
-body.cinema .back{
-  background:rgba(255,255,255,.1);
-  border-color:rgba(255,255,255,.18);
-}
-
-.cinema-hint{
-  position:fixed;
-  left:50%;
-  top:16px;
-  transform:translate(-50%,-12px);
-  z-index:7;
-  padding:8px 18px;
-  border-radius:999px;
-  background:rgba(18,18,32,.96);
-  border:1px solid var(--line);
-  color:var(--t2);
-  font-size:.82rem;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  white-space:nowrap;
-  max-width:92vw;
-}
+body.cinema .side{opacity:.14;filter:grayscale(1) brightness(.6);transition:opacity .3s,filter .3s}
+body.cinema .side:hover{opacity:1;filter:none}
+body.cinema .pl-head,body.cinema .back,body.cinema .wrap{position:relative;z-index:6}
+body.cinema .wrap{box-shadow:0 30px 90px rgba(0,0,0,.9),0 0 130px rgba(249,115,22,.20)}
+body.cinema .back{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+body.cinema .burger{opacity:.28}
+.cinema-hint{position:fixed;left:50%;top:16px;transform:translate(-50%,-12px);z-index:7;padding:8px 18px;border-radius:999px;background:rgba(18,18,32,.94);border:1px solid var(--line);color:var(--t2);font-size:.82rem;opacity:0;pointer-events:none;transition:.3s;white-space:nowrap;max-width:92vw}
 body.cinema .cinema-hint{opacity:1;transform:translate(-50%,0)}
 body.cinema .cinema-hint b{color:var(--pl)}
 body.tv .cinema-hint{font-size:1.05rem;top:20px}
-@media(max-width:700px){
-  body.cinema .side{opacity:0}
-  body.cinema .burger{opacity:.1}
-}
+@media(max-width:700px){body.cinema .side{opacity:0;pointer-events:none}body.cinema .burger{opacity:.22}}
 </style>
 </head>
 <body>
 <button class="burger" id="burger" aria-label="Меню"><span data-ic="menu"></span></button>
 <div class="scrim" id="scrim"></div>
 <aside class="side" id="side">
-  <div class="side-top"><a class="logo" href="./"><span class="mark"><span data-ic="play"></span></span><span class="logo-text">KinoLyaL</span></a><button class="collapse" id="collapse" title="Свернуть меню" aria-label="Свернуть меню"><span data-ic="chevl"></span></button></div>
-  <div id="sideNav"></div>
-  <div class="side-sep">Данные</div>
-  <button class="sb" id="exp" title="Скачать резервную копию"><span class="ic" data-ic="down"></span><span class="lb">Экспорт</span></button>
-  <button class="sb" id="imp" title="Загрузить резервную копию"><span class="ic" data-ic="up"></span><span class="lb">Импорт</span></button>
-  <button class="sb side-tv" id="tvToggle" title="Режим для телевизора"><span class="ic" data-ic="tv"></span><span class="lb" id="tvLabel">Режим ТВ</span></button>
-  <input type="file" id="impFile" accept="application/json,.json" hidden>
+  <div class="side-top"><a class="logo" href__="./"><span class="mark"><span data-ic="play"></span></span><span class="logo-text">KinoLyaL</span></a><button class="collapse" id="collapse" title="Свернуть меню" aria-label="Свернуть меню"><span data-ic="chevl"></span></button></div>
+  <div id="sideNav"></div>
+  <div class="side-sep">Данные</div>
+  <button class="sb" id="exp" title="Скачать резервную копию"><span class="ic" data-ic="down"></span><span class="lb">Экспорт</span></button>
+  <button class="sb" id="imp" title="Загрузить резервную копию"><span class="ic" data-ic="up"></span><span class="lb">Импорт</span></button>
+  <button class="sb side-tv" id="tvToggle" title="Режим для телевизора"><span class="ic" data-ic="tv"></span><span class="lb" id="tvLabel">Режим ТВ</span></button>
+  <input type="file" id="impFile" accept="application/json,.json" hidden>
 </aside>
 <main>
-  <section class="view" id="v-home">
-    <div class="hero"><h1>Что будем смотреть <em>сегодня</em>?</h1><p>Название, ID или ссылка с КиноПоиска — и фильм уже играет</p></div>
-    <div id="slotHome">
-      <section class="search" id="searchBox">
-        <div class="box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="q" type="text" placeholder="Название, ID или ссылка КиноПоиска" autocomplete="off" />
-          <div class="spin" id="spin"></div>
-          <button class="btn p" id="go">Найти</button>
-        </div>
-      </section>
-    </div>
-    <div class="sec-h"><h3>Продолжить просмотр</h3></div>
-    <div class="grid" id="homeGrid"></div>
-  </section>
-  <section class="view" id="v-search">
-    <div id="slotSearch"></div>
-    <div id="resMsg"></div>
-    <div class="grid" id="resGrid"></div>
-  </section>
-  <section class="view" id="v-list">
-    <div class="sec-h"><h3 id="tabTitle"></h3><span id="tabCount"></span>
-      <div class="tools"><select id="sort" aria-label="Сортировка"><option value="date">Недавние</option><option value="rating">По рейтингу</option><option value="year">По году</option><option value="name">По названию</option></select></div></div>
-    <div class="grid" id="grid"></div>
-  </section>
-  <section class="view" id="v-watch">
-    <button class="btn back" id="plBack"><span data-ic="back"></span>Назад</button>
-    <div class="pl-head"><h2 id="plTitle"></h2><div class="pl-act" id="plAct"></div></div>
-    <div class="wrap" id="wrap"><div class="sk" id="sk">Загрузка плеера…</div></div>
-  </section>
+  <section class="view" id="v-home">
+    <div class="hero"><h1>Что будем смотреть <em>сегодня</em>?</h1><p>Название, ID или ссылка с КиноПоиска — и фильм уже играет</p></div>
+    <div id="slotHome">
+      <section class="search" id="searchBox">
+        <div class="box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="text" placeholder="Название, ID или ссылка КиноПоиска" autocomplete="off" />
+          <div class="spin" id="spin"></div>
+          <button class="btn p" id="go">Найти</button>
+        </div>
+      </section>
+    </div>
+    <div class="sec-h"><h3>Продолжить просмотр</h3></div>
+    <div class="grid" id="homeGrid"></div>
+  </section>
+  <section class="view" id="v-search">
+    <div id="slotSearch"></div>
+    <div id="resMsg"></div>
+    <div class="grid" id="resGrid"></div>
+  </section>
+  <section class="view" id="v-list">
+    <div class="sec-h"><h3 id="tabTitle"></h3><span id="tabCount"></span>
+      <div class="tools"><select id="sort" aria-label="Сортировка"><option value="date">Недавние</option><option value="rating">По рейтингу</option><option value="year">По году</option><option value="name">По названию</option></select></div></div>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section class="view" id="v-watch">
+    <button class="btn back" id="plBack"><span data-ic="back"></span>Назад</button>
+    <div class="pl-head"><h2 id="plTitle"></h2><div class="pl-act" id="plAct"></div></div>
+    <div class="wrap" id="wrap"><div class="sk" id="sk">Загрузка плеера…</div></div>
+  </section>
 </main>
 <div class="cinema-hint" id="cineHint">Режим кинотеатра · нажмите <b>«Свет»</b>, чтобы вернуть меню</div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -333,691 +281,698 @@ const TOKEN = 'e7b61f129f4a392ac4bf6726a9dd6a';
 const playerUrl = id => `https://harald-as.newplayjj.com/?kp=${id}&token=${TOKEN}`;
 const LIB_KEY = 'kinolyal_library_v2';
 const TABS = {
-  watching: {
-    label: 'Смотрю',
-    empty: 'Здесь появятся фильмы, которые вы открыли.'
-  },
-  watched: {
-    label: 'Просмотрено',
-    empty: 'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'
-  },
-  later: {
-    label: 'Буду смотреть',
-    empty: 'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'
-  }
+  watching: {
+    label: 'Смотрю',
+    empty: 'Здесь появятся фильмы, которые вы открыли.'
+  },
+  watched: {
+    label: 'Просмотрено',
+    empty: 'Отмечайте фильмы кнопкой «Просмотрено» — они окажутся здесь.'
+  },
+  later: {
+    label: 'Буду смотреть',
+    empty: 'Найдите фильм и нажмите «Буду смотреть», чтобы сохранить на потом.'
+  }
 };
 const $ = id => document.getElementById(id);
 /* ---------- иконки (SVG вместо символов: на ТВ шрифты их не содержат) ---------- */
 const ICO = {
-  home: ['<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>'],
-  search: ['<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'],
-  play: ['<path d="M7 4v16l13-8z"/>', 1],
-  check: ['<path d="M5 12l5 5 9-10"/>'],
-  clock: ['<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
-  down: ['<path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/>'],
-  up: ['<path d="M12 16V5"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>'],
-  tv: ['<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>'],
-  chevl: ['<path d="M15 6l-6 6 6 6"/>'],
-  menu: ['<path d="M4 7h16M4 12h16M4 17h16"/>'],
-  plus: ['<path d="M12 5v14M5 12h14"/>'],
-  x: ['<path d="M6 6l12 12M18 6L6 18"/>'],
-  undo: ['<path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v5h5"/>'],
-  back: ['<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>'],
-  star: ['<path d="M12 3l2.8 6 6.2.7-4.6 4.2 1.3 6.3L12 17l-5.7 3.2 1.3-6.3L3 9.7 9.2 9z"/>', 1],
-  film: ['<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>'],
-  light: ['<path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4 11.6c.5.4.7.8.8 1.4h6.4c.1-.6.3-1 .8-1.4A6.5 6.5 0 0 0 12 2.5z"/>']
+  home: ['<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>'],
+  search: ['<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'],
+  play: ['<path d="M7 4v16l13-8z"/>', 1],
+  check: ['<path d="M5 12l5 5 9-10"/>'],
+  clock: ['<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
+  down: ['<path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/>'],
+  up: ['<path d="M12 16V5"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>'],
+  tv: ['<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>'],
+  chevl: ['<path d="M15 6l-6 6 6 6"/>'],
+  menu: ['<path d="M4 7h16M4 12h16M4 17h16"/>'],
+  plus: ['<path d="M12 5v14M5 12h14"/>'],
+  x: ['<path d="M6 6l12 12M18 6L6 18"/>'],
+  undo: ['<path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v5h5"/>'],
+  back: ['<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>'],
+  star: ['<path d="M12 3l2.8 6 6.2.7-4.6 4.2 1.3 6.3L12 17l-5.7 3.2 1.3-6.3L3 9.7 9.2 9z"/>', 1],
+  film: ['<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>'],
+  light: ['<path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4 11.6c.5.4.7.8.8 1.4h6.4c.1-.6.3-1 .8-1.4A6.5 6.5 0 0 0 12 2.5z"/>']
 };
 const ic = n => '<svg class="i" viewBox="0 0 24 24" fill="' + (ICO[n][1] ? 'currentColor' : 'none') + '" stroke="' + (ICO[n][1] ? 'none' : 'currentColor') + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[n][0] + '</svg>';
 document.querySelectorAll('[data-ic]').forEach(e => {
-  e.innerHTML = ic(e.dataset.ic);
+  e.innerHTML = ic(e.dataset.ic);
 });
 const q = $('q');
 let current = null,
-  workerDown = false;
+  workerDown = false;
 const esc = s => String(s !== null && s !== void 0 ? s : '').replace(/[&<>"']/g, c => ({
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
 })[c]);
 const load = (k, d) => {
-  try {
-    var _JSON$parse;
-    return (_JSON$parse = JSON.parse(localStorage.getItem(k))) !== null && _JSON$parse !== void 0 ? _JSON$parse : d;
-  } catch (e) {
-    return d;
-  }
+  try {
+    var _JSON$parse;
+    return (_JSON$parse = JSON.parse(localStorage.getItem(k))) !== null && _JSON$parse !== void 0 ? _JSON$parse : d;
+  } catch (e) {
+    return d;
+  }
 };
 const store = () => {
-  try {
-    localStorage.setItem(LIB_KEY, JSON.stringify(lib));
-  } catch (e) {}
+  try {
+    localStorage.setItem(LIB_KEY, JSON.stringify(lib));
+  } catch (e) {}
 };
 const extractID = s => {
-  const m = s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
-  return m ? m[1] : s.trim();
+  const m = s.match(/kinopoisk\.ru\/(?:film|series)\/(\d+)/);
+  return m ? m[1] : s.trim();
 };
 const isID = s => /^\d{1,10}$/.test(s);
 /* ---------- библиотека: одна запись на фильм (ключ — ID КиноПоиска) ---------- */
 let lib = load(LIB_KEY, null);
 if (!lib) {
-  lib = {};
-  load('kinolyal_watch_history', []).forEach(x => {
-    const id = String(x.id);
-    if (!lib[id] || x.name) lib[id] = {
-      id,
-      name: x.name || '',
-      year: x.year || '',
-      poster: x.poster || '',
-      status: 'watching',
-      ts: x.ts || Date.now()
-    };
-  });
-  store();
+  // перенос старой истории без дублей
+  lib = {};
+  load('kinolyal_watch_history', []).forEach(x => {
+    const id = String(x.id);
+    if (!lib[id] || x.name) lib[id] = {
+      id,
+      name: x.name || '',
+      year: x.year || '',
+      poster: x.poster || '',
+      status: 'watching',
+      ts: x.ts || Date.now()
+    };
+  });
+  store();
 }
 const safeUrl = u => /^(https:\/\/|\/kpimg\/)/.test(u || '') && !/['"()\s\\]/.test(u) ? u : '';
 function put(id, meta, status) {
-  var _ref, _meta$rating, _meta$genres;
-  id = String(id);
-  const o = lib[id] || {};
-  lib[id] = {
-    id,
-    name: (meta === null || meta === void 0 ? void 0 : meta.name) || o.name || '',
-    year: (meta === null || meta === void 0 ? void 0 : meta.year) || o.year || '',
-    poster: safeUrl(meta === null || meta === void 0 ? void 0 : meta.poster) || o.poster || '',
-    rating: (_ref = (_meta$rating = meta === null || meta === void 0 ? void 0 : meta.rating) !== null && _meta$rating !== void 0 ? _meta$rating : o.rating) !== null && _ref !== void 0 ? _ref : null,
-    genres: meta !== null && meta !== void 0 && (_meta$genres = meta.genres) !== null && _meta$genres !== void 0 && _meta$genres.length ? meta.genres : o.genres || [],
-    status: status || o.status || 'watching',
-    ts: Date.now()
-  };
-  store();
-  renderAll();
+  var _ref, _meta$rating, _meta$genres;
+  id = String(id);
+  const o = lib[id] || {};
+  lib[id] = {
+    id,
+    name: (meta === null || meta === void 0 ? void 0 : meta.name) || o.name || '',
+    year: (meta === null || meta === void 0 ? void 0 : meta.year) || o.year || '',
+    poster: safeUrl(meta === null || meta === void 0 ? void 0 : meta.poster) || o.poster || '',
+    rating: (_ref = (_meta$rating = meta === null || meta === void 0 ? void 0 : meta.rating) !== null && _meta$rating !== void 0 ? _meta$rating : o.rating) !== null && _ref !== void 0 ? _ref : null,
+    genres: meta !== null && meta !== void 0 && (_meta$genres = meta.genres) !== null && _meta$genres !== void 0 && _meta$genres.length ? meta.genres : o.genres || [],
+    status: status || o.status || 'watching',
+    ts: Date.now()
+  };
+  store();
+  renderAll();
 }
 function remove(id) {
-  const old = lib[id];
-  if (!old) return;
-  delete lib[id];
-  store();
-  if (current === id) closePlayer();
-  renderAll();
-  toast('«' + (old.name || 'ID ' + id) + '» удалён', 'Отменить', () => {
-    lib[id] = old;
-    store();
-    renderAll();
-  });
+  const old = lib[id];
+  if (!old) return;
+  delete lib[id];
+  store();
+  if (current === id) closePlayer();
+  renderAll();
+  toast('«' + (old.name || 'ID ' + id) + '» удалён', 'Отменить', () => {
+    lib[id] = old;
+    store();
+    renderAll();
+  });
 }
 let sortBy = load('kl_sort', 'date');
 const rnum = x => x && x.rating && !String(x.rating).includes('%') ? parseFloat(x.rating) || 0 : 0;
 const SORTS = {
-  date: (a, b) => b.ts - a.ts,
-  rating: (a, b) => rnum(b) - rnum(a) || b.ts - a.ts,
-  year: (a, b) => (+b.year || 0) - (+a.year || 0) || b.ts - a.ts,
-  name: (a, b) => (a.name || '~').localeCompare(b.name || '~', 'ru')
+  date: (a, b) => b.ts - a.ts,
+  rating: (a, b) => rnum(b) - rnum(a) || b.ts - a.ts,
+  year: (a, b) => (+b.year || 0) - (+a.year || 0) || b.ts - a.ts,
+  name: (a, b) => (a.name || '~').localeCompare(b.name || '~', 'ru')
 };
 const list = st => Object.values(lib).filter(x => x.status === st).sort(SORTS[sortBy] || SORTS.date);
 let toastTimer;
 function toast(msg, label, fn) {
-  const t = $('toast');
-  t.innerHTML = '<span>' + esc(msg) + '</span>' + (label ? '<button>' + esc(label) + '</button>' : '');
-  t.classList.add('on');
-  if (label) t.querySelector('button').onclick = () => {
-    fn();
-    t.classList.remove('on');
-  };
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('on'), 6000);
+  const t = $('toast');
+  t.innerHTML = '<span>' + esc(msg) + '</span>' + (label ? '<button>' + esc(label) + '</button>' : '');
+  t.classList.add('on');
+  if (label) t.querySelector('button').onclick = () => {
+    fn();
+    t.classList.remove('on');
+  };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 6000);
 }
 /* ---------- навигация по разделам ---------- */
 const NAVITEMS = [['home', 'home', 'Главная'], ['search', 'search', 'Поиск'], ['watching', 'play', 'Смотрю'], ['watched', 'check', 'Просмотрено'], ['later', 'clock', 'Буду смотреть']];
 const MOVES = {
-  watching: [['watched', 'check', 'Просмотрено']],
-  watched: [['watching', 'undo', 'Смотреть снова']],
-  later: [['watched', 'check', 'Просмотрено']]
+  watching: [['watched', 'check', 'Просмотрено']],
+  watched: [['watching', 'undo', 'Смотреть снова']],
+  later: [['watched', 'check', 'Просмотрено']]
 };
 let view = 'home',
-  prevView = 'home',
-  lastResults = [];
+  prevView = 'home',
+  lastResults = [];
 function renderSide() {
-  const act = view === 'watch' ? prevView : view;
-  const counts = {};
-  Object.values(lib).forEach(x => counts[x.status] = (counts[x.status] || 0) + 1);
-  $('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${ic(g)}</span><span class="lb">${l}</span>${TABS[k] ? `<i>${counts[k] || 0}</i>` : ''}</button>`).join('');
+  const act = view === 'watch' ? prevView : view;
+  const counts = {};
+  Object.values(lib).forEach(x => counts[x.status] = (counts[x.status] || 0) + 1);
+  $$ ('sideNav').innerHTML = NAVITEMS.map(([k, g, l]) => `<button class="sb ${k === act ? 'on' : ''}" data-v="${k}" title="${l}"><span class="ic">${ic(g)}</span><span class="lb">${l}</span>${TABS[k] ? `<i> $${counts[k] || 0}</i>` : ''}</button>`).join('');
 }
 $('sideNav').addEventListener('click', e => {
-  const b = e.target.closest('button[data-v]');
-  if (b) go(b.dataset.v);
+  const b = e.target.closest('button[data-v]');
+  if (b) go(b.dataset.v);
 });
 function go(v) {
-  if (view === 'watch' && v !== 'watch') {
-    current = null;
-    $('wrap').innerHTML = '';
-  }
-  view = v;
-  const page = TABS[v] ? 'list' : v;
-  ['home', 'search', 'list', 'watch'].forEach(k => $('v-' + k).classList.toggle('on', k === page));
-  if (v === 'home') $('slotHome').appendChild($('searchBox'));
-  if (v === 'search') $('slotSearch').appendChild($('searchBox'));
-  document.body.classList.remove('drawer');
-  renderAll();
-  window.scrollTo(0, 0);
-  if (v === 'search' && matchMedia('(hover:hover)').matches) q.focus();
-  updateCinema();
+  if (view === 'watch' && v !== 'watch') {
+    current = null;
+    $('wrap').innerHTML = '';
+  } // уходим со страницы плеера — видео останавливается
+  view = v;
+  const page = TABS[v] ? 'list' : v;
+  ['home', 'search', 'list', 'watch'].forEach(k => $('v-' + k).classList.toggle('on', k === page));
+  if (v === 'home') $$ ('slotHome').appendChild( $$('searchBox')); // одна строка поиска живёт только на «Главной» и в «Поиске»
+  if (v === 'search') $$ ('slotSearch').appendChild( $$('searchBox'));
+  document.body.classList.remove('drawer');
+  renderAll();
+  window.scrollTo(0, 0);
+  if (v === 'search' && matchMedia('(hover:hover)').matches) q.focus();
+  updateCinema();
 }
 $('burger').onclick = () => document.body.classList.toggle('drawer');
 $('scrim').onclick = () => document.body.classList.remove('drawer');
 /* ---------- карточки ---------- */
 function ago(ts) {
-  const m = Math.round((Date.now() - ts) / 60000);
-  if (m < 1) return 'только что';
-  if (m < 60) return m + ' мин назад';
-  const h = Math.round(m / 60);
-  if (h < 24) return h + ' ч назад';
-  return new Date(ts).toLocaleDateString('ru-RU');
+  const m = Math.round((Date.now() - ts) / 60000);
+  if (m < 1) return 'только что';
+  if (m < 60) return m + ' мин назад';
+  const h = Math.round(m / 60);
+  if (h < 24) return h + ' ч назад';
+  return new Date(ts).toLocaleDateString('ru-RU');
 }
 function card(x, o) {
-  const pic = safeUrl(x.poster);
-  return `<div class="wc" tabindex="0" data-id="${esc(x.id)}">
-    <div class="po">${pic ? `<img class="pi" src="${esc(pic)}" loading="lazy" decoding="async" alt="">` : ic('film')}${rnum(x) ? `<span class="rt">${ic('star')}${rnum(x).toFixed(1)}</span>` : ''}${o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play">${ic('play')}</span></div>
-    <div class="ac"><div>${(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${ic(m[1])}</button>`).join('')}${o.add ? `<button data-add title="Буду смотреть">${ic('plus')}</button>` : ''}</div>${o.del ? `<button class="x" title="Удалить из списка">${ic('x')}</button>` : ''}</div>
-    <div class="n">${esc(x.name || 'ID ' + x.id)}</div><div class="d">${o.sub || ''}</div></div>`;
+  const pic = safeUrl(x.poster);
+  return `<div class="wc" tabindex="0" data-id="${esc(x.id)}">
+    <div class="po">$$ {pic ? `<img class="pi" src="${esc(pic)}" loading="lazy" decoding="async" alt="">` : ic('film')} $${rnum(x) ? `<span class="rt">${ic('star')}${rnum(x).toFixed(1)}</span>` : ''}$$ {o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ''}<span class="play"> $${ic('play')}</span></div>
+    <div class="ac"><div>$$ {(o.moves || []).map(m => `<button data-mv="${m[0]}" title="${m[2]}">${ic(m[1])}</button>`).join('')} $${o.add ? `<button data-add title="Буду смотреть">${ic('plus')}</button>` : ''}</div>${o.del ? `<button class="x" title="Удалить из списка">${ic('x')}</button>` : ''}</div>
+    <div class="n">$$ {esc(x.name || 'ID ' + x.id)}</div><div class="d"> $${o.sub || ''}</div></div>`;
 }
 const subOf = (x, withAgo) => [x.year, (x.genres || [])[0], withAgo ? ago(x.ts) : ''].filter(Boolean).map(esc).join(' · ');
 let itemById = {};
 function setItems(items) {
-  itemById = {};
-  items.forEach(x => itemById[String(x.id)] = x);
+  itemById = {};
+  items.forEach(x => itemById[String(x.id)] = x);
 }
+/* делегирование: один обработчик на контейнер вместо 4 на карточку */
 function onGridClick(e) {
-  const el = e.target.closest && e.target.closest('.wc');
-  if (!el) return;
-  const id = el.dataset.id;
-  const mv = e.target.closest('[data-mv]');
-  if (mv) {
-    const prev = lib[id].status;
-    put(id, null, mv.dataset.mv);
-    toast('Перенесено: ' + TABS[mv.dataset.mv].label, 'Отменить', () => put(id, null, prev));
-    return;
-  }
-  const del = e.target.closest('.x');
-  if (del) {
-    remove(id);
-    return;
-  }
-  const ad = e.target.closest('[data-add]');
-  if (ad) {
-    const r = itemById[id];
-    if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
-      put(id, r, 'later');
-      toast('«' + r.name + '» добавлен в «Буду смотреть»');
-    }
-    return;
-  }
-  openFilm(id, itemById[id]);
+  const el = e.target.closest && e.target.closest('.wc');
+  if (!el) return;
+  const id = el.dataset.id;
+  const mv = e.target.closest('[data-mv]');
+  if (mv) {
+    const prev = lib[id].status;
+    put(id, null, mv.dataset.mv);
+    toast('Перенесено: ' + TABS[mv.dataset.mv].label, 'Отменить', () => put(id, null, prev));
+    return;
+  }
+  const del = e.target.closest('.x');
+  if (del) {
+    remove(id);
+    return;
+  }
+  const ad = e.target.closest('[data-add]');
+  if (ad) {
+    const r = itemById[id];
+    if (lib[id]) toast('Уже в списке: ' + TABS[lib[id].status].label);else {
+      put(id, r, 'later');
+      toast('«' + r.name + '» добавлен в «Буду смотреть»');
+    }
+    return;
+  }
+  openFilm(id, itemById[id]);
 }
 ['homeGrid', 'resGrid', 'grid'].forEach(g => $(g).addEventListener('click', onGridClick));
 function renderList() {
-  const items = list(view);
-  $('tabTitle').textContent = TABS[view].label;
-  $('tabCount').textContent = items.length ? items.length + ' шт.' : '';
-  $('grid').innerHTML = items.length ? items.map(x => card(x, {
-    moves: MOVES[view],
-    del: true,
-    sub: subOf(x, view === 'watching')
-  })).join('') : `<div class="empty">${ic('film')}${TABS[view].empty}</div>`;
-  setItems(items);
+  const items = list(view);
+  $('tabTitle').textContent = TABS[view].label;
+  $('tabCount').textContent = items.length ? items.length + ' шт.' : '';
+  $('grid').innerHTML = items.length ? items.map(x => card(x, {
+    moves: MOVES[view],
+    del: true,
+    sub: subOf(x, view === 'watching')
+  })).join('') : `<div class="empty">${ic('film')}${TABS[view].empty}</div>`;
+  setItems(items);
 }
 function renderHome() {
-  const items = Object.values(lib).filter(x => x.status === 'watching').sort(SORTS.date).slice(0, 6);
-  $('homeGrid').innerHTML = items.length ? items.map(x => card(x, {
-    moves: MOVES.watching,
-    del: true,
-    sub: subOf(x, true)
-  })).join('') : '<div class="empty">' + ic('film') + 'Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
-  setItems(items);
+  const items = Object.values(lib).filter(x => x.status === 'watching').sort(SORTS.date).slice(0, 6);
+  $('homeGrid').innerHTML = items.length ? items.map(x => card(x, {
+    moves: MOVES.watching,
+    del: true,
+    sub: subOf(x, true)
+  })).join('') : '<div class="empty">' + ic('film') + 'Здесь появятся фильмы, которые вы смотрите. Найдите что-нибудь выше.</div>';
+  setItems(items);
 }
 function renderResults() {
-  const items = lastResults;
-  $('resGrid').innerHTML = items.map(r => {
-    const k = String(r.id);
-    return card(r, {
-      add: !lib[k],
-      tag: lib[k] ? TABS[lib[k].status].label : '',
-      sub: subOf(r, false)
-    });
-  }).join('');
-  setItems(items);
+  const items = lastResults;
+  $('resGrid').innerHTML = items.map(r => {
+    const k = String(r.id);
+    return card(r, {
+      add: !lib[k],
+      tag: lib[k] ? TABS[lib[k].status].label : '',
+      sub: subOf(r, false)
+    });
+  }).join('');
+  setItems(items);
 }
 function renderPlayerBar() {
-  if (view !== 'watch' || !current) return;
-  const o = lib[current] || {};
-  $('plTitle').innerHTML = esc(o.name || 'ID ' + current) + (o.year ? `<small>${esc(o.year)}</small>` : '');
-  $('plAct').innerHTML = [['watched', 'check', 'Просмотрено'], ['later', 'clock', 'Буду смотреть']].map(([s, i, l]) => `<button class="btn ${o.status === s ? 'on' : ''}" data-s="${s}">${ic(i)}${l}</button>`).join('') + `<button class="btn" id="cineBtn" title="Свет в зале">${ic('light')}<span id="cineLbl">Свет</span></button>`;
-  updateCineBtn();
+  if (view !== 'watch' || !current) return;
+  const o = lib[current] || {};
+  $('plTitle').innerHTML = esc(o.name || 'ID ' + current) + (o.year ? `<small>${esc(o.year)}</small>` : '');
+  $('plAct').innerHTML = [['watched', 'check', 'Просмотрено'], ['later', 'clock', 'Буду смотреть']].map(([s, i, l]) => `<button class="btn ${o.status === s ? 'on' : ''}" data-s="${s}">${ic(i)}${l}</button>`).join('') + `<button class="btn" id="cineBtn" title="Свет в зале">${ic('light')}<span id="cineLbl">Свет</span></button>`;
+  updateCineBtn();
 }
 $('plAct').addEventListener('click', e => {
-  const b = e.target.closest('button[data-s]');
-  if (!b || !current) return;
-  const o = lib[current] || {};
-  put(current, null, o.status === b.dataset.s ? 'watching' : b.dataset.s);
+  const b = e.target.closest('button[data-s]');
+  if (!b || !current) return;
+  const o = lib[current] || {};
+  put(current, null, o.status === b.dataset.s ? 'watching' : b.dataset.s);
 });
 $('plAct').addEventListener('click', e => {
-  const cb = e.target.closest('#cineBtn');
-  if (!cb) return;
-  cinemaUserOff = cinemaOn;
-  updateCinema();
+  const cb = e.target.closest('#cineBtn');
+  if (!cb) return;
+  cinemaUserOff = cinemaOn; // сейчас темно → пользователь хочет свет; сейчас свет → хочет темноту
+  updateCinema();
 });
 $('plBack').onclick = () => closePlayer();
 function renderAll() {
-  renderSide();
-  if (view === 'home') renderHome();else if (TABS[view]) renderList();else if (view === 'search' && lastResults.length) renderResults();
-  renderPlayerBar();
+  renderSide();
+  if (view === 'home') renderHome();else if (TABS[view]) renderList();else if (view === 'search' && lastResults.length) renderResults();
+  renderPlayerBar();
 }
 /* ---------- режим кинотеатра ---------- */
 /* Включается, когда плеер открыт, но НЕ в полноэкранном режиме.
-   В полном экране затемнение не нужно — плеер и так занимает весь экран.
-   Кнопка «Свет» в панели плеера переключает вручную. */
+   В полном экране затемнение не нужно — плеер и так занимает весь экран.
+   Кнопка «Свет/Тьма» в панели плеера переключает вручную. */
 let cinemaOn = false,
-  cinemaUserOff = false;
+  cinemaUserOff = false;
 const isFullscreen = () => !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
 function updateCineBtn() {
-  const lbl = $('cineLbl');
-  if (lbl) lbl.textContent = cinemaOn ? 'Свет' : 'кинотеатр';
+  const lbl = $('cineLbl');
+  if (lbl) lbl.textContent = cinemaOn ? 'Свет' : 'кинотеатр';
 }
 function updateCinema() {
-  const playing = view === 'watch';
-  const want = playing && !isFullscreen() && !cinemaUserOff;
-  if (want === cinemaOn) {
-    updateCineBtn();
-    return;
-  }
-  cinemaOn = want;
-  document.body.classList.toggle('cinema', want);
-  updateCineBtn();
+  const playing = view === 'watch';
+  const want = playing && !isFullscreen() && !cinemaUserOff;
+  if (want === cinemaOn) return;
+  cinemaOn = want;
+  document.body.classList.toggle('cinema', want);
+  updateCineBtn();
 }
-['fullscreenchange', 'webkitfullscreenchange', 'MSFullscreenChange', 'msfullscreenchange'].forEach(ev =>
-  document.addEventListener(ev, updateCinema)
-);
+['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(ev => document.addEventListener(ev, updateCinema));
 /* ---------- плеер (Alloha) ---------- */
 function openFilm(id, meta) {
-  var _lib$id;
-  id = String(id);
-  if (view !== 'watch') prevView = view;
-  current = id;
-  put(id, meta, ((_lib$id = lib[id]) === null || _lib$id === void 0 ? void 0 : _lib$id.status) === 'watched' ? 'watched' : 'watching');
-  cinemaUserOff = false;
-  go('watch');
-  $('wrap').innerHTML = '<div class="sk" id="sk">Загрузка плеера…</div>';
-  const f = document.createElement('iframe');
-  f.allowFullscreen = true;
-  f.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
-  f.title = 'Плеер для ID ' + id;
-  f.onload = () => {
-    var _$;
-    return (_$ = $('sk')) === null || _$ === void 0 ? void 0 : _$.classList.add('h');
-  };
-  f.src = playerUrl(id);
-  $('wrap').appendChild(f);
-  setTimeout(() => {
-    var _$2;
-    return (_$2 = $('sk')) === null || _$2 === void 0 ? void 0 : _$2.classList.add('h');
-  }, 8000);
-  try {
-    history.state && history.state.kl ? history.replaceState({
-      kl: 1
-    }, '', '?id=' + id) : history.pushState({
-      kl: 1
-    }, '', '?id=' + id);
-  } catch (e) {}
-  if (isTV) setTimeout(() => {
-    var _$$querySelector;
-    return (_$$querySelector = $('plAct').querySelector('button')) === null || _$$querySelector === void 0 ? void 0 : _$$querySelector.focus({
-      preventScroll: true
-    });
-  }, 50);
+  var _lib$id;
+  id = String(id);
+  if (view !== 'watch') prevView = view;
+  current = id;
+  put(id, meta, ((_lib$id = lib[id]) === null || _lib$id === void 0 ? void 0 : _lib$id.status) === 'watched' ? 'watched' : 'watching'); // открыли — «смотрю», если ещё не просмотрено
+  cinemaUserOff = false; // каждый новый фильм начинается с затемнённого зала
+  go('watch');
+  $('wrap').innerHTML = '<div class="sk" id="sk">Загрузка плеера…</div>';
+  const f = document.createElement('iframe');
+  f.allowFullscreen = true;
+  f.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+  f.title = 'Плеер для ID ' + id;
+  f.onload = () => {
+    var _$;
+    return (_$ = $$ ('sk')) === null || _ $$ === void 0 ? void 0 : _$.classList.add('h');
+  };
+  f.src = playerUrl(id);
+  $('wrap').appendChild(f);
+  setTimeout(() => {
+    var _$2;
+    return (_$2 = $('sk')) === null || _$2 === void 0 ? void 0 : _$2.classList.add('h');
+  }, 8000);
+  try {
+    history.state && history.state.kl ? history.replaceState({
+      kl: 1
+    }, '', '?id=' + id) : history.pushState({
+      kl: 1
+    }, '', '?id=' + id);
+  } catch (e) {}
+  if (isTV) setTimeout(() => {
+    var _$$  querySelector;
+return (_  $$querySelector = $('plAct').querySelector('button')) === null || _$$  querySelector === void 0 ? void 0 : _  $$querySelector.focus({
+      preventScroll: true
+    });
+  }, 50);
 }
 function closePlayer(fromPop) {
-  if (view !== 'watch') return;
-  go(prevView || 'home');
-  if (!fromPop) try {
-    history.state && history.state.kl ? history.back() : history.replaceState(null, '', location.pathname);
-  } catch (e) {}
+  if (view !== 'watch') return;
+  go(prevView || 'home');
+  if (!fromPop) try {
+    history.state && history.state.kl ? history.back() : history.replaceState(null, '', location.pathname);
+  } catch (e) {}
 }
 window.addEventListener('popstate', () => {
-  if (view === 'watch') closePlayer(true);
-  try {
-    history.replaceState(null, '', location.pathname);
-  } catch (e) {}
+  if (view === 'watch') closePlayer(true);
+  try {
+    history.replaceState(null, '', location.pathname);
+  } catch (e) {}
 });
-/* ---------- поиск ---------- */
+/* ---------- поиск (только «Главная» и «Поиск») ---------- */
 q.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    search();
-  }
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    search();
+  }
 });
 $('go').onclick = search;
 async function search() {
-  const raw = q.value.trim();
-  if (!raw) return;
-  const id = extractID(raw);
-  if (isID(id)) {
-    q.value = '';
-    openFilm(id);
-    return;
-  }
-  if (view !== 'search') go('search');
-  $('spin').classList.add('on');
-  await byTitle(raw);
-  $('spin').classList.remove('on');
+  const raw = q.value.trim();
+  if (!raw) return;
+  const id = extractID(raw);
+  if (isID(id)) {
+    q.value = '';
+    openFilm(id);
+    return;
+  }
+  if (view !== 'search') go('search');
+  $('spin').classList.add('on');
+  await byTitle(raw);
+  $('spin').classList.remove('on');
 }
+/* Поиск идёт параллельно по двум источникам: воркер (много результатов, но *.workers.dev
+   часто недоступен без VPN) и API Alloha (один лучший результат, домен другой). */
 const timeout = ms => {
-  if (typeof AbortController === 'undefined') return undefined;
-  const c = new AbortController();
-  setTimeout(() => c.abort(), ms);
-  return c.signal;
+  if (typeof AbortController === 'undefined') return undefined;
+  const c = new AbortController();
+  setTimeout(() => c.abort(), ms);
+  return c.signal;
 };
 async function viaWorker(title) {
-  const r = await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`, {
-    signal: timeout(8000)
-  });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-  const j = await r.json();
-  if (j.error) throw new Error(j.error);
-  return j.results || [];
+  const r = await fetch(`${WORKER}/search?search=${encodeURIComponent(title)}`, {
+    signal: timeout(8000)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  if (j.error) throw new Error(j.error);
+  return j.results || [];
 }
+/* Прокси на своём домене (netlify.toml): /api/search -> kinopoiskapiunofficial.tech.
+   Браузер ходит только на ваш netlify.app, поэтому работает и без VPN. */
 async function viaProxy(title) {
-  const r = await fetch(`/api/search?keyword=${encodeURIComponent(title)}&page=1`, {
-    signal: timeout(8000)
-  });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-  const j = await r.json();
-  return (j.films || []).map(f => ({
-    id: String(f.filmId),
-    name: f.nameRu || f.nameEn || 'Без названия',
-    year: f.year || '',
-    rating: f.rating || null,
-    genres: (f.genres || []).map(g => g.genre),
-    poster: (f.posterUrlPreview || f.posterUrl || '').replace('https://kinopoiskapiunofficial.tech/', '/kpimg/')
-  }));
+  const r = await fetch(`/api/search?keyword=${encodeURIComponent(title)}&page=1`, {
+    signal: timeout(8000)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  return (j.films || []).map(f => ({
+    id: String(f.filmId),
+    name: f.nameRu || f.nameEn || 'Без названия',
+    year: f.year || '',
+    rating: f.rating || null,
+    genres: (f.genres || []).map(g => g.genre),
+    poster: (f.posterUrlPreview || f.posterUrl || '').replace('https://kinopoiskapiunofficial.tech/', '/kpimg/')
+  }));
 }
 async function viaAlloha(title) {
-  const r = await fetch(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`, {
-    signal: timeout(8000)
-  });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-  const j = await r.json();
-  const d = j && j.data;
-  if (!d || !d.id_kp) return [];
-  return [{
-    id: String(d.id_kp),
-    name: d.name || d.original_name || 'ID ' + d.id_kp,
-    year: d.year || '',
-    poster: d.poster || ''
-  }];
+  const r = await fetch(`https://api.alloha.tv/?token=${TOKEN}&name=${encodeURIComponent(title)}`, {
+    signal: timeout(8000)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json();
+  const d = j && j.data;
+  if (!d || !d.id_kp) return [];
+  return [{
+    id: String(d.id_kp),
+    name: d.name || d.original_name || 'ID ' + d.id_kp,
+    year: d.year || '',
+    poster: d.poster || ''
+  }];
 }
 async function byTitle(title) {
-  const msg = $('resMsg');
-  const key = 'search_v2_' + title.toLowerCase();
-  try {
-    const c = sessionStorage.getItem(key);
-    if (c) {
-      showResults(JSON.parse(c));
-      return;
-    }
-  } catch (e) {}
-  lastResults = [];
-  $('resGrid').innerHTML = '';
-  msg.className = 'big';
-  msg.textContent = 'Ищем…';
-  let all = [],
-    errors = [],
-    pending = 3,
-    shown = false,
-    fails = 0;
-  await new Promise(done => {
-    const finish = (list, err) => {
-      pending--;
-      if (err) errors.push(err);
-      if (list && list.length) {
-        const seen = new Set(all.map(x => String(x.id)));
-        list.forEach(x => {
-          if (!seen.has(String(x.id))) all.push(x);
-        });
-        if (view === 'search') {
-          showResults(all);
-          shown = true;
-        }
-      }
-      if (pending === 0) done();
-    };
-    workerDown = false;
-    viaProxy(title).then(l => finish(l), e => {
-      fails++;
-      workerDown = fails >= 2;
-      finish(null, e);
-    });
-    viaWorker(title).then(l => finish(l), e => {
-      fails++;
-      workerDown = fails >= 2;
-      finish(null, e);
-    });
-    viaAlloha(title).then(l => finish(l), e => finish(null, e));
-  });
-  if (all.length) {
-    try {
-      sessionStorage.setItem(key, JSON.stringify(all));
-    } catch (e) {}
-    return;
-  }
-  if (shown) return;
-  msg.className = 'big';
-  if (errors.length === 3) {
-    console.error('Поиск:', errors);
-    msg.innerHTML = 'Не удалось связаться с серверами поиска (без VPN они могут быть недоступны).<br>Введите ID с КиноПоиска вручную.';
-  } else msg.textContent = 'Ничего не найдено.';
+  const msg = $('resMsg');
+  const key = 'search_v2_' + title.toLowerCase();
+  try {
+    const c = sessionStorage.getItem(key);
+    if (c) {
+      showResults(JSON.parse(c));
+      return;
+    }
+  } catch (e) {}
+  lastResults = [];
+  $('resGrid').innerHTML = '';
+  msg.className = 'big';
+  msg.textContent = 'Ищем…';
+  let all = [],
+    errors = [],
+    pending = 3,
+    shown = false,
+    fails = 0;
+  await new Promise(done => {
+    const finish = (list, err) => {
+      pending--;
+      if (err) errors.push(err);
+      if (list && list.length) {
+        const seen = new Set(all.map(x => String(x.id)));
+        list.forEach(x => {
+          if (!seen.has(String(x.id))) all.push(x);
+        });
+        if (view === 'search') {
+          showResults(all);
+          shown = true;
+        }
+      }
+      if (pending === 0) done();
+    };
+    workerDown = false;
+    viaProxy(title).then(l => finish(l), e => {
+      fails++;
+      workerDown = fails >= 2;
+      finish(null, e);
+    });
+    viaWorker(title).then(l => finish(l), e => {
+      fails++;
+      workerDown = fails >= 2;
+      finish(null, e);
+    });
+    viaAlloha(title).then(l => finish(l), e => finish(null, e));
+  });
+  if (all.length) {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(all));
+    } catch (e) {}
+    return;
+  }
+  if (shown) return;
+  msg.className = 'big';
+  if (errors.length === 3) {
+    console.error('Поиск:', errors);
+    msg.innerHTML = 'Не удалось связаться с серверами поиска (без VPN они могут быть недоступны).<br>Введите ID с КиноПоиска вручную.';
+  } else msg.textContent = 'Ничего не найдено.';
 }
 function showResults(data) {
-  lastResults = data;
-  const msg = $('resMsg');
-  if (!data.length) {
-    $('resGrid').innerHTML = '';
-    msg.className = 'big';
-    msg.textContent = 'Ничего не найдено.';
-    return;
-  }
-  msg.className = '';
-  msg.textContent = workerDown ? 'Показан только лучший вариант: полный поиск недоступен без VPN. Точнее найдёте по ID с КиноПоиска.' : '';
-  renderResults();
+  lastResults = data;
+  const msg = $('resMsg');
+  if (!data.length) {
+    $('resGrid').innerHTML = '';
+    msg.className = 'big';
+    msg.textContent = 'Ничего не найдено.';
+    return;
+  }
+  msg.className = '';
+  msg.textContent = workerDown ? 'Показан только лучший вариант: полный поиск недоступен без VPN. Точнее найдёте по ID с КиноПоиска.' : '';
+  renderResults();
 }
-/* ---------- ТВ ---------- */
+/* ---------- ТВ: определение и навигация пультом ---------- */
 const isTV = (() => {
-  let p = new URLSearchParams(location.search).get('tv');
-  try {
-    if (p !== null) localStorage.setItem('kl_tv', p);else p = localStorage.getItem('kl_tv');
-  } catch (e) {}
-  if (p === '1') return true;
-  if (p === '0') return false;
-  if (/SMART-TV|SmartTV|Tizen|Web0S|WebOS|NetCast|HbbTV|BRAVIA|Android TV|AFTB|AFTM|AFTT|CrKey|VIDAA|Hisense|Philips|Roku|Tesla/i.test(navigator.userAgent)) return true;
-  try {
-    if ((matchMedia('(pointer:none)').matches || matchMedia('(hover:none)').matches) && !navigator.maxTouchPoints && screen.width >= 960) return true;
-  } catch (e) {}
-  return false;
+  let p = new URLSearchParams(location.search).get('tv');
+  try {
+    if (p !== null) localStorage.setItem('kl_tv', p);else p = localStorage.getItem('kl_tv');
+  } catch (e) {}
+  if (p === '1') return true;
+  if (p === '0') return false;
+  if (/SMART-TV|SmartTV|Tizen|Web0S|WebOS|NetCast|HbbTV|BRAVIA|Android TV|AFTB|AFTM|AFTT|CrKey|VIDAA|Hisense|Philips|Roku|Tesla/i.test(navigator.userAgent)) return true;
+  // ТВ-браузеры обычно сообщают «нет указателя» и не имеют сенсора (планшеты и ноутбуки с мышью под это не попадают)
+  try {
+    if ((matchMedia('(pointer:none)').matches || matchMedia('(hover:none)').matches) && !navigator.maxTouchPoints && screen.width >= 960) return true;
+  } catch (e) {}
+  return false;
 })();
 if (isTV) document.body.classList.add('tv');
 const KEY = {
-  back: [461, 10009, 27, 'GoBack', 'BrowserBack'],
-  red: [403, 46, 'Delete'],
-  green: [404],
-  yellow: [405]
+  back: [461, 10009, 27, 'GoBack', 'BrowserBack'],
+  red: [403, 46, 'Delete'],
+  green: [404],
+  yellow: [405]
 };
 const is = (e, k) => KEY[k].includes(e.keyCode) || KEY[k].includes(e.key);
 const NAV = '.side .sb,#q,#go,.wc,#plAct button,#plBack,#wrap iframe';
 const seen = el => {
-  const r = el.getBoundingClientRect();
-  return r.width > 0 && r.height > 0;
+  const r = el.getBoundingClientRect();
+  return r.width > 0 && r.height > 0;
 };
 function spatial(dir) {
-  const cur = document.activeElement,
-    list = [...document.querySelectorAll(NAV)].filter(seen);
-  if (!list.length) return;
-  if (!cur || !cur.matches || !cur.matches(NAV)) {
-    (document.querySelector('.side .sb.on') || list[0]).focus();
-    return;
-  }
-  const a = cur.getBoundingClientRect(),
-    cx = a.left + a.width / 2,
-    cy = a.top + a.height / 2;
-  let best = null,
-    bs = 1e9;
-  list.forEach(el => {
-    if (el === cur) return;
-    const r = el.getBoundingClientRect(),
-      dx = r.left + r.width / 2 - cx,
-      dy = r.top + r.height / 2 - cy;
-    const main = dir === 'L' ? -dx : dir === 'R' ? dx : dir === 'U' ? -dy : dy,
-      perp = dir === 'L' || dir === 'R' ? Math.abs(dy) : Math.abs(dx);
-    if (main < 4) return;
-    const sc = main + perp * 2.5;
-    if (sc < bs) {
-      bs = sc;
-      best = el;
-    }
-  });
-  if (best) {
-    best.focus({
-      preventScroll: true
-    });
-    best.scrollIntoView({
-      block: 'center',
-      behavior: 'smooth'
-    });
-  }
+  const cur = document.activeElement,
+    list = [...document.querySelectorAll(NAV)].filter(seen);
+  if (!list.length) return;
+  if (!cur || !cur.matches || !cur.matches(NAV)) {
+    (document.querySelector('.side .sb.on') || list[0]).focus();
+    return;
+  }
+  const a = cur.getBoundingClientRect(),
+    cx = a.left + a.width / 2,
+    cy = a.top + a.height / 2;
+  let best = null,
+    bs = 1e9;
+  list.forEach(el => {
+    if (el === cur) return;
+    const r = el.getBoundingClientRect(),
+      dx = r.left + r.width / 2 - cx,
+      dy = r.top + r.height / 2 - cy;
+    const main = dir === 'L' ? -dx : dir === 'R' ? dx : dir === 'U' ? -dy : dy,
+      perp = dir === 'L' || dir === 'R' ? Math.abs(dy) : Math.abs(dx);
+    if (main < 4) return;
+    const sc = main + perp * 2.5;
+    if (sc < bs) {
+      bs = sc;
+      best = el;
+    }
+  });
+  if (best) {
+    best.focus({
+      preventScroll: true
+    });
+    best.scrollIntoView({
+      block: 'center',
+      behavior: 'smooth'
+    });
+  }
 }
 function refocusCard(i) {
-  var _ref2;
-  const cards = document.querySelectorAll('.wc');
-  (_ref2 = cards[Math.min(i, cards.length - 1)] || document.querySelector('.side .sb.on')) === null || _ref2 === void 0 || _ref2.focus({
-    preventScroll: true
-  });
+  var _ref2;
+  const cards = document.querySelectorAll('.wc');
+  (_ref2 = cards[Math.min(i, cards.length - 1)] || document.querySelector('.side .sb.on')) === null || _ref2 === void 0 || _ref2.focus({
+    preventScroll: true
+  });
 }
 document.addEventListener('keydown', e => {
-  const t = e.target,
-    inInput = t && t.tagName === 'INPUT';
-  if (is(e, 'back') || isTV && e.key === 'Backspace' && !inInput) {
-    if (view === 'watch') {
-      closePlayer();
-      e.preventDefault();
-      if (isTV) setTimeout(() => refocusCard(0), 80);
-    }
-    return;
-  }
-  const card = t && t.closest && t.closest('.wc');
-  if (card && (is(e, 'red') || is(e, 'green') || is(e, 'yellow'))) {
-    const id = card.dataset.id,
-      i = [...document.querySelectorAll('.wc')].indexOf(card);
-    e.preventDefault();
-    if (is(e, 'red')) remove(id);else if (lib[id]) put(id, null, is(e, 'yellow') ? 'later' : lib[id].status === 'watched' ? 'watching' : 'watched');
-    setTimeout(() => refocusCard(i), 30);
-    return;
-  }
-  if (e.defaultPrevented) return;
-  if (e.key === 'Enter' && t && t.matches && t.matches('.wc')) {
-    e.preventDefault();
-    t.click();
-    return;
-  }
-  if (e.key === 'Enter' && t && t.matches && t.matches('#wrap iframe')) return;
-  const dir = {
-    ArrowLeft: 'L',
-    ArrowRight: 'R',
-    ArrowUp: 'U',
-    ArrowDown: 'D'
-  }[e.key];
-  if (!dir) return;
-  if (inInput && (dir === 'L' || dir === 'R')) return;
-  e.preventDefault();
-  spatial(dir);
+  const t = e.target,
+    inInput = t && t.tagName === 'INPUT';
+  // «Назад» на пульте: закрыть список → закрыть плеер
+  if (is(e, 'back') || isTV && e.key === 'Backspace' && !inInput) {
+    if (view === 'watch') {
+      closePlayer();
+      e.preventDefault();
+      if (isTV) setTimeout(() => refocusCard(0), 80);
+    }
+    return;
+  }
+  // цветные кнопки / Delete на карточке
+  const card = t && t.closest && t.closest('.wc');
+  if (card && (is(e, 'red') || is(e, 'green') || is(e, 'yellow'))) {
+    const id = card.dataset.id,
+      i = [...document.querySelectorAll('.wc')].indexOf(card);
+    e.preventDefault();
+    if (is(e, 'red')) remove(id);else if (lib[id]) put(id, null, is(e, 'yellow') ? 'later' : lib[id].status === 'watched' ? 'watching' : 'watched');
+    setTimeout(() => refocusCard(i), 30);
+    return;
+  }
+  if (e.defaultPrevented) return;
+  if (e.key === 'Enter' && t && t.matches && t.matches('.wc')) {
+    e.preventDefault();
+    t.click();
+    return;
+  }
+  if (e.key === 'Enter' && t && t.matches && t.matches('#wrap iframe')) return;
+  const dir = {
+    ArrowLeft: 'L',
+    ArrowRight: 'R',
+    ArrowUp: 'U',
+    ArrowDown: 'D'
+  }[e.key];
+  if (!dir) return;
+  if (inInput && (dir === 'L' || dir === 'R')) return; // каретка в поле ввода
+  e.preventDefault();
+  spatial(dir);
 });
 if (isTV) setTimeout(() => (document.querySelector('.side .sb.on') || q).focus({
-  preventScroll: true
+  preventScroll: true
 }), 100);
 $('sort').value = sortBy;
 $('sort').onchange = e => {
-  sortBy = e.target.value;
-  try {
-    localStorage.setItem('kl_sort', JSON.stringify(sortBy));
-  } catch (x) {}
-  renderList();
+  sortBy = e.target.value;
+  try {
+    localStorage.setItem('kl_sort', JSON.stringify(sortBy));
+  } catch (x) {}
+  renderList();
 };
 $('exp').onclick = () => {
-  const b = new Blob([JSON.stringify({
-    app: 'kinolyal',
-    v: 2,
-    lib
-  }, null, 1)], {
-    type: 'application/json'
-  });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(b);
-  a.download = 'kinolyal-backup-' + new Date().toISOString().slice(0, 10) + '.json';
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  toast('Резервная копия сохранена');
+  const b = new Blob([JSON.stringify({
+    app: 'kinolyal',
+    v: 2,
+    lib
+  }, null, 1)], {
+    type: 'application/json'
+  });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'kinolyal-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('Резервная копия сохранена');
 };
 $('imp').onclick = () => $('impFile').click();
 $('impFile').onchange = async e => {
-  const f = e.target.files[0];
-  e.target.value = '';
-  if (!f) return;
-  try {
-    const j = JSON.parse(await f.text()),
-      inc = j.lib || j;
-    let n = 0;
-    Object.values(inc).forEach(x => {
-      if (!x || !/^\d{1,10}$/.test(String(x.id))) return;
-      const id = String(x.id);
-      if (!lib[id] || (+x.ts || 0) > (lib[id].ts || 0)) {
-        var _x$rating;
-        lib[id] = {
-          id,
-          name: String(x.name || '').slice(0, 200),
-          year: x.year || '',
-          poster: safeUrl(x.poster),
-          rating: (_x$rating = x.rating) !== null && _x$rating !== void 0 ? _x$rating : null,
-          genres: Array.isArray(x.genres) ? x.genres.slice(0, 5).map(String) : [],
-          status: TABS[x.status] ? x.status : 'watching',
-          ts: +x.ts || Date.now()
-        };
-        n++;
-      }
-    });
-    store();
-    renderAll();
-    toast(n ? 'Импортировано: ' + n : 'Новых записей нет');
-  } catch (err) {
-    toast('Не удалось прочитать файл');
-  }
+  const f = e.target.files[0];
+  e.target.value = '';
+  if (!f) return;
+  try {
+    const j = JSON.parse(await f.text()),
+      inc = j.lib || j;
+    let n = 0;
+    Object.values(inc).forEach(x => {
+      if (!x || !/^\d{1,10}$/.test(String(x.id))) return;
+      const id = String(x.id);
+      if (!lib[id] || (+x.ts || 0) > (lib[id].ts || 0)) {
+        var _x$rating;
+        // при совпадении побеждает более свежая запись
+        lib[id] = {
+          id,
+          name: String(x.name || '').slice(0, 200),
+          year: x.year || '',
+          poster: safeUrl(x.poster),
+          rating: (_x$rating = x.rating) !== null && _x$rating !== void 0 ? _x$rating : null,
+          genres: Array.isArray(x.genres) ? x.genres.slice(0, 5).map(String) : [],
+          status: TABS[x.status] ? x.status : 'watching',
+          ts: +x.ts || Date.now()
+        };
+        n++;
+      }
+    });
+    store();
+    renderAll();
+    toast(n ? 'Импортировано: ' + n : 'Новых записей нет');
+  } catch (err) {
+    toast('Не удалось прочитать файл');
+  }
 };
+/* ручной переключатель ТВ-режима (если автоопределение ошиблось) */
 $('tvLabel').textContent = isTV ? 'Обычный режим' : 'Режим ТВ';
 $('tvToggle').onclick = () => {
-  try {
-    localStorage.setItem('kl_tv', isTV ? '0' : '1');
-  } catch (e) {}
-  location.href = location.pathname + '?tv=' + (isTV ? '0' : '1');
+  try {
+    localStorage.setItem('kl_tv', isTV ? '0' : '1');
+  } catch (e) {}
+  location.href = location.pathname + '?tv=' + (isTV ? '0' : '1');
 };
+/* сворачивание меню: состояние запоминается */
 let sideMin = load('kl_side_min', false);
 const applySide = () => {
-  document.body.classList.toggle('side-min', sideMin && !isTV);
-  const c = $('collapse');
-  c.title = c.ariaLabel = sideMin ? 'Развернуть меню' : 'Свернуть меню';
+  document.body.classList.toggle('side-min', sideMin && !isTV);
+  const c = $('collapse');
+  c.title = c.ariaLabel = sideMin ? 'Развернуть меню' : 'Свернуть меню';
 };
 $('collapse').onclick = () => {
-  sideMin = !sideMin;
-  try {
-    localStorage.setItem('kl_side_min', JSON.stringify(sideMin));
-  } catch (e) {}
-  applySide();
+  sideMin = !sideMin;
+  try {
+    localStorage.setItem('kl_side_min', JSON.stringify(sideMin));
+  } catch (e) {}
+  applySide();
 };
 applySide();
 go('home');
